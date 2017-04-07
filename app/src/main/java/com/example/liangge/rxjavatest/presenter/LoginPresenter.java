@@ -66,6 +66,8 @@ public class LoginPresenter implements UserInfoContract.Presenter {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
                         throwable.printStackTrace();
+                        mView.disMissLoading();
+                        mView.showError(throwable.getMessage());
                     }
                 });
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
 
@@ -43,38 +44,41 @@ public class HomeActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn1:
-                toOtherActivity(UserInfoActivity.class);
+                toOtherActivity(AuthCodeActivity.class);
                 break;
             case R.id.btn2:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(DaggerActivity.class);
                 break;
             case R.id.btn3:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(MaterialDesignActivity.class);
                 break;
             case R.id.btn4:
                 toOtherActivity(MapActivity.class);
                 break;
             case R.id.btn5:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(MainActivity.class);
                 break;
             case R.id.btn6:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(UserInfoActivity.class);
                 break;
             case R.id.btn7:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(null);
                 break;
             case R.id.btn8:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(null);
                 break;
             case R.id.btn9:
-                toOtherActivity(MapActivity.class);
+                toOtherActivity(null);
                 break;
         }
     }
 
     private void toOtherActivity(Class<? extends Activity> clazz) {
-        Intent intent;
-        intent = new Intent(HomeActivity.this, clazz);
-        startActivity(intent);
+        if (clazz != null) {
+            Intent intent = new Intent(HomeActivity.this, clazz);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "建设中。。。。", Toast.LENGTH_SHORT).show();
+        }
     }
 }
