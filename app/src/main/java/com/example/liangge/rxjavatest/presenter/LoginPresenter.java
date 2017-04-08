@@ -1,16 +1,22 @@
 package com.example.liangge.rxjavatest.presenter;
 
 import android.util.Log;
+import android.util.Pair;
 
-import com.example.liangge.rxjavatest.Api;
-import com.example.liangge.rxjavatest.constant.Data;
-import com.example.liangge.rxjavatest.constant.Header;
-import com.example.liangge.rxjavatest.constant.UserParam;
-import com.example.liangge.rxjavatest.contract.UserInfoContract;
-import com.example.liangge.rxjavatest.httpurl.HttpUrls;
-import com.example.liangge.rxjavatest.utils.BeanTest;
-import com.example.liangge.rxjavatest.utils.RetrofitUtil;
+import com.example.liangge.rxjavatest.App;
+import com.example.liangge.rxjavatest.common.constant.Data;
+import com.example.liangge.rxjavatest.common.constant.Header;
+import com.example.liangge.rxjavatest.common.constant.UserParam;
+import com.example.liangge.rxjavatest.common.httpurl.HttpUrls;
+import com.example.liangge.rxjavatest.common.utils.BeanTest;
+import com.example.liangge.rxjavatest.common.utils.RetrofitUtil;
+import com.example.liangge.rxjavatest.data.http.Api;
+import com.example.liangge.rxjavatest.di.component.DaggerAppComponent;
+import com.example.liangge.rxjavatest.di.modules.HttpModule;
+import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
 import com.google.gson.Gson;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -28,8 +34,9 @@ public class LoginPresenter implements UserInfoContract.Presenter {
     private Api mApi;
     private UserInfoContract.View mView;
 
-    public LoginPresenter(UserInfoContract.View view) {
+    public LoginPresenter(UserInfoContract.View view, Api api) {
         mView = view;
+        this.mApi = api;
         view.setPresenter(this);
     }
 
@@ -41,7 +48,7 @@ public class LoginPresenter implements UserInfoContract.Presenter {
     @Override
     public void LoadUserInfo() {
         mView.showLoading();
-        mApi = RetrofitUtil.retrofitInitialize(HttpUrls.URL_LOGIN_IP);
+//        mApi = RetrofitUtil.retrofitInitialize(HttpUrls.URL_LOGIN_IP);
         Observable.just(getUserParam())
                 .flatMap(new Function<UserParam, ObservableSource<BeanTest>>() {
                     @Override
