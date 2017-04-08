@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.liangge.rxjavatest.App;
 import com.example.liangge.rxjavatest.R;
-import com.example.liangge.rxjavatest.common.constant.DaggerUserComponent;
-import com.example.liangge.rxjavatest.di.modules.UserModules;
-import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
-import com.example.liangge.rxjavatest.presenter.LoginPresenter;
 import com.example.liangge.rxjavatest.common.utils.BeanTest;
+import com.example.liangge.rxjavatest.di.component.DaggerAppComponent;
+import com.example.liangge.rxjavatest.di.component.DaggerUserComponent;
+import com.example.liangge.rxjavatest.di.modules.UserModules;
+import com.example.liangge.rxjavatest.presenter.LoginPresenter;
+import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -32,8 +34,11 @@ public class UserInfoActivity extends AppCompatActivity implements UserInfoContr
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
         mProgressDialog = new ProgressDialog(this);
-        DaggerUserComponent.builder().userModules(new UserModules(this)).build().inject(this);
-        new LoginPresenter(this);
+        DaggerUserComponent.builder().appComponent(((App) getApplication()).getAppComponent())
+                .userModules(new UserModules(this))
+                .build()
+                .inject(this);
+//        new LoginPresenter(this);
         mPresenter.start();
     }
 

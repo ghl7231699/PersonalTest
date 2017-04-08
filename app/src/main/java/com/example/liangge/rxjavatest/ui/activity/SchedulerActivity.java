@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.liangge.rxjavatest.di.data.Api;
+import com.example.liangge.rxjavatest.data.http.Api;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.User;
 

@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.di.data;
+package com.example.liangge.rxjavatest.data.http;
 
 import com.example.liangge.rxjavatest.common.constant.User;
 import com.example.liangge.rxjavatest.common.constant.UserParam;

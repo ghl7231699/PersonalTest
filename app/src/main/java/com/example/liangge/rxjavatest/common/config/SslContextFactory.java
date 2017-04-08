@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.common.constant;
+package com.example.liangge.rxjavatest.common.config;
 
 import android.util.Log;
 
@@ -77,7 +77,7 @@ public class SslContextFactory {
     }
 
 
-    private static SSLSocketFactory createSSLSocketFactory() {
+    public static SSLSocketFactory createSSLSocketFactory() {
         SSLSocketFactory sSLSocketFactory = null;
         try {
             SSLContext sc = SSLContext.getInstance(CLIENT_AGREEMENT);
@@ -90,7 +90,7 @@ public class SslContextFactory {
         return sSLSocketFactory;
     }
 
-    private static class TrustAllManager implements X509TrustManager {
+    public static class TrustAllManager implements X509TrustManager {
         @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
@@ -108,7 +108,7 @@ public class SslContextFactory {
         }
     }
 
-    private static class TrustAllHostnameVerifier implements HostnameVerifier {
+    public static class TrustAllHostnameVerifier implements HostnameVerifier {
         @Override
         public boolean verify(String hostname, SSLSession session) {
             return true;

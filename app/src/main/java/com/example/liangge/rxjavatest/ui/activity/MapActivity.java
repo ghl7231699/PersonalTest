@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.liangge.rxjavatest.di.data.Api;
+import com.example.liangge.rxjavatest.data.http.Api;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Data;
 import com.example.liangge.rxjavatest.common.constant.Header;

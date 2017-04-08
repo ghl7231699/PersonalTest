@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.liangge.rxjavatest.common.constant.ApiService;
 import com.example.liangge.rxjavatest.common.constant.UserManager;
 import com.example.liangge.rxjavatest.common.constant.UserStore;
+import com.example.liangge.rxjavatest.data.http.Api;
 import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
 import com.example.liangge.rxjavatest.presenter.LoginPresenter;
 
@@ -17,11 +18,6 @@ import dagger.Provides;
  */
 @Module
 public class UserModules {
-    //    @Provides
-//    public ApiService provideApiService() {
-//        Log.d("UserModules", "provideApiService: ");
-//        return new ApiService();
-//    }
     private UserInfoContract.View mView;
 
     public UserModules(UserInfoContract.View view) {
@@ -40,8 +36,8 @@ public class UserModules {
     }
 
     @Provides
-    public UserInfoContract.Presenter providePresenter(UserInfoContract.View view) {
-        return new LoginPresenter(view);
+    public UserInfoContract.Presenter providePresenter(UserInfoContract.View view, Api api) {
+        return new LoginPresenter(view, api);
     }
 
     @Provides
