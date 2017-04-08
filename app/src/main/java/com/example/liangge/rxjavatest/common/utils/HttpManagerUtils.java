@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.utils;
+package com.example.liangge.rxjavatest.common.utils;
 
 /**
  * Created by guhongliang on 2017/3/29.

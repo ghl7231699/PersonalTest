@@ -1,12 +1,12 @@
-package com.example.liangge.rxjavatest.constant;
+package com.example.liangge.rxjavatest.common.constant;
 
 /**
  * Created by liangge on 2017/3/26.
  */
 
-public class UserParam {
+public class BaseResult {
+    private User data;
     private Header header;
-    private Data data;
 
     public Header getHeader() {
         return header;
@@ -16,11 +16,11 @@ public class UserParam {
         this.header = header;
     }
 
-    public Data getUserData() {
+    public User getUser() {
         return data;
     }
 
-    public void setUserData(Data userData) {
-        this.data = userData;
+    public void setUser(User user) {
+        this.data = user;
     }
 }

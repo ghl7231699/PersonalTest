@@ -1,7 +1,7 @@
-package com.example.liangge.rxjavatest.utils;
+package com.example.liangge.rxjavatest.common.utils;
 
-import com.example.liangge.rxjavatest.Api;
-import com.example.liangge.rxjavatest.constant.SslContextFactory;
+import com.example.liangge.rxjavatest.di.data.Api;
+import com.example.liangge.rxjavatest.common.constant.SslContextFactory;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

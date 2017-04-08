@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.constant;
+package com.example.liangge.rxjavatest.common.constant;
 
 import android.util.Log;
 

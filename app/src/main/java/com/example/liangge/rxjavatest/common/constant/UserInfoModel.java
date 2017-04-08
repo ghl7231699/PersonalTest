@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.moduls;
+package com.example.liangge.rxjavatest.common.constant;
 
 /**
  * Created by guhongliang on 2017/4/6.

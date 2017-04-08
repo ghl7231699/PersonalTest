@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.utils;
+package com.example.liangge.rxjavatest.common.utils;
 
 import com.google.gson.Gson;
 
