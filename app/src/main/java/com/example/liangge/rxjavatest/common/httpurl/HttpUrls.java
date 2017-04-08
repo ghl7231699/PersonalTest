@@ -1,4 +1,4 @@
-package com.example.liangge.rxjavatest.httpurl;
+package com.example.liangge.rxjavatest.common.httpurl;
 
 /**
  * Created by guhongliang on 2017/4/6.
