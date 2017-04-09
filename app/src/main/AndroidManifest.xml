@@ -15,7 +15,6 @@
         <activity android:name=".ui.activity.MapActivity"/>
         <activity android:name=".ui.activity.AuthCodeActivity"/>
         <activity android:name=".ui.activity.baseactivity.BaseActivity"/>
-        <activity android:name=".ui.activity.DaggerActivity"/>
         <activity
             android:name=".ui.activity.MaterialDesignActivity"
             android:label="@string/Fruits"
@@ -25,13 +24,15 @@
         <activity android:name=".ui.activity.UserInfoActivity">
         </activity>
         <activity android:name=".ui.activity.HomeActivity">
+        </activity>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity"/>
     </application>
 
 </manifest>

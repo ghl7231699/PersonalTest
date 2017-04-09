@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
                 toOtherActivity(AuthCodeActivity.class);
                 break;
             case R.id.btn2:
-                toOtherActivity(DaggerActivity.class);
+                toOtherActivity(null);
                 break;
             case R.id.btn3:
                 toOtherActivity(MaterialDesignActivity.class);

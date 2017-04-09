@@ -4,6 +4,7 @@ import com.example.liangge.rxjavatest.common.constant.User;
 import com.example.liangge.rxjavatest.common.constant.UserParam;
 import com.example.liangge.rxjavatest.common.utils.BeanTest;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -22,4 +23,6 @@ public interface Api {
 //    Call<BaseResult> login(@Body UserParam param);
     @POST("ju321/isb/isb-ucm-adapter-in/agentDetail")
     Call<BeanTest> login(@Body UserParam param);
+    @POST("ju321/isb/isb-ucm-adapter-in/agentDetail")
+    Observable<BeanTest> UserLogin(@Body UserParam param);
 }

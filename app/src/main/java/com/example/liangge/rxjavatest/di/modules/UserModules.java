@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.liangge.rxjavatest.common.constant.ApiService;
 import com.example.liangge.rxjavatest.common.constant.UserManager;
 import com.example.liangge.rxjavatest.common.constant.UserStore;
+import com.example.liangge.rxjavatest.data.UserInfoModel;
 import com.example.liangge.rxjavatest.data.http.Api;
 import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
 import com.example.liangge.rxjavatest.presenter.LoginPresenter;
@@ -35,9 +36,13 @@ public class UserModules {
         return new UserManager(apiService, s);
     }
 
+    //    @Provides
+//    public UserInfoContract.Presenter providePresenter(UserInfoContract.View view, Api api) {
+//        return new LoginPresenter(view, api);
+//    }
     @Provides
-    public UserInfoContract.Presenter providePresenter(UserInfoContract.View view, Api api) {
-        return new LoginPresenter(view, api);
+    public UserInfoModel provideUserInfoModel(Api api) {
+        return new UserInfoModel(api);
     }
 
     @Provides
