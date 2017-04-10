@@ -2,6 +2,10 @@ package com.example.liangge.rxjavatest.constant;
 
 import android.util.Log;
 
+import com.example.liangge.rxjavatest.common.constant.ApiService;
+import com.example.liangge.rxjavatest.common.constant.UserManager;
+import com.example.liangge.rxjavatest.common.constant.UserStore;
+
 import dagger.Module;
 import dagger.Provides;
 
