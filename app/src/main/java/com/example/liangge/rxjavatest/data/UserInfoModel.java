@@ -1,20 +1,12 @@
 package com.example.liangge.rxjavatest.data;
 
-import android.util.Log;
-
+import com.example.liangge.rxjavatest.bean.BaseBean;
+import com.example.liangge.rxjavatest.bean.BeanTest;
+import com.example.liangge.rxjavatest.bean.UserInfo;
 import com.example.liangge.rxjavatest.common.constant.UserParam;
-import com.example.liangge.rxjavatest.common.utils.BeanTest;
 import com.example.liangge.rxjavatest.data.http.Api;
-import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
-import com.google.gson.Gson;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by guhongliang on 2017/4/6.
@@ -27,8 +19,9 @@ public class UserInfoModel {
         mApi = api;
     }
 
-    public Observable<BeanTest> LoadUserInfo(UserParam param) {
-        return mApi.UserLogin(param);
+
+    public Observable<BaseBean<UserInfo>> LoadUserInfo(UserParam param) {
+        return mApi.userLogin(param);
 //        Observable.just(param)
 //                .flatMap(new Function<UserParam, ObservableSource<BeanTest>>() {
 //                    @Override

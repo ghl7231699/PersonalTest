@@ -1,12 +1,13 @@
-package com.example.liangge.rxjavatest.common.utils;
+package com.example.liangge.rxjavatest.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by guhongliang on 2017/3/29.
  */
 
-public class BeanTest {
+public class BeanTest implements Serializable {
 
     /**
      * header : {"response_code":"0"}
@@ -36,8 +37,12 @@ public class BeanTest {
         /**
          * response_code : 0
          */
-
+        private static final String SUCCESS = "0";
         private String response_code;
+
+        public boolean success() {
+            return (response_code.equals(SUCCESS));
+        }
 
         public String getResponse_code() {
             return response_code;

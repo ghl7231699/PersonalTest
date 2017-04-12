@@ -1,7 +1,6 @@
 package com.example.liangge.rxjavatest.presenter.contract;
 
-import com.example.liangge.rxjavatest.presenter.BasePresenter;
-import com.example.liangge.rxjavatest.common.utils.BeanTest;
+import com.example.liangge.rxjavatest.bean.BeanTest;
 
 /**
  * Created by guhongliang on 2017/4/6.
@@ -13,7 +12,7 @@ public interface UserInfoContract {
 
         void disMissLoading();//取消加载框展示
 
-        void showUserInfo(BeanTest model);//将网络请求得到的用户信息回调
+        void showUserInfo(Object model);//将网络请求得到的用户信息回调
     }
 //
 //    interface Presenter extends BasePresenter {

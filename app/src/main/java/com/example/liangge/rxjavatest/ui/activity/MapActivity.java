@@ -12,7 +12,7 @@ import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Data;
 import com.example.liangge.rxjavatest.common.constant.Header;
 import com.example.liangge.rxjavatest.common.constant.UserParam;
-import com.example.liangge.rxjavatest.common.utils.BeanTest;
+import com.example.liangge.rxjavatest.bean.BeanTest;
 import com.example.liangge.rxjavatest.common.utils.RetrofitUtil;
 import com.google.gson.Gson;
 
@@ -61,31 +61,31 @@ public class MapActivity extends AppCompatActivity {
         final Gson gson = new Gson();
         Observable.just(getUserParam())
                 .flatMap(new Function<UserParam, ObservableSource<BeanTest>>() {
-            @Override
-            public ObservableSource<BeanTest> apply(UserParam param) throws Exception {
-                BeanTest body = api.login(param).execute().body();
-                Log.d("", "apply: " + body);
-                return Observable.just(body);
-            }
-        }).subscribeOn(Schedulers.io())
+                    @Override
+                    public ObservableSource<BeanTest> apply(UserParam param) throws Exception {
+                        BeanTest body = api.login(param).execute().body();
+                        Log.d("", "apply: " + body);
+                        return Observable.just(body);
+                    }
+                }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BeanTest>() {
-            @Override
-            public void accept(BeanTest BeanTest) throws Exception {
-                if (BeanTest != null) {
-                    String s = gson.toJson(BeanTest);
-                    com.example.liangge.rxjavatest.common.utils.BeanTest.DataBean user = BeanTest.getData();
-                    Log.d("MapActivity", "username= " + s);
-                    tv.setText(s);
-                }
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                throwable.printStackTrace();
-                Toast.makeText(MapActivity.this, "请求出错了，请检查网络", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void accept(BeanTest BeanTest) throws Exception {
+                        if (BeanTest != null) {
+                            String s = gson.toJson(BeanTest);
+                            com.example.liangge.rxjavatest.bean.BeanTest.DataBean user = BeanTest.getData();
+                            Log.d("MapActivity", "username= " + s);
+                            tv.setText(s);
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                        Toast.makeText(MapActivity.this, "请求出错了，请检查网络", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 //        Observable<Integer> observable = Observable.just(1);
 //        observable.map(new Function<Integer, String>() {
