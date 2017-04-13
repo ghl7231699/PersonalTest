@@ -62,4 +62,8 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     //path view
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
+    //pdfAndroidViewer
+    compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
+    //okHttpUtils
+    compile 'com.lzy.net:okhttputils:1.6.5'
 }
