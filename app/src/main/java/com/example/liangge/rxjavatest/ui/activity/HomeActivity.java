@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.ui.activity.baseactivity.PdfDownLoadActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -62,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
                 toOtherActivity(UserInfoActivity.class);
                 break;
             case R.id.btn7:
-                toOtherActivity(null);
+                toOtherActivity(PdfDownLoadActivity.class);
                 break;
             case R.id.btn8:
                 toOtherActivity(null);
