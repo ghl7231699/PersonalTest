@@ -14,8 +14,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
-import com.example.liangge.rxjavatest.ui.adapter.FruitAdapter;
 import com.example.liangge.rxjavatest.common.constant.Fruit;
+import com.example.liangge.rxjavatest.ui.adapter.FruitsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +24,14 @@ import java.util.Random;
 public class MaterialDesignActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private Fruit[] mFruits={new Fruit("Apple",R.mipmap.backup),new Fruit("Orange",R.mipmap.call),
-            new Fruit("Pear",R.mipmap.friends),
-            new Fruit("Cherry",R.mipmap.location),
-            new Fruit("PineApple",R.mipmap.mail)};
-    private List<Fruit> mFruitList=new ArrayList<>();
-    private FruitAdapter mFruitAdapter;
+    private Fruit[] mFruits = {new Fruit("Apple", R.mipmap.backup), new Fruit("Orange", R.mipmap.call),
+            new Fruit("Pear", R.mipmap.friends),
+            new Fruit("Cherry", R.mipmap.location),
+            new Fruit("PineApple", R.mipmap.mail)};
+    private List<Fruit> mFruitList = new ArrayList<>();
+    //    private FruitAdapter mFruitAdapter;
+    private FruitsAdapter mFruitAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,18 +44,18 @@ public class MaterialDesignActivity extends AppCompatActivity {
 
     private void setRecycleView() {
         initFruits();
-        RecyclerView rv= (RecyclerView) findViewById(R.id.recycler_view);
-        GridLayoutManager manager=new GridLayoutManager(this,2);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+        GridLayoutManager manager = new GridLayoutManager(this, 2);
         rv.setLayoutManager(manager);
-        mFruitAdapter=new FruitAdapter(this,mFruitList);
+        mFruitAdapter = new FruitsAdapter(this, mFruitList);
         rv.setAdapter(mFruitAdapter);
     }
 
     private void initFruits() {
         mFruitList.clear();
-        for (int i = 0; i <50 ; i++) {
-            Random r=new Random();
-            int index=r.nextInt(mFruits.length);
+        for (int i = 0; i < 50; i++) {
+            Random r = new Random();
+            int index = r.nextInt(mFruits.length);
             mFruitList.add(mFruits[index]);
         }
     }

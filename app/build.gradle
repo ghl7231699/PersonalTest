@@ -66,4 +66,6 @@ dependencies {
     compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
     //okHttpUtils
     compile 'com.lzy.net:okhttputils:1.6.5'
+    //BaseRecyclerViewAdapterHelper
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.12'
 }
