@@ -1,6 +1,7 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,6 +54,11 @@ public class AuthCodeActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Long aLong) {
+                        btn.setEnabled(false);
+                        btn.setBackgroundResource(R.drawable.edit_text_boder_send);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            btn.setTextColor(AuthCodeActivity.this.getResources().getColor(R.color.colorLight,null));
+                        }
                         btn.setText("剩余" + aLong + "s");
                     }
 
@@ -63,16 +69,11 @@ public class AuthCodeActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {
-                        btn.setBackgroundColor(Color.WHITE);
+                        btn.setEnabled(true);
+                        btn.setBackgroundResource(R.drawable.edit_text_boder);
+                        btn.setTextColor(Color.BLACK);
                         btn.setText("发送验证码");
                     }
                 });
-//                .subscribe(new Consumer<Long>() {
-//                    @Override
-//                    public void accept(@NonNull Long aLong) throws Exception {
-//                        Log.d("1111", "accept: " + aLong);
-//                        btn.setText("剩余" + aLong + "s");
-//                    }
-//                });
     }
 }

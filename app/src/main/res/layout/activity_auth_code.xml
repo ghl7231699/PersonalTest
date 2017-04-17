@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.liangge.rxjavatest.activity.AuthCodeActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:layout_margin="5dp"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/auto_code_edit_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_text_boder"
+        android:gravity="center"
+        android:text="请输入手机号"
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/auto_code_edit_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_text_boder"
+        android:gravity="center"
+        android:text="短信验证码"
+        android:textColor="#000"
+        />
 
     <Button
         android:id="@+id/btn_send"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_text_boder"
+        android:gravity="center"
         android:onClick="onclick"
-        android:text="发送验证码" />
+        android:text="发送验证码"
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
