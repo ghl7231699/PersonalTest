@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
-import android.util.Log;
 
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -14,15 +13,12 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by guhongliang on 2017/4/19.
  * 运行时权限工具类
  */
 
 public class PermissionUtil {
-   static int i=0;
     public static void requestPermission(final Activity activity, String... permission) {
         RxPermissions permissions = new RxPermissions(activity);
         permissions.requestEach(permission)
@@ -49,8 +45,6 @@ public class PermissionUtil {
      * @param activity
      */
     private static void openSetting(final Activity activity) {
-        i++;
-        Log.d(TAG, "openSetting: "+i);
         new AlertDialog.Builder(activity).setTitle("警告")
                 .setMessage("如果您不授权，将无法进行正常的操作！")
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {

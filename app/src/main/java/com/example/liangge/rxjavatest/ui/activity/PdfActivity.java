@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.widget.TextView;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.common.utils.FileUtil;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -53,14 +54,9 @@ public class PdfActivity extends BaseActivity implements OnPageChangeListener {
 
     @Override
     public void initData() {
-//        pdfName = Environment.getExternalStorageDirectory() +
-//                "/temp";
         pdfName = Environment.getExternalStorageDirectory() +
                 "/GlideCache";
-        File file=new File(pdfName);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
+        FileUtil.create(pdfName);
         display(pdfName, false);
     }
 
