@@ -1,9 +1,8 @@
 package com.example.liangge.rxjavatest.ui.activity.baseactivity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseArray;
-import android.view.View;
 
 import com.example.liangge.rxjavatest.App;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
@@ -11,7 +10,6 @@ import com.example.liangge.rxjavatest.presenter.BasePresenter;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -53,4 +51,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     //初始化Component
     public abstract void setUpComponent(AppComponent appComponent);
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }

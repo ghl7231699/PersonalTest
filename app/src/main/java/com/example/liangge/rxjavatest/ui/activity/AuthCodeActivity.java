@@ -1,16 +1,24 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
+import android.Manifest;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.common.utils.PermissionUtil;
+import com.example.liangge.rxjavatest.di.component.AppComponent;
+import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -19,14 +27,44 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
-public class AuthCodeActivity extends AppCompatActivity {
-    private Button btn;
+public class AuthCodeActivity extends BaseActivity {
+    @BindView(R.id.auto_code_edit_phone)
+    EditText mAutoCodeEditPhone;
+    @BindView(R.id.auto_code_edit_content)
+    EditText mAutoCodeEditContent;
+    @BindView(R.id.btn_send)
+    Button mBtnSend;
+    @BindView(R.id.password_content_edit)
+    EditText mPwdEdit;
+    @BindView(R.id.password_content_img)
+    ImageView mPwdImg;
+
+    private boolean isVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth_code);
-        btn = (Button) findViewById(R.id.btn_send);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_auth_code;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void setUpComponent(AppComponent appComponent) {
+
     }
 
     public void onclick(View view) {
@@ -54,12 +92,12 @@ public class AuthCodeActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Long aLong) {
-                        btn.setEnabled(false);
-                        btn.setBackgroundResource(R.drawable.edit_text_boder_send);
+                        mBtnSend.setEnabled(false);
+                        mBtnSend.setBackgroundResource(R.drawable.edit_text_boder_send);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            btn.setTextColor(AuthCodeActivity.this.getResources().getColor(R.color.colorLight,null));
+                            mBtnSend.setTextColor(AuthCodeActivity.this.getResources().getColor(R.color.colorLight, null));
                         }
-                        btn.setText("剩余" + aLong + "s");
+                        mBtnSend.setText("剩余" + aLong + "s");
                     }
 
                     @Override
@@ -69,11 +107,26 @@ public class AuthCodeActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {
-                        btn.setEnabled(true);
-                        btn.setBackgroundResource(R.drawable.edit_text_boder);
-                        btn.setTextColor(Color.BLACK);
-                        btn.setText("发送验证码");
+                        mBtnSend.setEnabled(true);
+                        mBtnSend.setBackgroundResource(R.drawable.edit_text_boder);
+                        mBtnSend.setTextColor(Color.BLACK);
+                        mBtnSend.setText("发送验证码");
                     }
                 });
+    }
+
+    @OnClick(R.id.password_content_img)
+    public void onViewClicked() {
+        if (!isVisible) {
+            mPwdImg.setBackgroundResource(R.mipmap.password_visible);
+            mPwdEdit.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            PermissionUtil.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    );
+            isVisible = true;
+        } else {
+            mPwdImg.setBackgroundResource(R.mipmap.password_invisible);
+            mPwdEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+            isVisible = false;
+        }
     }
 }
