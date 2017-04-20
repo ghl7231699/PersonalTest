@@ -56,7 +56,6 @@ public class LoginPresenter extends BasePresenter<UserInfoModel, UserInfoContrac
                         if (aBoolean) {
                             return mM.LoadUserInfo(getUserParam())
                                     .compose(RxHttpTransFormer.<UserInfo>handleResult());
-
                         } else
                             mV.disMissLoading();
                             mV.showError("拒绝权限，无法进行正常操作");
@@ -101,7 +100,7 @@ public class LoginPresenter extends BasePresenter<UserInfoModel, UserInfoContrac
 
     private UserParam getUserParam() {
         Header header = new Header("373F0C4ED4D444C6B50B3633EBEC9080", "ebt-003");
-        Data data = new Data("1968010", "17205261");
+        Data data = new Data("19680106", "17205261");
         UserParam param = new UserParam();
         param.setHeader(header);
         param.setUserData(data);
