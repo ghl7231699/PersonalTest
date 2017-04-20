@@ -7,5 +7,11 @@ package com.example.liangge.rxjavatest.common.exception;
 public class APiException extends BaseException {
     public APiException(String code, String displayMessage) {
         super(code, displayMessage);
+
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

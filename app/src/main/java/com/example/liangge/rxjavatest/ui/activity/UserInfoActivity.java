@@ -5,8 +5,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
-import com.example.liangge.rxjavatest.bean.BeanTest;
-import com.example.liangge.rxjavatest.bean.UserInfo;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.di.component.DaggerUserComponent;
 import com.example.liangge.rxjavatest.di.modules.UserModules;
@@ -54,17 +52,24 @@ public class UserInfoActivity extends BaseActivity<LoginPresenter> implements Us
     }
 
     @Override
+    public void onRequestPermissonSuccess() {
+        mPresenter.LoadUserInfo();
+    }
+
+    @Override
+    public void onRequestPermissonError() {
+        Toast.makeText(this, "你已拒绝授权", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showLoading() {
-//        Toast.makeText(this, "加载中。。。。。", Toast.LENGTH_SHORT).show();
         mProgressDialog.setMessage("加载中。。。。");
         mProgressDialog.setTitle("提示");
         mProgressDialog.show();
-//        mProgressDialog=ProgressDialog.show(UserInfoActivity.this,"提示","加载中。。。。。");
     }
 
     @Override
     public void disMissLoading() {
-//        Toast.makeText(this, "加载完成", Toast.LENGTH_SHORT).show();
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }

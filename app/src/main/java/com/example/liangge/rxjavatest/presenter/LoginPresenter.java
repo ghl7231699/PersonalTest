@@ -1,9 +1,8 @@
 package com.example.liangge.rxjavatest.presenter;
 
-import android.util.Log;
+import android.Manifest;
+import android.app.Activity;
 
-import com.example.liangge.rxjavatest.bean.BaseBean;
-import com.example.liangge.rxjavatest.bean.BeanTest;
 import com.example.liangge.rxjavatest.bean.UserInfo;
 import com.example.liangge.rxjavatest.common.constant.Data;
 import com.example.liangge.rxjavatest.common.constant.Header;
@@ -11,15 +10,15 @@ import com.example.liangge.rxjavatest.common.constant.UserParam;
 import com.example.liangge.rxjavatest.common.rx.RxHttpTransFormer;
 import com.example.liangge.rxjavatest.data.UserInfoModel;
 import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
-import com.google.gson.Gson;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import javax.inject.Inject;
 
-import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.functions.Function;
 
 /**
  * Created by guhongliang on 2017/4/6.
@@ -48,25 +47,56 @@ public class LoginPresenter extends BasePresenter<UserInfoModel, UserInfoContrac
     public void LoadUserInfo() {
         mV.showLoading();
 //        mM.LoadUserInfo(getUserParam(),mV);
-        mM.LoadUserInfo(getUserParam())
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxHttpTransFormer.<UserInfo>handleResult())
-                .subscribe(new Consumer<UserInfo>() {
+        RxPermissions permissions = new RxPermissions((Activity) mV);
+        permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .flatMap(new Function<Boolean, ObservableSource<UserInfo>>() {
                     @Override
-                    public void accept(@NonNull UserInfo userInfo) throws Exception {
-                        if (userInfo != null) {
-                            mV.showUserInfo(userInfo);
+                    public ObservableSource<UserInfo> apply(@NonNull Boolean aBoolean) throws Exception {
+
+                        if (aBoolean) {
+                            return mM.LoadUserInfo(getUserParam())
+                                    .compose(RxHttpTransFormer.<UserInfo>handleResult());
+
+                        } else
                             mV.disMissLoading();
-                        }
+                            mV.showError("拒绝权限，无法进行正常操作");
+                            return Observable.empty();
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-                        mV.showError(throwable.toString());
-                        mV.disMissLoading();
-                    }
-                });
+                }).subscribe(new Consumer<UserInfo>() {
+            @Override
+            public void accept(@NonNull UserInfo userInfo) throws Exception {
+                if (userInfo != null) {
+                    mV.showUserInfo(userInfo);
+                    mV.disMissLoading();
+                }
+            }
+
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                mV.showError(throwable.toString());
+                mV.disMissLoading();
+            }
+        });
+//        mM.LoadUserInfo(getUserParam())
+////                .subscribeOn(Schedulers.io())
+////                .observeOn(AndroidSchedulers.mainThread())
+//                .compose(RxHttpTransFormer.<UserInfo>handleResult())
+//                .subscribe(new Consumer<UserInfo>() {
+//                    @Override
+//                    public void accept(@NonNull UserInfo userInfo) throws Exception {
+//                        if (userInfo != null) {
+//                            mV.showUserInfo(userInfo);
+//                            mV.disMissLoading();
+//                        }
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(@NonNull Throwable throwable) throws Exception {
+//                        mV.showError(throwable.toString());
+//                        mV.disMissLoading();
+//                    }
+//                });
     }
 
     private UserParam getUserParam() {

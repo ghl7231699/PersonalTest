@@ -8,4 +8,8 @@ public interface BaseView<T> {
 //    void setPresenter(T presenter);
 
     void showError(String s);
+
+    void onRequestPermissonSuccess();//获取权限
+
+    void onRequestPermissonError();//拒绝权限
 }
