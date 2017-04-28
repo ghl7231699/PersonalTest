@@ -24,7 +24,7 @@ import io.reactivex.functions.Function;
  * Created by guhongliang on 2017/4/6.
  */
 
-public class LoginPresenter extends BasePresenter<UserInfoModel, UserInfoContract.View> {
+public class LoginPresenter extends BasePresenter<UserInfoModel, UserInfoContract.View>{
     //    private Api mApi;
 //    private UserInfoContract.View mView;
     @Inject

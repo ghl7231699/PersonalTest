@@ -30,4 +30,6 @@ public interface Api {
     Observable<BeanTest> UserLogin(@Body UserParam param);
     @POST("ju321/isb/isb-ucm-adapter-in/agentDetail")
     Observable<BaseBean<UserInfo>> userLogin(@Body UserParam param);
+    @GET("ju321/isb/isb-ucm-adapter-in/agentDetail")
+    Observable<BaseBean<UserInfo>> checkIsUpdate();
 }

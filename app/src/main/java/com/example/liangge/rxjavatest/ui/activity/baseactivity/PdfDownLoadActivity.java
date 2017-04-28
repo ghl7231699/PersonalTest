@@ -41,6 +41,8 @@ public class PdfDownLoadActivity extends AppCompatActivity {
     @BindView(R.id.show_pdf)
     Button mShowPdf;
     String pdfUrl = "http://partners.adobe.com/public/developer/en/xml/AdobeXMLFormsSamples.pdf";
+    private static String url = "http://vpan.bj189.cn/xhrs/EBT2/NCI_EBT2.0_ZY_5.0.apk";
+//    private static String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493288790631&di=b80e1abbeabfd2b4bab5552fec6ef157&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Flvpics%2Fh%3D800%2Fsign%3D9931b79f1dd5ad6eb5f969eab1ca39a3%2Fa8773912b31bb051b3333f73307adab44aede052.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +55,10 @@ public class PdfDownLoadActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fileDownload:
-                OkHttpUtils.get(pdfUrl)//
+                OkHttpUtils.get(url)//
                         .tag(this)//
                         .execute(new DownloadFileCallBack(Environment.getExternalStorageDirectory() +
-                                "/temp", "qcl.pdf"));//保存到sd卡
+                                "/temp/glide", "刘东.apk"));//保存到sd卡
                 break;
             case R.id.show_pdf:
                 startActivity(new Intent(this, PdfActivity.class));

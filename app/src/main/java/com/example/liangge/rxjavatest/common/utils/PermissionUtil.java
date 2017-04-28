@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
+import com.example.liangge.rxjavatest.common.inter.PermissonListener;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -19,7 +20,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class PermissionUtil {
-    public static void requestPermission(final Activity activity, String... permission) {
+    public static void requestPermission(final Activity activity, final PermissonListener listener, String... permission) {
         RxPermissions permissions = new RxPermissions(activity);
         permissions.requestEach(permission)
                 .subscribe(new Consumer<Permission>() {
@@ -27,9 +28,10 @@ public class PermissionUtil {
                     public void accept(@NonNull Permission permission) throws Exception {
 
                         if (permission.granted) {//用户同意授权
-
+                            listener.onGranted();
                         } else if (permission.shouldShowRequestPermissionRationale) {
                             //用户不同意授权，但没有选中不在询问
+                            listener.onDenied();
                         } else {
                             //用户不同意授权，选择了不在询问
                             openSetting(activity);

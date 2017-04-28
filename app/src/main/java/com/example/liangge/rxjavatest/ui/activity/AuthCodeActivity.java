@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.common.inter.PermissonListener;
 import com.example.liangge.rxjavatest.common.utils.PermissionUtil;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
@@ -120,8 +121,18 @@ public class AuthCodeActivity extends BaseActivity {
         if (!isVisible) {
             mPwdImg.setBackgroundResource(R.mipmap.password_visible);
             mPwdEdit.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            PermissionUtil.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    );
+            PermissionUtil.requestPermission(this, new PermissonListener() {
+                        @Override
+                        public void onGranted() {
+
+                        }
+
+                        @Override
+                        public void onDenied() {
+
+                        }
+                    }, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            );
             isVisible = true;
         } else {
             mPwdImg.setBackgroundResource(R.mipmap.password_invisible);

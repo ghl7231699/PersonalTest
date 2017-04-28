@@ -1,6 +1,6 @@
 package com.example.liangge.rxjavatest.presenter.contract;
 
-import com.example.liangge.rxjavatest.bean.BeanTest;
+import java.io.File;
 
 /**
  * Created by guhongliang on 2017/4/6.
@@ -9,6 +9,8 @@ import com.example.liangge.rxjavatest.bean.BeanTest;
 public interface UserInfoContract {
     interface View extends BaseView {
         void showLoading();//展示加载框
+
+        void loadDetailContent(File file, String s);//加载详情页面的源文件
 
         void disMissLoading();//取消加载框展示
 
