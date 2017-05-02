@@ -1,10 +1,17 @@
 package com.example.liangge.rxjavatest.common.exception;
 
 /**
- * Created by liangge on 2017/4/12.
+ * 类名称：BaseException
+ * 类描述：展业夹基础Exception
+ * 创建人：ghl
+ * 创建时间：2017/5/2 9:45
+ * 修改人：ghl
+ * 修改时间：2017/5/2 9:45
+ *
+ * @version v1.0
  */
 
-public class BaseException  extends Exception{
+public class BaseException extends Exception {
     /*API错误*/
     public static final int API_ERROR = 0x0;
 
@@ -52,25 +59,31 @@ public class BaseException  extends Exception{
     public static final int ERROR_HTTP_405 = 405;
 
     public static final int ERROR_HTTP_500 = 500;
-    private String code;
+
+
+    private int code;
 
     private String displayMessage;
 
-
     public BaseException() {
-
     }
 
-    public BaseException(String code, String displayMessage) {
+    public BaseException(int code, String displayMessage) {
         this.code = code;
         this.displayMessage = displayMessage;
     }
 
-    public String getCode() {
+    public BaseException(String message, int code, String displayMessage) {
+        super(message);
+        this.code = code;
+        this.displayMessage = displayMessage;
+    }
+
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
