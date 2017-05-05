@@ -2,7 +2,8 @@ package com.example.liangge.rxjavatest.common.exception;
 
 import android.content.Context;
 
-import com.nciebt.zyj.R;
+import com.example.liangge.rxjavatest.R;
+
 
 /**
  * 类名称：ErrorMessageFactory

@@ -3,8 +3,9 @@ package com.example.liangge.rxjavatest.common.rx.subscriber;
 import android.content.Context;
 import android.util.Log;
 
-import com.nciebt.zyj.common.Exception.BaseException;
-import com.nciebt.zyj.common.rx.RxErrorHandler;
+import com.example.liangge.rxjavatest.common.exception.BaseException;
+import com.example.liangge.rxjavatest.common.rx.RxErrorHandler;
+
 
 /**
  * 类名称：ErrorHandlerSubscriber

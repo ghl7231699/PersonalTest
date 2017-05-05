@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
                 toOtherActivity(PdfDownLoadActivity.class);
                 break;
             case R.id.btn8:
-                toOtherActivity(null);
+                toOtherActivity(RxDownLoadActivity.class);
                 break;
             case R.id.btn9:
                 toOtherActivity(null);

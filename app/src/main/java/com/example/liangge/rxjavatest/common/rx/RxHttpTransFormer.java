@@ -1,7 +1,7 @@
 package com.example.liangge.rxjavatest.common.rx;
 
 import com.example.liangge.rxjavatest.bean.BaseBean;
-import com.example.liangge.rxjavatest.common.exception.APiException;
+import com.example.liangge.rxjavatest.common.exception.ApiException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -28,8 +28,8 @@ public class RxHttpTransFormer {
                         if (tBaseBean.getHeader().success()) {
                             return obtainResult(tBaseBean);
                         } else {
-                            return Observable.error(new APiException(tBaseBean.getHeader().getResponse_code()
-                                    ,tBaseBean.getHeader().getResponse_msg().getDefault_msg()));
+                            return Observable.error(new ApiException(Integer.valueOf(tBaseBean.getHeader().getResponse_code()
+                            ), tBaseBean.getHeader().getResponse_msg().getDefault_msg()));
                         }
 //                        return Observable.empty();
                     }

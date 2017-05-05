@@ -1,7 +1,5 @@
 package com.example.liangge.rxjavatest.data;
 
-import android.util.Log;
-
 import com.example.liangge.rxjavatest.bean.BaseBean;
 import com.example.liangge.rxjavatest.bean.UserInfo;
 import com.example.liangge.rxjavatest.common.constant.UserParam;
@@ -9,13 +7,11 @@ import com.example.liangge.rxjavatest.data.http.Api;
 
 import io.reactivex.Observable;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by guhongliang on 2017/4/6.
  */
 
-public class UserInfoModel implements MergerData{
+public class UserInfoModel {
     private Api mApi;
 
     public UserInfoModel(Api api) {
@@ -54,10 +50,5 @@ public class UserInfoModel implements MergerData{
 //                        view.showError(throwable.getMessage());
 //                    }
 //                });
-    }
-
-    @Override
-    public void mergerLocalData(String s) {
-        Log.d(TAG, "mergerLocalData: "+s);
     }
 }

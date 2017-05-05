@@ -69,4 +69,6 @@ dependencies {
     compile 'com.lzy.net:okhttputils:1.6.5'
     //BaseRecyclerViewAdapterHelper
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.12'
+    //RxDownLoad
+    compile 'zlc.season:rxdownload2:2.0.0-beta4'
 }

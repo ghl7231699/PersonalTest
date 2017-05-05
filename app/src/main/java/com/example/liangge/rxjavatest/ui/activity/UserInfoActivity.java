@@ -13,6 +13,8 @@ import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
 import com.google.gson.Gson;
 
+import java.io.File;
+
 import butterknife.BindView;
 
 public class UserInfoActivity extends BaseActivity<LoginPresenter> implements UserInfoContract.View {
@@ -66,6 +68,11 @@ public class UserInfoActivity extends BaseActivity<LoginPresenter> implements Us
         mProgressDialog.setMessage("加载中。。。。");
         mProgressDialog.setTitle("提示");
         mProgressDialog.show();
+    }
+
+    @Override
+    public void loadDetailContent(File file, String s) {
+
     }
 
     @Override
