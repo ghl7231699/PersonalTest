@@ -14,7 +14,14 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by liangge on 2017/4/12.
+ * 类名称：RxHttpTransFormer
+ * 类描述：过滤
+ * 创建人：ghl
+ * 创建时间：2017/5/5 16:37
+ * 修改人：ghl
+ * 修改时间：2017/5/5 16:37
+ *
+ * @version v1.0
  */
 
 public class RxHttpTransFormer {
