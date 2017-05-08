@@ -4,11 +4,11 @@ package com.example.liangge.rxjavatest.common.constant;
  * Created by liangge on 2017/4/3.
  */
 
-public class Fruit {
+public class Fruits {
     private String name;
     private int imageId;
 
-    public Fruit(String name, int imageId) {
+    public Fruits(String name, int imageId) {
         this.name = name;
         this.imageId = imageId;
     }

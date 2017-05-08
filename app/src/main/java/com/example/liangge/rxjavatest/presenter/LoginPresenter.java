@@ -8,7 +8,7 @@ import com.example.liangge.rxjavatest.common.constant.Data;
 import com.example.liangge.rxjavatest.common.constant.Header;
 import com.example.liangge.rxjavatest.common.constant.UserParam;
 import com.example.liangge.rxjavatest.common.rx.RxHttpTransFormer;
-import com.example.liangge.rxjavatest.data.UserInfoModel;
+import com.example.liangge.rxjavatest.data.UserInfoModule;
 import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -24,11 +24,11 @@ import io.reactivex.functions.Function;
  * Created by guhongliang on 2017/4/6.
  */
 
-public class LoginPresenter extends BasePresenter<UserInfoModel, UserInfoContract.View>{
+public class LoginPresenter extends BasePresenter<UserInfoModule, UserInfoContract.View>{
     //    private Api mApi;
 //    private UserInfoContract.View mView;
     @Inject
-    public LoginPresenter(UserInfoModel userModules, UserInfoContract.View view) {
+    public LoginPresenter(UserInfoModule userModules, UserInfoContract.View view) {
         super(userModules, view);
     }
 

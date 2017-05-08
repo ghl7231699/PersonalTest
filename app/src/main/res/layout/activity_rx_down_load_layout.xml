@@ -4,60 +4,9 @@
                 android:layout_height="match_parent"
     >
 
-    <ImageView
-        android:id="@+id/rx_down_load_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/friends"/>
-
-    <TextView
-        android:id="@+id/rx_down_load_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/rx_down_load_img"
-        />
-
-    <TextView
-        android:id="@+id/rx_down_load_per"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_toLeftOf="@+id/rx_down_load_btn"
-        android:layout_toRightOf="@+id/rx_down_load_loading"
-        android:layout_toStartOf="@+id/rx_down_load_btn"
-        />
-
-    <ProgressBar
-        android:id="@+id/rx_down_load_pb"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rx_down_load_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/rx_down_load_btn"
-        android:layout_toLeftOf="@+id/rx_down_load_btn"
-        android:layout_toRightOf="@+id/rx_down_load_img"
-        android:visibility="invisible"/>
-
-    <TextView
-        android:id="@+id/rx_down_load_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rx_down_load_pb"
-        android:layout_marginLeft="100dp"
-        android:layout_toRightOf="@+id/rx_down_load_img"
-        />
-
-    <Button
-        android:id="@+id/rx_down_load_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/rx_down_load_img"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/rx_down_load_loading"
-        android:layout_centerVertical="true"
-        android:text="下载"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

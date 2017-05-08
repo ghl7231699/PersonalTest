@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
-import com.example.liangge.rxjavatest.common.constant.Fruit;
+import com.example.liangge.rxjavatest.common.constant.Fruits;
 import com.example.liangge.rxjavatest.ui.adapter.FruitsAdapter;
 
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ import java.util.Random;
 public class MaterialDesignActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private Fruit[] mFruits = {new Fruit("Apple", R.mipmap.backup), new Fruit("Orange", R.mipmap.call),
-            new Fruit("Pear", R.mipmap.friends),
-            new Fruit("Cherry", R.mipmap.location),
-            new Fruit("PineApple", R.mipmap.mail)};
-    private List<Fruit> mFruitList = new ArrayList<>();
+    private Fruits[] mFruitses = {new Fruits("Apple", R.mipmap.backup), new Fruits("Orange", R.mipmap.call),
+            new Fruits("Pear", R.mipmap.friends),
+            new Fruits("Cherry", R.mipmap.location),
+            new Fruits("PineApple", R.mipmap.mail)};
+    private List<Fruits> mFruitsList = new ArrayList<>();
     //    private FruitAdapter mFruitAdapter;
     private FruitsAdapter mFruitAdapter;
 
@@ -47,16 +47,16 @@ public class MaterialDesignActivity extends AppCompatActivity {
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         rv.setLayoutManager(manager);
-        mFruitAdapter = new FruitsAdapter(this, mFruitList);
+        mFruitAdapter = new FruitsAdapter(this, mFruitsList);
         rv.setAdapter(mFruitAdapter);
     }
 
     private void initFruits() {
-        mFruitList.clear();
+        mFruitsList.clear();
         for (int i = 0; i < 50; i++) {
             Random r = new Random();
-            int index = r.nextInt(mFruits.length);
-            mFruitList.add(mFruits[index]);
+            int index = r.nextInt(mFruitses.length);
+            mFruitsList.add(mFruitses[index]);
         }
     }
 

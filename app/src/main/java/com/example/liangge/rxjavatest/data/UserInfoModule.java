@@ -11,10 +11,10 @@ import io.reactivex.Observable;
  * Created by guhongliang on 2017/4/6.
  */
 
-public class UserInfoModel {
+public class UserInfoModule {
     private Api mApi;
 
-    public UserInfoModel(Api api) {
+    public UserInfoModule(Api api) {
         mApi = api;
     }
 

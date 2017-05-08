@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.ui.activity.FruitActivity;
-import com.example.liangge.rxjavatest.common.constant.Fruit;
+import com.example.liangge.rxjavatest.common.constant.Fruits;
 
 import java.util.List;
 
@@ -29,11 +29,11 @@ import butterknife.ButterKnife;
 
 public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> {
     private Context mContext;
-    private List<Fruit> mFruitList;
+    private List<Fruits> mFruitsList;
 
-    public FruitAdapter(Context context, List<Fruit> fruitList) {
+    public FruitAdapter(Context context, List<Fruits> fruitsList) {
         mContext = context;
-        mFruitList = fruitList;
+        mFruitsList = fruitsList;
     }
 
     @Override
@@ -46,12 +46,12 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Fruit fruit = mFruitList.get(position);
+                Fruits fruits = mFruitsList.get(position);
                 Intent intent = new Intent(mContext, FruitActivity.class);
-                String name = fruit.getName();
+                String name = fruits.getName();
                 intent.putExtra(FruitActivity.FRUIT_NAME, name);
                 Log.d("FruitAdapter", "onClick: "+name);
-                int imageId = fruit.getImageId();
+                int imageId = fruits.getImageId();
                 intent.putExtra(FruitActivity.FRUIT_IMAGE_ID, imageId);
                 mContext.startActivity(intent);
 
@@ -63,11 +63,11 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         try {
-            Fruit fruit = mFruitList.get(position);
-            Log.d("--------->", "onBindViewHolder: " + fruit.getName());
-            String name = fruit.getName();
+            Fruits fruits = mFruitsList.get(position);
+            Log.d("--------->", "onBindViewHolder: " + fruits.getName());
+            String name = fruits.getName();
             holder.mFruitContent.setText(name);
-            int imageId = fruit.getImageId();
+            int imageId = fruits.getImageId();
             Glide.with(mContext).load(imageId).into(holder.mFruitImage);
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mFruitList.size();
+        return mFruitsList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

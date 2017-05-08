@@ -5,10 +5,10 @@ import android.util.Log;
 import com.example.liangge.rxjavatest.common.constant.ApiService;
 import com.example.liangge.rxjavatest.common.constant.UserManager;
 import com.example.liangge.rxjavatest.common.constant.UserStore;
-import com.example.liangge.rxjavatest.data.UserInfoModel;
+import com.example.liangge.rxjavatest.data.RxDownListModule;
+import com.example.liangge.rxjavatest.data.UserInfoModule;
 import com.example.liangge.rxjavatest.data.http.Api;
 import com.example.liangge.rxjavatest.presenter.contract.UserInfoContract;
-import com.example.liangge.rxjavatest.presenter.LoginPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -41,12 +41,16 @@ public class UserModules {
 //        return new LoginPresenter(view, api);
 //    }
     @Provides
-    public UserInfoModel provideUserInfoModel(Api api) {
-        return new UserInfoModel(api);
+    public UserInfoModule provideUserInfoModel(Api api) {
+        return new UserInfoModule(api);
     }
 
     @Provides
     public UserInfoContract.View providerView() {
         return mView;
+    }
+    @Provides
+    public RxDownListModule provideRxDownListModule(Api api) {
+        return new RxDownListModule(api);
     }
 }
