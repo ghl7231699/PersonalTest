@@ -21,11 +21,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import zlc.season.rxdownload2.RxDownload;
 import zlc.season.rxdownload2.entity.DownloadStatus;
@@ -40,6 +38,8 @@ public class RxDownLoadAdapter extends RecyclerView.Adapter<RxDownLoadAdapter.Vi
     List<Fruit> mFruits;
 
     private Context mContext;
+    private RxDownload mDownload;
+    Disposable disposable;
 
     public RxDownLoadAdapter(List<Fruit> fruits, Context context) {
         mFruits = fruits;
@@ -99,10 +99,9 @@ public class RxDownLoadAdapter extends RecyclerView.Adapter<RxDownLoadAdapter.Vi
     }
 
     private void get(final ViewHolder holder, String s) {
-        RxDownload mDownload = RxDownload.getInstance(mContext)
-                .maxDownloadNumber(10)
-                .maxThread(10)
-                .maxRetryCount(10)
+        mDownload = RxDownload.getInstance(mContext)
+//                .maxThread(10)
+//                .maxRetryCount(10)
                 .defaultSavePath(App.getLocalDataPath());
         String[] split = s.split("/");
         String name = null;
@@ -111,52 +110,89 @@ public class RxDownLoadAdapter extends RecyclerView.Adapter<RxDownLoadAdapter.Vi
         }
         Log.d(TAG, "get: " + mDownload.hashCode());
         if (holder.mRxDownLoadBtn.getText().equals("下载")) {
-            mDownload.download(s, name, null)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<DownloadStatus>() {
-                        @Override
-                        public void accept(@NonNull DownloadStatus downloadStatus) throws Exception {
-                            String formatDownloadSize = downloadStatus.getFormatDownloadSize();
-                            String formatTotalSize = downloadStatus.getFormatTotalSize();
-                            int size = (int) downloadStatus.getDownloadSize();
-                            int totalSize = (int) downloadStatus.getTotalSize();
-                            String percent = downloadStatus.getPercent();
-                            holder.mRxDownLoadLoading.setText("正在下载");
-                            holder.mRxDownLoadBtn.setText("暂停");
-                            holder.mRxDownLoadPb.setVisibility(View.VISIBLE);
-                            holder.mRxDownLoadPb.setMax(totalSize);
-                            holder.mRxDownLoadPb.setProgress(size);
-                            holder.mRxDownLoadSize.setText(formatDownloadSize + "/" + formatTotalSize);
-                            holder.mRxDownLoadPer.setText(percent);
-                            if (formatDownloadSize.equals(formatTotalSize)) {
-                                holder.mRxDownLoadLoading.setText("下载完成");
-                                holder.mRxDownLoadBtn.setText("完成");
-                            }
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(@NonNull Throwable throwable) throws Exception {
-                            ToastUtils.toast("下载失败");
-                        }
-                    });
+            set(holder, s);
+//            mDownload.download(s, name, null)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Consumer<DownloadStatus>() {
+//                        @Override
+//                        public void accept(@NonNull DownloadStatus downloadStatus) throws Exception {
+//                            String formatDownloadSize = downloadStatus.getFormatDownloadSize();
+//                            String formatTotalSize = downloadStatus.getFormatTotalSize();
+//                            int size = (int) downloadStatus.getDownloadSize();
+//                            int totalSize = (int) downloadStatus.getTotalSize();
+//                            String percent = downloadStatus.getPercent();
+//                            holder.mRxDownLoadLoading.setText("正在下载");
+//                            holder.mRxDownLoadBtn.setText("暂停");
+//                            holder.mRxDownLoadPb.setVisibility(View.VISIBLE);
+//                            holder.mRxDownLoadPb.setMax(totalSize);
+//                            holder.mRxDownLoadPb.setProgress(size);
+//                            holder.mRxDownLoadSize.setText(formatDownloadSize + "/" + formatTotalSize);
+//                            holder.mRxDownLoadPer.setText(percent);
+//                        }
+//                    }, new Consumer<Throwable>() {
+//                        @Override
+//                        public void accept(@NonNull Throwable throwable) throws Exception {
+//                            //download failed
+//                            ToastUtils.toast("下载失败");
+//                        }
+//                    }, new Action() {
+//                        @Override
+//                        public void run() throws Exception {
+//                            //downLoad success
+//                            holder.mRxDownLoadLoading.setText("下载完成");
+//                            holder.mRxDownLoadBtn.setText("完成");
+//                        }
+//                    });
         } else if (holder.mRxDownLoadBtn.getText().equals("暂停")) {
             //...//取消订阅, 即可暂停下载, 若服务端不支持断点续传,下一次下载会重新下载,反之会继续下载
-            Observable<DownloadStatus> download = mDownload.download(s, null, null);
-            Disposable subscribe = download.subscribe(new Consumer<DownloadStatus>() {
-                @Override
-                public void accept(@NonNull DownloadStatus downloadStatus) throws Exception {
-
-                }
-            });
-            boolean b = !subscribe.isDisposed();
-            if (b) {
-                subscribe.dispose();
+            if (disposable != null && !disposable.isDisposed()) {
+                disposable.dispose();
             }
-
+            holder.mRxDownLoadBtn.setText("继续");
+        } else if (holder.mRxDownLoadBtn.getText().equals("继续")) {
+            set(holder, s);
         } else if (holder.mRxDownLoadBtn.getText().equals("完成")) {
             ToastUtils.toast("已经下载完成");
         }
 
+    }
+
+    private void set(final ViewHolder holder, String s) {
+        mDownload.download(s).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<DownloadStatus>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(DownloadStatus downloadStatus) {
+                        String formatDownloadSize = downloadStatus.getFormatDownloadSize();
+                        String formatTotalSize = downloadStatus.getFormatTotalSize();
+                        int size = (int) downloadStatus.getDownloadSize();
+                        int totalSize = (int) downloadStatus.getTotalSize();
+                        String percent = downloadStatus.getPercent();
+                        holder.mRxDownLoadLoading.setText("正在下载");
+                        holder.mRxDownLoadBtn.setText("暂停");
+                        holder.mRxDownLoadPb.setVisibility(View.VISIBLE);
+                        holder.mRxDownLoadPb.setMax(totalSize);
+                        holder.mRxDownLoadPb.setProgress(size);
+                        holder.mRxDownLoadSize.setText(formatDownloadSize + "/" + formatTotalSize);
+                        holder.mRxDownLoadPer.setText(percent);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtils.toast("下载失败");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        holder.mRxDownLoadLoading.setText("下载完成");
+                        holder.mRxDownLoadBtn.setText("完成");
+                    }
+                });
     }
 }
