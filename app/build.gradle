@@ -71,4 +71,6 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.12'
     //RxDownLoad
     compile 'zlc.season:rxdownload2:2.0.0-beta4'
+    //litePal
+    compile 'org.litepal.android:core:1.5.1'
 }

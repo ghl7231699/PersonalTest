@@ -1,5 +1,6 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -8,11 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Fruits;
 import com.example.liangge.rxjavatest.ui.adapter.FruitsAdapter;
@@ -24,7 +28,7 @@ import java.util.Random;
 public class MaterialDesignActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private Fruits[] mFruitses = {new Fruits("Apple", R.mipmap.backup), new Fruits("Orange", R.mipmap.call),
+    private Fruits[] mFruits = {new Fruits("Apple", R.mipmap.backup), new Fruits("Orange", R.mipmap.call),
             new Fruits("Pear", R.mipmap.friends),
             new Fruits("Cherry", R.mipmap.location),
             new Fruits("PineApple", R.mipmap.mail)};
@@ -45,9 +49,26 @@ public class MaterialDesignActivity extends AppCompatActivity {
     private void setRecycleView() {
         initFruits();
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
-        GridLayoutManager manager = new GridLayoutManager(this, 2);
+        GridLayoutManager manager = new GridLayoutManager(this, 4);
         rv.setLayoutManager(manager);
         mFruitAdapter = new FruitsAdapter(this, mFruitsList);
+        mFruitAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.fruit_image:
+                        Fruits fruits = mFruitsList.get(position);
+                        Intent intent = new Intent(MaterialDesignActivity.this, FruitActivity.class);
+                        String name = fruits.getName();
+                        intent.putExtra(FruitActivity.FRUIT_NAME, name);
+                        Log.d("FruitAdapter", "onClick: "+name);
+                        int imageId = fruits.getImageId();
+                        intent.putExtra(FruitActivity.FRUIT_IMAGE_ID, imageId);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
         rv.setAdapter(mFruitAdapter);
     }
 
@@ -55,8 +76,8 @@ public class MaterialDesignActivity extends AppCompatActivity {
         mFruitsList.clear();
         for (int i = 0; i < 50; i++) {
             Random r = new Random();
-            int index = r.nextInt(mFruitses.length);
-            mFruitsList.add(mFruitses[index]);
+            int index = r.nextInt(mFruits.length);
+            mFruitsList.add(mFruits[index]);
         }
     }
 

@@ -10,13 +10,16 @@ import com.example.liangge.rxjavatest.di.modules.AppModule;
 import com.example.liangge.rxjavatest.di.modules.HttpModule;
 import com.lzy.okhttputils.OkHttpUtils;
 
+import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
+
 import java.io.File;
 
 /**
  * Created by guhongliang on 2017/3/30.
  */
 
-public class App extends Application {
+public class App extends LitePalApplication {
     private static Context mContext;
     private AppComponent mAppComponent;
     public static App mApp;
@@ -29,6 +32,7 @@ public class App extends Application {
         mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).httpModule(new HttpModule()).build();
         mContext = getApplicationContext();
         OkHttpUtils.init(this);
+        initSql();
     }
 
     public static Context getContext() {
@@ -45,5 +49,12 @@ public class App extends Application {
 
     public static final String getLocalDataPath() {
         return LOCAL_DATA_PATH;
+    }
+
+    /**
+     * 初始化litepal，建表
+     */
+    private void initSql() {
+        LitePal.initialize(this);
     }
 }

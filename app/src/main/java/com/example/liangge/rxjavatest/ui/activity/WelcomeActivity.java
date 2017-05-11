@@ -24,7 +24,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mPathView.getPathAnimator().delay(100).duration(3000)
+        mPathView.getPathAnimator().delay(100).duration(2000)
                 .interpolator(new AccelerateDecelerateInterpolator())
                 .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
                     @Override

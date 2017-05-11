@@ -26,5 +26,6 @@ public class FruitsAdapter extends BaseQuickAdapter<Fruits,BaseViewHolder> {
     protected void convert(BaseViewHolder helper, Fruits item) {
             helper.setText(R.id.fruit_content,item.getName());
         Glide.with(mContext).load(item.getImageId()).crossFade().into((ImageView) helper.getView(R.id.fruit_image));
+        helper.addOnClickListener(R.id.fruit_image);
     }
 }

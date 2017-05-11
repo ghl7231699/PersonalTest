@@ -54,16 +54,6 @@ public class UserInfoActivity extends BaseActivity<LoginPresenter> implements Us
     }
 
     @Override
-    public void onRequestPermissonSuccess() {
-        mPresenter.LoadUserInfo();
-    }
-
-    @Override
-    public void onRequestPermissonError() {
-        Toast.makeText(this, "你已拒绝授权", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void showLoading() {
         mProgressDialog.setMessage("加载中。。。。");
         mProgressDialog.setTitle("提示");

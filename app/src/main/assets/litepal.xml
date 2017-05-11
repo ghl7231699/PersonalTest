@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--
+       这里是你的android数据库的名字，可以直接写一个名称，框架会自动给你加上名
+       称.db,例如下面的例子的结果为生成一个userinf.db的数据库。例：
+        <dbname value="userinf" ></dbname>
+    -->
+    <dbname value="detailed_list"></dbname>
+
+    <!--
+        这里是数据库的版本，就像我们使用SqliteOpenHelper建立数据库一样，第一次建
+        立数据库需要给数据库一个版本。如果想更新数据库的设置，只要在此基础上加1就可
+        以了。例：
+        <version value="1" ></version>
+    -->
+    <version value="1"></version>
+
+    <!--
+        这里是实体类和数据库中的表的映射配置，一个类对应数据库中一张表，类中的一个字
+        段对应表中的一列。例：
+        <list>
+            <mapping class="com.tianlanse.mvpdemo.bean.UserBean"></mapping>
+        </list>
+    -->
+    <list>
+        <mapping class="com.example.liangge.rxjavatest.bean.Fruit"></mapping>
+    </list>
+
+    <!--
+        这个是定义数据userinf.db存储在哪里，有两个参数"internal"和"external"可
+        以选择。"internal"表示数据库存储在数据库文件夹的内部存储中，其他人不能访
+        问。"external"表示存储在外部的存储中，所有人可以访问。默认情况下
+        是"internal"。例：
+        <storage value="external"></storage>
+    -->
+    <storage value="internal"></storage>
+</litepal>

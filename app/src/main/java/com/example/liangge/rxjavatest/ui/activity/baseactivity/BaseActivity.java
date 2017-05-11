@@ -1,7 +1,6 @@
 package com.example.liangge.rxjavatest.ui.activity.baseactivity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.liangge.rxjavatest.App;
@@ -52,8 +51,4 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     //初始化Component
     public abstract void setUpComponent(AppComponent appComponent);
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 }

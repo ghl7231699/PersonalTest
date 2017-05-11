@@ -13,15 +13,16 @@
 
         <ImageView
             android:id="@+id/fruit_image"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/fruit_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             android:textSize="16sp" />
 

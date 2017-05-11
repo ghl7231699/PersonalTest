@@ -1,10 +1,12 @@
 package com.example.liangge.rxjavatest.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by liangge on 2017/4/3.
  */
 
-public class Fruit {
+public class Fruit extends DataSupport {
     private String name;
     private int imageId;
     private int t;

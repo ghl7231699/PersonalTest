@@ -2,7 +2,6 @@ package com.example.liangge.rxjavatest.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import com.example.liangge.rxjavatest.App;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.bean.Fruit;
-import com.example.liangge.rxjavatest.common.httpurl.HttpUrls;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.di.component.DaggerUserComponent;
@@ -43,6 +41,8 @@ public class RxDownLoadActivity extends BaseActivity<RxDownLoadPresenter> implem
     TextView mRxDownLoadSize;
     Button mRxDownLoadBtn;
     RecyclerView mRecyclerView;
+    private int count;
+    private int totalCount=12;
 
     @Override
     public int getLayoutId() {
@@ -51,13 +51,13 @@ public class RxDownLoadActivity extends BaseActivity<RxDownLoadPresenter> implem
 
     @Override
     public void initView() {
-        View view = LayoutInflater.from(this).inflate(R.layout.rx_down_list_item, null, false);
-        mRxDownLoadContent = (TextView) view.findViewById(R.id.rx_down_load_content);
-        mRxDownLoadPer = (TextView) view.findViewById(R.id.rx_down_load_per);
-        mRxDownLoadLoading = (TextView) view.findViewById(R.id.rx_down_load_loading);
-        mRxDownLoadSize = (TextView) view.findViewById(R.id.rx_down_load_size);
-        mRxDownLoadPb = (ProgressBar) view.findViewById(R.id.rx_down_load_pb);
-        mRxDownLoadBtn = (Button) view.findViewById(R.id.rx_down_load_btn);
+//        View view = LayoutInflater.from(this).inflate(R.layout.rx_down_list_item, null, false);
+//        mRxDownLoadContent = (TextView) view.findViewById(R.id.rx_down_load_content);
+//        mRxDownLoadPer = (TextView) view.findViewById(R.id.rx_down_load_per);
+//        mRxDownLoadLoading = (TextView) view.findViewById(R.id.rx_down_load_loading);
+//        mRxDownLoadSize = (TextView) view.findViewById(R.id.rx_down_load_size);
+//        mRxDownLoadPb = (ProgressBar) view.findViewById(R.id.rx_down_load_pb);
+//        mRxDownLoadBtn = (Button) view.findViewById(R.id.rx_down_load_btn);
         mRecyclerView = (RecyclerView) findViewById(R.id.rx_down_load_recycler_view);
     }
 
@@ -79,16 +79,6 @@ public class RxDownLoadActivity extends BaseActivity<RxDownLoadPresenter> implem
     }
 
     @Override
-    public void onRequestPermissonSuccess() {
-
-    }
-
-    @Override
-    public void onRequestPermissonError() {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }
@@ -105,20 +95,30 @@ public class RxDownLoadActivity extends BaseActivity<RxDownLoadPresenter> implem
 
     @Override
     public void showUserInfo(Object model) {
-        List<Fruit> list = (List<Fruit>) model;
+        final List<Fruit> list = (List<Fruit>) model;
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(manager);
         if (list != null) {
-//            RxDownListAdapter adapter = new RxDownListAdapter(this, list);
+//            final RxDownListAdapter adapter = new RxDownListAdapter(this, list);
+//            adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+//                @Override
+//                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+//                    switch (view.getId()) {
+//                        case R.id.rx_down_load_btn:
+//                            ToastUtils.toast("点击了" + list.get(position).getName());
+//                            get(list.get(position));
+//                            break;
+//                    }
+//                }
+//            });
             RxDownLoadAdapter adapter = new RxDownLoadAdapter(list, this);
-            LinearLayoutManager manager = new LinearLayoutManager(this);
-            mRecyclerView.setLayoutManager(manager);
             mRecyclerView.setAdapter(adapter);
         }
     }
 
-    private void get() {
-
-        RxDownload.getInstance(this)
-                .download(HttpUrls.URL_DOWN_LOAD, "展业区.apk", App.getLocalDataPath())
+    private void get(Fruit fruit) {
+        RxDownload rxDownload = RxDownload.getInstance(this).defaultSavePath(App.getLocalDataPath());
+        rxDownload.download(fruit.getUrl())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<DownloadStatus>() {
