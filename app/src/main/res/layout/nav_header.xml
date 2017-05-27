@@ -6,7 +6,6 @@
     android:layout_height="180dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/icon_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerInParent="true"
@@ -22,7 +21,6 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/nav_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/user_name"

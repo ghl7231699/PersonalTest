@@ -80,4 +80,10 @@ public class UserInfoActivity extends BaseActivity<LoginPresenter> implements Us
             Toast.makeText(this, "请求出错了，请检查网络", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void overridePendingTransition(int enterAnim, int exitAnim) {
+        super.overridePendingTransition(enterAnim, exitAnim);
+
+    }
 }

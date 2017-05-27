@@ -6,19 +6,15 @@
             android:icon="@mipmap/call"
             android:title="Call" />
         <item
-            android:id="@+id/nav_friends"
             android:icon="@mipmap/friends"
             android:title="Friends" />
         <item
-            android:id="@+id/nav_location"
             android:icon="@mipmap/location"
             android:title="Location" />
         <item
-            android:id="@+id/nav_mail"
             android:icon="@mipmap/mail"
             android:title="Mail" />
         <item
-            android:id="@+id/nav_task"
             android:icon="@mipmap/task"
             android:title="Tasks" />
     </group>
