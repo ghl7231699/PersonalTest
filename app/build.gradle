@@ -89,4 +89,6 @@ dependencies {
     //GreenDao
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'org.greenrobot:greendao-generator:3.2.2'
+    //loading工具
+    compile 'com.dyhdyh.loadingbar:loadingbar:1.4.4'
 }
