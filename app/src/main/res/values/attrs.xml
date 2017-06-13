@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="textsize" format="reference|dimension"/>
+    <attr name="textsize2" format="reference|dimension"/>
+    <attr name="textsize3" format="reference|dimension"/>
+    <attr name="contentText" format="string"/>
+    <attr name="contentTextColor" format="color"/>
+    <attr name="contentTextSize" format="dimension"/>
+    <declare-styleable name="CustomCircleView">
+        <attr name="contentText"/>
+        <attr name="contentTextColor"/>
+        <attr name="contentTextSize"/>
+    </declare-styleable>
+
+</resources>

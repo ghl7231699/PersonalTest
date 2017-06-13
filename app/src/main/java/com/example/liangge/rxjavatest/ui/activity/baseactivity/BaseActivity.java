@@ -16,6 +16,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     private Unbinder mUnbinder;
     private App mApp;
+    private int states=3;
     @Inject
     public
     T mPresenter;
@@ -23,6 +24,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(getLayoutId());
         mUnbinder = ButterKnife.bind(this);
         this.mApp = (App) getApplication();

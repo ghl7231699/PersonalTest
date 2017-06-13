@@ -2,6 +2,8 @@
   <dictionary name="guhongliang">
     <words>
       <w>litepal</w>
+      <w>textsize</w>
+      <w>tset</w>
     </words>
   </dictionary>
 </component>

@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
                 toOtherActivity(RxDownLoadActivity.class);
                 break;
             case R.id.btn9:
-                toOtherActivity(null);
+                toOtherActivity(CustomActivity.class);
                 break;
         }
     }
