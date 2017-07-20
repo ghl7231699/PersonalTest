@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dyhdyh.widget.loading.bar.LoadingBar;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.di.component.DaggerUserComponent;
@@ -59,7 +58,6 @@ public class UserInfoActivity extends BaseActivity<LoginPresenter> implements Us
 //        mProgressDialog.setMessage("加载中。。。。");
 //        mProgressDialog.setTitle("提示");
 //        mProgressDialog.show();
-        LoadingBar.make(mUserInfoTextContent).show();
     }
 
     @Override
@@ -72,7 +70,6 @@ public class UserInfoActivity extends BaseActivity<LoginPresenter> implements Us
 //        if (mProgressDialog.isShowing()) {
 //            mProgressDialog.dismiss();
 //        }
-        LoadingBar.cancel(mUserInfoTextContent);
     }
 
     @Override

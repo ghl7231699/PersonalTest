@@ -15,6 +15,7 @@
     <string name="error_socket_timeout">网络超时</string>
     <string name="error_socket_unreachable">网络不可用</string>
     <string name="loading">加载中...</string>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -29,4 +30,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
 </resources>
