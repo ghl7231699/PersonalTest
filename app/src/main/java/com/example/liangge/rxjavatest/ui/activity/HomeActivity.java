@@ -53,6 +53,9 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.btn9:
                 toOtherActivity(CustomActivity.class);
                 break;
+            case R.id.btn10:
+                toOtherActivity(VideoActivity.class);
+                break;
         }
     }
 
