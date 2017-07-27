@@ -11,5 +11,14 @@
         <attr name="contentTextColor"/>
         <attr name="contentTextSize"/>
     </declare-styleable>
+    <attr name="borderRadius" format="dimension"/>
+    <attr name="type">
+        <enum name="round" value="1"/>
+        <enum name="circle" value="0"/>
+    </attr>
+    <declare-styleable name="RoundImage">
+        <attr name="borderRadius"/>
+        <attr name="type"/>
 
+    </declare-styleable>
 </resources>
