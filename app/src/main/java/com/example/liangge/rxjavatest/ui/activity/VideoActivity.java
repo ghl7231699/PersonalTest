@@ -3,7 +3,6 @@ package com.example.liangge.rxjavatest.ui.activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.example.liangge.rxjavatest.ui.view.RoundImageViewByXfermode;
 import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by guhongliang on 2017/7/19.
@@ -94,12 +92,5 @@ public class VideoActivity extends BaseActivity {
                 }
             }
         }.start();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }
