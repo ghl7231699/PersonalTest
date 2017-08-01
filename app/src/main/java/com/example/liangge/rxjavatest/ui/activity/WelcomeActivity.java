@@ -46,11 +46,4 @@ public class WelcomeActivity extends BaseActivity {
     public void setUpComponent(AppComponent appComponent) {
 
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
