@@ -20,9 +20,14 @@ import dagger.Provides;
 @Module
 public class UserModules {
     private UserInfoContract.View mView;
+    private UserInfoContract.RxView mRxView;
 
     public UserModules(UserInfoContract.View view) {
         mView = view;
+    }
+
+    public UserModules(UserInfoContract.RxView rxView) {
+        mRxView = rxView;
     }
 
     @Provides
@@ -49,6 +54,12 @@ public class UserModules {
     public UserInfoContract.View providerView() {
         return mView;
     }
+
+    @Provides
+    public UserInfoContract.RxView providerRxView() {
+        return mRxView;
+    }
+
     @Provides
     public RxDownListModule provideRxDownListModule(Api api) {
         return new RxDownListModule(api);

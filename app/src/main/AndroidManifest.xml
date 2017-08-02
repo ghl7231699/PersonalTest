@@ -57,6 +57,7 @@
         </activity>
         <activity android:name=".ui.activity.VideoActivity"/>
         <activity android:name=".ui.activity.EventBusActivity"/>
+        <activity android:name=".ui.activity.RxjavaActivity"/>
     </application>
 
 </manifest>
