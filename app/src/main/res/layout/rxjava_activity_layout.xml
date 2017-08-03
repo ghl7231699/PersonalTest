@@ -19,6 +19,21 @@
         android:text="Map操作符"/>
 
     <Button
+        android:id="@+id/rx_java_flatMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="FlatMap操作符"/>
+
+
+    <Button
+        android:id="@+id/rx_java_zip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="zip操作符"/>
+
+    <Button
         android:id="@+id/rx_java_concat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,17 +41,25 @@
         android:text="Concat操作符"/>
 
     <Button
-        android:id="@+id/rx_java_flatMap"
+        android:id="@+id/rx_java_distinct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="FlatMap操作符"/>
+        android:text="distinct操作符"/>
+
+    <Button
+        android:id="@+id/rx_java_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="filter操作符"/>
+
 
     <TextView
-        android:background="@drawable/boder"
         android:id="@+id/rx_java_content"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@drawable/boder"/>
 </LinearLayout>
