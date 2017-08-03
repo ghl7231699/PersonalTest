@@ -219,7 +219,9 @@ public class RxjavaActivity extends BaseActivity<RxjavaPresenter> implements Use
         });
     }
 
-    @OnClick({R.id.rx_java_create, R.id.rx_java_map, R.id.rx_java_concat, R.id.rx_java_flatMap, R.id.rx_java_zip, R.id.rx_java_distinct, R.id.rx_java_filter})
+    @OnClick({R.id.rx_java_create, R.id.rx_java_map, R.id.rx_java_concat,
+            R.id.rx_java_flatMap, R.id.rx_java_zip,
+            R.id.rx_java_distinct, R.id.rx_java_filter})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rx_java_create:
