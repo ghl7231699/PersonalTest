@@ -6,6 +6,7 @@
     <attr name="contentText" format="string"/>
     <attr name="contentTextColor" format="color"/>
     <attr name="contentTextSize" format="dimension"/>
+
     <declare-styleable name="CustomCircleView">
         <attr name="contentText"/>
         <attr name="contentTextColor"/>
@@ -20,5 +21,21 @@
         <attr name="borderRadius"/>
         <attr name="type"/>
 
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomControlView">
+        <attr name="title_background_color" format="reference|integer"/>
+        <attr name="left_button_visible" format="boolean"/>
+        <attr name="right_button_visible" format="boolean"/>
+        <attr name="title_text" format="string"/>
+        <attr name="title_text_color" format="color"/>
+        <attr name="title_text_drawable" format="reference|integer"/>
+        <attr name="right_button_text" format="string"/>
+        <attr name="right_button_text_color" format="color"/>
+        <attr name="right_button_text_drawable" format="reference|integer"/>
+        <attr name="left_button_text" format="string"/>
+        <attr name="left_button_text_color" format="color"/>
+        <attr name="left_button_text_drawable" format="reference|integer"/>
     </declare-styleable>
 </resources>

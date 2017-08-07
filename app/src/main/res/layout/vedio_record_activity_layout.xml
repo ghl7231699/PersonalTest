@@ -70,6 +70,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="订阅粘性事件"/>
+
+            <com.example.liangge.rxjavatest.ui.view.CustomControlView
+                android:id="@+id/video_custom_rl1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                app:right_button_text_drawable="@mipmap/delete"
+                app:title_background_color="@color/colorAccent"
+                app:title_text="标题1"/>
+
+            <com.example.liangge.rxjavatest.ui.view.CustomControlView
+                android:id="@+id/video_custom_rl2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                app:right_button_visible="false"
+                app:title_background_color="@color/colorAccent"
+                app:title_text="标题2"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

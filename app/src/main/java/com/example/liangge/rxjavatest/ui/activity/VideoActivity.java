@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.bean.MessageEvent;
+import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
+import com.example.liangge.rxjavatest.ui.view.CustomControlView;
 import com.example.liangge.rxjavatest.ui.view.PercentView;
 import com.example.liangge.rxjavatest.ui.view.RoundImage;
 import com.example.liangge.rxjavatest.ui.view.RoundImageViewByXfermode;
@@ -47,6 +49,10 @@ public class VideoActivity extends BaseActivity {
     TextView mContent;
     @BindView(R.id.strike_next)
     TextView mTextView;
+    @BindView(R.id.video_custom_rl1)
+    CustomControlView mControlView1;
+    @BindView(R.id.video_custom_rl2)
+    CustomControlView mControlView2;
     private String path = Environment.getExternalStorageDirectory() + "Video" + File.separator;
 
     @Override
@@ -58,7 +64,6 @@ public class VideoActivity extends BaseActivity {
     public void initView() {
         EventBus.getDefault()
                 .register(this);
-
     }
 
     @Override
@@ -136,13 +141,29 @@ public class VideoActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.strike_next, R.id.strike_subscribe})
+    @OnClick({R.id.strike_next, R.id.strike_subscribe, R.id.video_custom_rl1, R.id.video_custom_rl2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.strike_next:
                 break;
             case R.id.strike_subscribe:
                 EventBus.getDefault().postSticky(new MessageEvent(true));
+                break;
+            case R.id.video_custom_rl1:
+                mControlView1.getTitleBarRightBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.toast("点击了右边按钮");
+                    }
+                });
+                break;
+            case R.id.video_custom_rl2:
+                mControlView1.getTitleBarLeftBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.toast("点击了左边按钮");
+                    }
+                });
                 break;
         }
     }
