@@ -30,7 +30,7 @@ public class RxDownListModule {
             new Fruit("酷狗", R.mipmap.h, 3, 1, HttpUrls.URL_3),
             new Fruit("网易云音乐", R.mipmap.j, 1, 1, HttpUrls.URL_4),
             new Fruit("爱奇艺视频", R.mipmap.k, 2, 1, HttpUrls.URL_5),
-            new Fruit("西游降魔篇", R.mipmap.l, 3, 1, HttpUrls.URL_6),
+            new Fruit("西游降魔篇", R.mipmap.l, 3, 1, HttpUrls.URL_8),
     };
     Api mApi;
 

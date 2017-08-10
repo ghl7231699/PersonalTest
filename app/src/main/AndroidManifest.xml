@@ -58,6 +58,8 @@
         <activity android:name=".ui.activity.VideoActivity"/>
         <activity android:name=".ui.activity.EventBusActivity"/>
         <activity android:name=".ui.activity.RxjavaActivity"/>
+        <activity android:name=".ui.activity.PaintViewActivity"/>
+        <activity android:name=".ui.activity.OkHttpActivity"/>
     </application>
 
 </manifest>

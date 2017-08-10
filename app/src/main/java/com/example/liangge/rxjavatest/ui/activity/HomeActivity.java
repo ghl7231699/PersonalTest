@@ -59,6 +59,12 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.btn11:
                 toOtherActivity(RxjavaActivity.class);
                 break;
+            case R.id.btn12:
+                toOtherActivity(PaintViewActivity.class);
+                break;
+            case R.id.btn13:
+                toOtherActivity(OkHttpActivity.class);
+                break;
         }
     }
 

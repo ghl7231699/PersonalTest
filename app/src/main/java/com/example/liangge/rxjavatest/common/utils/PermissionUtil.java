@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
-import com.example.liangge.rxjavatest.common.inter.PermissonListener;
+import com.example.liangge.rxjavatest.common.inter.PermissionListener;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -20,7 +20,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class PermissionUtil {
-    public static void requestPermission(final Activity activity, final PermissonListener listener, String... permission) {
+    public static void requestPermission(final Activity activity, final PermissionListener listener, String... permission) {
         RxPermissions permissions = new RxPermissions(activity);
         permissions.requestEach(permission)
                 .subscribe(new Consumer<Permission>() {

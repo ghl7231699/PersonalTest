@@ -4,7 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 
 import com.example.liangge.rxjavatest.bean.Fruit;
-import com.example.liangge.rxjavatest.common.inter.PermissonListener;
+import com.example.liangge.rxjavatest.common.inter.PermissionListener;
 import com.example.liangge.rxjavatest.common.utils.PermissionUtil;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.data.RxDownListModule;
@@ -30,7 +30,7 @@ public class RxDownLoadPresenter extends BasePresenter<RxDownListModule, UserInf
 
 
     public void showDownList() {
-        PermissionUtil.requestPermission((Activity) mV, new PermissonListener() {
+        PermissionUtil.requestPermission((Activity) mV, new PermissionListener() {
             @Override
             public void onGranted() {
                 mM.getData()
