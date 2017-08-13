@@ -60,6 +60,7 @@
         <activity android:name=".ui.activity.RxjavaActivity"/>
         <activity android:name=".ui.activity.PaintViewActivity"/>
         <activity android:name=".ui.activity.OkHttpActivity"/>
+        <activity android:name=".ui.activity.HotFixActivity"/>
     </application>
 
 </manifest>
