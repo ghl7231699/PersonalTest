@@ -1,5 +1,6 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -12,13 +13,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.bean.MessageEvent;
 import com.example.liangge.rxjavatest.common.config.SslContextFactory;
 import com.example.liangge.rxjavatest.common.httpurl.HttpUrls;
 import com.example.liangge.rxjavatest.common.utils.CommonUtils;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
+import com.example.liangge.rxjavatest.ui.view.PercentView;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -54,6 +61,8 @@ public class OkHttpActivity extends BaseActivity {
     TextView mOkHttpTv;
     @BindView(R.id.ok_http_iv)
     ImageView mOkHttpIv;
+    @BindView(R.id.ok_http_tv_total)
+    TextView mPercentView;
     private byte[] mBytes;
     private OkHttpClient okHttpClient;
     private Handler mHandler = new Handler() {
@@ -62,6 +71,7 @@ public class OkHttpActivity extends BaseActivity {
             super.handleMessage(msg);
         }
     };
+    private ProgressDialog pd;
 
     @Override
     public int getLayoutId() {
@@ -70,12 +80,13 @@ public class OkHttpActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        pd = new ProgressDialog(this);
     }
 
     @Override
     public void initData() {
         okHttpClient = SslContextFactory.getOkHttpClient();
+        EventBus.getDefault().register(this);//订阅
     }
 
     /**
@@ -140,9 +151,8 @@ public class OkHttpActivity extends BaseActivity {
         //4 执行call
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 Log.e(TAG, "onFailure");
-                e.printStackTrace();
             }
 
             @Override
@@ -204,7 +214,6 @@ public class OkHttpActivity extends BaseActivity {
      * 下载文件
      */
     private void downLoadImage() {
-        final OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
                 .get()
                 .url(HttpUrls.URL_8)
@@ -214,9 +223,15 @@ public class OkHttpActivity extends BaseActivity {
             public void run() {
                 okHttpClient.newCall(request).enqueue(new Callback() {
                     @Override
-                    public void onFailure(Call call, IOException e) {
+                    public void onFailure(Call call, final IOException e) {
                         Log.e(TAG, "onFailure");
                         e.printStackTrace();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mOkHttpTv.setText(e.getMessage());
+                            }
+                        });
                     }
 
                     @Override
@@ -262,6 +277,19 @@ public class OkHttpActivity extends BaseActivity {
         });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onRespose(MessageEvent event) {
+        mOkHttpTv.setText("" + event.getRead());
+        mPercentView.setText("" + event.getTotal());
+//        pd = new ProgressDialog(this);
+//        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//        pd.setTitle("提示");
+//        pd.setMessage("下载中");
+//        pd.setProgress((int) event.getRead());
+//        pd.setMax((int) event.getTotal());
+//        pd.show();
+    }
+
     @Override
     public void setUpComponent(AppComponent appComponent) {
 
@@ -285,5 +313,11 @@ public class OkHttpActivity extends BaseActivity {
                 downLoadImage();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);//解除订阅
+        super.onDestroy();
     }
 }

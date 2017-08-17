@@ -2,10 +2,13 @@ package com.example.liangge.rxjavatest.common.config;
 
 import android.util.Log;
 
+import com.example.liangge.rxjavatest.custombody.ProgressResponseBodyInterceptor;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -15,6 +18,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by guhongliang on 2017/3/29.
@@ -73,6 +77,25 @@ public class SslContextFactory {
         OkHttpClient.Builder mBuilder = new OkHttpClient.Builder();
         mBuilder.sslSocketFactory(createSSLSocketFactory(), new TrustAllManager());
         mBuilder.hostnameVerifier(new TrustAllHostnameVerifier());
+//        mBuilder.addNetworkInterceptor(new ProgressResponseBodyInterceptor());
+//        mBuilder.networkInterceptors().add(new Interceptor() {
+//            @Override
+//            public Response intercept(Chain chain) throws IOException {
+//                Response response = chain.proceed(chain.request());
+//                return response
+//                        .newBuilder()
+//                        .body(new ProgressResponseBody(response.body(), new ProgressListener() {
+//                            @Override
+//                            public void update(long readLength, long contentLength, boolean done) {
+//                                Log.e(TAG, "update: " + readLength + contentLength);
+//                            }
+//                        }))
+//                        .build();
+//            }
+//        });
+        mBuilder.connectTimeout(100000, TimeUnit.SECONDS);
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS);
+        mBuilder.addInterceptor(interceptor);
         return mBuilder.build();
     }
 

@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.PdfDownLoadActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,12 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.btn13:
                 toOtherActivity(OkHttpActivity.class);
                 break;
+            case R.id.btn14:
+                toOtherActivity(InterviewActivity.class);
+                break;
+            case R.id.btn15:
+                toOtherActivity(RetrofitActivity.class);
+                break;
         }
     }
 
@@ -73,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, clazz);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "建设中。。。。", Toast.LENGTH_SHORT).show();
+            ToastUtils.toast("建设中");
         }
     }
 }
