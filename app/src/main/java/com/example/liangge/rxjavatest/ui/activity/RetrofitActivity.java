@@ -1,7 +1,6 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -65,6 +64,8 @@ public class RetrofitActivity extends BaseActivity {
     TextView mRxDownLoadSize;
     @BindView(R.id.rx_down_load_btn)
     Button mRxDownLoadBtn;
+    @BindView(R.id.retrofit_tv)//文本内容
+            TextView mRetrofitTv;
     private String[] mSplit;
 
     @Override
@@ -102,15 +103,25 @@ public class RetrofitActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rx_down_load_btn:
-                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setTitle("reminder");
                 dialog.setMessage("loading");
                 dialog.create().show();
                 downFile();
                 break;
             case R.id.retrofit_up_btn:
+                int asc = getAsc("li");
+                mRetrofitTv.setText("转换后的值=" + asc);
                 break;
         }
+    }
+
+
+    private int getAsc(String s) {
+        int a;
+        byte[] bytes = s.getBytes();
+        a = bytes[0];
+        return a;
     }
 
     /**

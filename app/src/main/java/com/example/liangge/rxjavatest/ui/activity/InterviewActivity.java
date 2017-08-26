@@ -1,12 +1,21 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
+import com.example.liangge.rxjavatest.service.MessengerService;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
 
 import butterknife.OnClick;
@@ -18,6 +27,7 @@ import butterknife.OnClick;
 public class InterviewActivity extends BaseActivity {
     private static final String TAG = "InterviewActivity";
     private ProgressDialog p;
+    private Messenger mService;
 
     @Override
     public int getLayoutId() {
@@ -33,6 +43,10 @@ public class InterviewActivity extends BaseActivity {
         p.setMessage("Loading");
         p.setMax(10);
         p.setTitle("Warn");
+
+        //
+        Intent intent = new Intent(this, MessengerService.class);
+        bindService(intent, mConnection, BIND_AUTO_CREATE);
     }
 
     @Override
@@ -82,11 +96,24 @@ public class InterviewActivity extends BaseActivity {
         }
     }
 
-    public class Thread implements Runnable {
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mService = new Messenger(service);
+            Message message = Message.obtain(null, 1);
+            Bundle bundle = new Bundle();
+            bundle.putString("msg", "hello,this is client.");
+            message.setData(bundle);
+            try {
+                mService.send(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
 
         @Override
-        public void run() {
+        public void onServiceDisconnected(ComponentName name) {
 
         }
-    }
+    };
 }

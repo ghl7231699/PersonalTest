@@ -1,5 +1,6 @@
 package com.example.liangge.rxjavatest.bean;
 
+import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,7 +9,7 @@ import android.os.Parcelable;
  * 事件类
  */
 
-public class MessageEvent implements Parcelable {
+public class MessageEvent extends Handler implements Parcelable{
     private boolean change;
     private long total;
 

@@ -72,6 +72,9 @@ public class HomeActivity extends Activity {
             case R.id.btn15:
                 toOtherActivity(RetrofitActivity.class);
                 break;
+            case R.id.btn16:
+                toOtherActivity(RecyclerViewActivity.class);
+                break;
         }
     }
 
