@@ -10,6 +10,18 @@ public class Fruit {
     private int t;
     private int flag;
     private String url;
+    private boolean top;
+
+    public boolean isTop() {
+        return top;
+    }
+
+    public void setTop(boolean top) {
+        this.top = top;
+    }
+
+    public Fruit() {
+    }
 
     public String getUrl() {
         return url;

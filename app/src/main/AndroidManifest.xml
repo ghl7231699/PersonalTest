@@ -41,7 +41,6 @@
         </activity>
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.WelcomeActivity">
-
         </activity>
         <activity android:name=".ui.activity.PdfActivity"/>
         <activity android:name=".ui.activity.baseactivity.PdfDownLoadActivity">
@@ -52,8 +51,6 @@
             android:label="@string/title_activity_login">
         </activity>
         <activity android:name=".ui.activity.CustomActivity">
-
-
         </activity>
         <activity android:name=".ui.activity.VideoActivity"/>
         <activity android:name=".ui.activity.EventBusActivity"/>
@@ -64,11 +61,15 @@
         <activity android:name=".ui.activity.InterviewActivity"/>
         <activity android:name=".ui.activity.RetrofitActivity"/>
         <activity android:name=".ui.activity.RecyclerViewActivity"/>
+        <activity android:name=".ui.activity.ResultActivity"/>
+        <activity android:name=".ui.activity.ProxyActivity"/>
 
         <service
             android:name=".service.MessengerService"
-            android:process=":remote"
-            />
+            android:process=":remote"/>
+
+        <activity android:name=".ui.activity.SlideActivity">
+        </activity>
     </application>
 
 </manifest>

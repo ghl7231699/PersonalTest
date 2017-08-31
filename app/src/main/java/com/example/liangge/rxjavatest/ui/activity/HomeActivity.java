@@ -75,6 +75,12 @@ public class HomeActivity extends Activity {
             case R.id.btn16:
                 toOtherActivity(RecyclerViewActivity.class);
                 break;
+            case R.id.btn17:
+                toOtherActivity(ResultActivity.class);
+                break;
+            case R.id.btn18:
+                toOtherActivity(SlideActivity.class);
+                break;
         }
     }
 
