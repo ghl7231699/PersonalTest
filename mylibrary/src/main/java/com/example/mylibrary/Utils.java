@@ -1,4 +1,4 @@
-package com.othershe.nicedialog;
+package com.example.mylibrary;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

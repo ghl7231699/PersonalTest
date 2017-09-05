@@ -3,9 +3,7 @@ package com.example.liangge.rxjavatest.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
@@ -76,7 +74,7 @@ public class HomeActivity extends Activity {
                 toOtherActivity(RecyclerViewActivity.class);
                 break;
             case R.id.btn17:
-                toOtherActivity(ResultActivity.class);
+                toOtherActivity(NiceDialogActivity.class);
                 break;
             case R.id.btn18:
                 toOtherActivity(SlideActivity.class);

@@ -33,14 +33,15 @@
         <activity android:name=".ui.activity.UserInfoActivity">
         </activity>
         <activity android:name=".ui.activity.HomeActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.activity.MainActivity"/>
-        <activity android:name=".ui.activity.WelcomeActivity">
         </activity>
         <activity android:name=".ui.activity.PdfActivity"/>
         <activity android:name=".ui.activity.baseactivity.PdfDownLoadActivity">
@@ -70,6 +71,7 @@
 
         <activity android:name=".ui.activity.SlideActivity">
         </activity>
+        <activity android:name=".ui.activity.NiceDialogActivity"/>
     </application>
 
 </manifest>

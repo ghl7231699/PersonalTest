@@ -49,16 +49,27 @@ dependencies {
         force = true;
     }
     //Rxjava
+
     //Retrofit
+
     //
+
     //dagger
+
     //butterKnife
+
     //okHttp Log
+
     //path view
+
     //pdfAndroidViewer
+
     //okHttpUtils
+
     //BaseRecyclerViewAdapterHelper
+
     //RxDownLoad
+
     //GreenDao
     compile 'org.greenrobot:eventbus:3.0.0'
     compile project(':alipaystander')
@@ -92,4 +103,5 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.10'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile project(':mylibrary')
 }

@@ -1,2 +1,2 @@
-include ':app', ':alipaystander', ':taopiaopiao'
+include ':app', ':alipaystander', ':taopiaopiao', ':mylibrary'
 
