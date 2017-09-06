@@ -38,4 +38,12 @@
         <attr name="left_button_text_color" format="color"/>
         <attr name="left_button_text_drawable" format="reference|integer"/>
     </declare-styleable>
+    <declare-styleable name="TimeLineMakerView">
+        <attr name="marker" format="reference|color"/>
+        <attr name="line" format="reference|color"/>
+        <attr name="circle_width" format="dimension"/>
+        <attr name="line_width" format="dimension"/>
+        <attr name="orientation" format="boolean"/>
+
+    </declare-styleable>
 </resources>

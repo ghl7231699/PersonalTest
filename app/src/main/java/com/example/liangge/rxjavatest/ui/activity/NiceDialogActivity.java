@@ -1,16 +1,20 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
+import com.example.liangge.rxjavatest.ui.view.DashedLine;
 import com.example.mylibrary.BaseNiceDialog;
 import com.example.mylibrary.NiceDialog;
 import com.example.mylibrary.ViewConvertListener;
 import com.example.mylibrary.ViewHolder;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -18,6 +22,10 @@ import butterknife.OnClick;
  */
 
 public class NiceDialogActivity extends BaseActivity {
+    @BindView(R.id.dl)
+    DashedLine mDl;
+    private Animation mAnimation;
+
     @Override
     public int getLayoutId() {
         return R.layout.nice_dialog_activity_layout;
@@ -25,7 +33,7 @@ public class NiceDialogActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.ad_enter_anim);
     }
 
     @Override
@@ -56,6 +64,7 @@ public class NiceDialogActivity extends BaseActivity {
                         .show(getSupportFragmentManager());
                 break;
             case R.id.button3:
+                mDl.startAnimation(mAnimation);
                 NiceDialog.init()
                         .setLayoutId(R.layout.commit_layout)
                         .setOutCancel(false)

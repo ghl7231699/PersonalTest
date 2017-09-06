@@ -10,5 +10,11 @@ import java.io.Serializable;
 public interface ViewConvertListener extends Serializable {
     long serilaVersionUID = System.currentTimeMillis();
 
+    /**
+     * 进行子view的初始化及点击事件
+     *
+     * @param viewHolder
+     * @param dialog
+     */
     void convertView(ViewHolder viewHolder, BaseNiceDialog dialog);
 }
