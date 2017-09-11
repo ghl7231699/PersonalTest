@@ -3,4 +3,23 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!-- 自定义柱形图  线颜色-->
+    <color name="imaginary_line">#12313076</color>
+    <color name="full_line_color">#12313076</color>
+
+    <!-- 自定义柱形图  字体颜色-->
+    <color name="text_color">#FF6A6A77</color>
+    <color name="per_text_color">#FF9EA4AF</color>
+
+
+    <!-- 绿色 -->
+    <color name="green">#66CC00</color>
+    <!-- 淡蓝 -->
+    <color name="wathet">#66FFFF</color>
+    <!-- 黄色 -->
+    <color name="yellow">#FFFF66</color>
+    <!-- 红色 -->
+    <color name="red">#FF3333</color>
 </resources>

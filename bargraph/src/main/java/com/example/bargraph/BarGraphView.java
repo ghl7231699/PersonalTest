@@ -3,7 +3,9 @@ package com.example.bargraph;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -33,8 +35,13 @@ public class BarGraphView extends View {
     private int[] color = {Color.RED, Color.BLUE, Color.YELLOW, Color.BLACK, Color.GREEN, Color.GRAY};
     private String[] ySteps = new String[]{"0", "20k", "40k", "60k", "80k", "100k"};
 
+    private int type = 4;//设置条形图的类型
+
     private List<Bar> mBars = new ArrayList<>();
 
+    private Path mPath;
+
+    private int marginWidth = 20;//相邻两组条形图之间的间距
 
     public BarGraphView(Context context) {
         this(context, null);
@@ -49,12 +56,14 @@ public class BarGraphView extends View {
         initParam();
     }
 
+
     /**
      * 初始化参数
      */
     private void initParam() {
         mRf = new Rect();
         mPaint = new Paint();
+        mPath = new Path();
         mPaint.setColor(Color.RED);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
@@ -85,18 +94,22 @@ public class BarGraphView extends View {
 
 
     public Paint getPaint() {
-
         return mPaint;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         num = mBars.size();
+        //得到条形图的份数
+        int t = num / type;
+        //获取到每组条形图的宽度
+//        int groupWidth = (mWidth - marginLeft - (t - 1) * marginWidth) / t;
         int left;
         int right;
         int value;
         int top;
         int Y = mHeight - marginBottom;
+//        for (int i = 0; i < t; i++) {
         for (int i = 0; i < num; i++) {
             Bar bar = mBars.get(i);
             height = bar.getHeightSize();
@@ -118,33 +131,56 @@ public class BarGraphView extends View {
                     + marginBottom + "\n");
             canvas.drawRect(mRf, mPaint);
         }
+//        }
         //绘制x轴
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStrokeWidth(3);
-        canvas.drawLine(50, Y, 100 + mWidth, Y, mPaint);
+//        drawX(canvas, Y);
         //绘制y轴
-        mPaint.setColor(Color.BLUE);
-        mPaint.setStrokeWidth(3);
-        canvas.drawLine(50, Y, 50, 10, mPaint);
+//        drawY(canvas, Y);
         //绘制y轴数字
         int oneH = Y / 5;
+//        drawYText(canvas, Y, oneH);
+        //绘制x轴虚线
+//        drawImaginaryLine(canvas, oneH);
+        super.onDraw(canvas);
+    }
+
+    private void drawImaginaryLine(Canvas canvas, int oneH) {
+
+        mPaint.setColor(R.color.imaginary_line);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3);
+        mPaint.setAntiAlias(true);
+        mPaint.setPathEffect(new DashPathEffect(new float[]{15, 5}, 0));
+        for (int i = 0; i < ySteps.length - 1; i++) {
+            mPath.reset();
+            mPath.moveTo(50, oneH + oneH * i);
+            mPath.lineTo(mWidth, oneH + oneH * i);
+//            canvas.drawLine(50, oneH + oneH * i, mWidth, oneH + oneH * i, mPaint);
+            canvas.drawPath(mPath, mPaint);
+        }
+    }
+
+    private void drawYText(Canvas canvas, int y, int oneH) {
         for (int i = 0; i < ySteps.length; i++) {
             if (i == ySteps.length - 1) {
-                canvas.drawText(ySteps[i], 10, Y + 10 - oneH * i, mPaint);
+                canvas.drawText(ySteps[i], 10, y + 10 - oneH * i, mPaint);
             } else {
-                canvas.drawText(ySteps[i], 10, Y - oneH * i, mPaint);
+                canvas.drawText(ySteps[i], 10, y - oneH * i, mPaint);
             }
 
         }
+    }
 
+    private void drawY(Canvas canvas, int y) {
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStrokeWidth(3);
+        canvas.drawLine(50, y, 50, 10, mPaint);
+    }
 
-
-        //绘制x轴横线
-        mPaint.setColor(Color.WHITE);
-        for (int i = 0; i < ySteps.length - 1; i++) {
-            canvas.drawLine(50, oneH + oneH * i, mWidth, oneH + oneH * i, mPaint);
-        }
-        super.onDraw(canvas);
+    private void drawX(Canvas canvas, int y) {
+        mPaint.setColor(Color.BLACK);
+        mPaint.setStrokeWidth(3);
+        canvas.drawLine(50, y, 100 + mWidth, y, mPaint);
     }
 
     public BarGraphView setPaint(Paint paint) {
@@ -178,6 +214,10 @@ public class BarGraphView extends View {
     public BarGraphView setMarginBottom(int marginBottom) {
         this.marginBottom = marginBottom;
         return this;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     static class Bar {

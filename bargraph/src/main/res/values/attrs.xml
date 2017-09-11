@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalBarGraphView">
+        <attr name="child_width" format="dimension"/>
+        <attr name="height_stander" format="dimension"/>
+        <attr name="child_text_name" format="string"/>
+        <attr name="child_text_num" format="integer"/>
+        <attr name="child_color" format="color"/>
+        <attr name="child_text_name_color" format="color"/>
+        <attr name="child_text_num_color" format="color"/>
+        <attr name="child_text_name_size" format="dimension"/>
+        <attr name="child_text_num_size" format="dimension"/>
+    </declare-styleable>
+</resources>

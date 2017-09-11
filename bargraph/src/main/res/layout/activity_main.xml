@@ -11,5 +11,20 @@
         android:id="@+id/bgv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#bfbfbf"/>
+        android:background="#bfbfbf"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/go"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="走你"
+        android:visibility="gone"/>
+
+    <com.example.bargraph.HorizontalBarGraphView
+        android:id="@+id/h_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
