@@ -63,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
                 .setMarginBottom(20)
                 .setBars(mList);
         //
-        mBar = new HorizontalBarGraphView.HorizontalBar(100, Color.argb(252, 252, 71, 88), "15000", "金汉王通讯研发中心");
+        mBar = new HorizontalBarGraphView.HorizontalBar(95, Color.argb(252, 252, 71, 88), "15000", "金汉王通讯研发中心北京分部机构");
         mBars.add(mBar);
         mBar = new HorizontalBarGraphView.HorizontalBar(80, Color.argb(252, 39, 210, 180), "12000", "领智中心");
         mBars.add(mBar);
         mBar = new HorizontalBarGraphView.HorizontalBar(80, Color.argb(252, 100, 179, 251), "12000", "领智中心");
         mBars.add(mBar);
-//        mBar = new HorizontalBarGraphView.HorizontalBar(55, Color.argb(252, 100, 179, 251), "10000", "领智中心");
-//        mBars.add(mBar);
+        mBar = new HorizontalBarGraphView.HorizontalBar(75, Color.argb(252, 100, 179, 251), "10000", "？？？");
+        mBars.add(mBar);
 //        mBar = new HorizontalBarGraphView.HorizontalBar(55, Color.argb(252, 100, 179, 251), "10000", "领智中心");
 //        mBars.add(mBar);
 //        mBar = new HorizontalBarGraphView.HorizontalBar(55, Color.argb(252, 100, 179, 251), "10000", "领智中心");

@@ -206,7 +206,6 @@ public class HorizontalBarGraphView extends View {
             canvas.drawRect(mRf, mRectPaint);
             //设置字体大小
             mTextPaint.setTextSize(Utils.dp2px(getContext(), 14 * scaling));
-
             mTextPaint.setARGB(252, 106, 106, 119);
             childNum = horizontalBar.getTextContent();
             canvas.drawText(childNum, l + spaceY * 2, y * i + space * i + marginTop, mTextPaint);
@@ -228,7 +227,6 @@ public class HorizontalBarGraphView extends View {
         mTextPaint.setStyle(Paint.Style.FILL);
         mTextPaint.setDither(true);
 //        getContext().getResources().getColor(R.color.text_color);
-
 //        mTextPaint.setColor(Color.argb(252, 106, 106, 119));
         mTextPaint.setColor(childTextColor);
         //设置字体大小
@@ -238,7 +236,7 @@ public class HorizontalBarGraphView extends View {
             //获取文本内容的大小
             int length = childName.length();
             mTextPaint.getTextBounds(childName, 0, length, mTextRf);
-            textWidth = mTextRf.width();
+            int width = mTextRf.width();
             int height = mTextRf.height();
             Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
             int textHeight = (int) ((-fontMetrics.ascent - fontMetrics.descent) / 2);
@@ -247,20 +245,26 @@ public class HorizontalBarGraphView extends View {
             float perTextW = measureText / length;
             //实际分配给文本的宽度
             int allocate = (int) (perTextW * textNum);
+            //将想要的值赋给文本，固定文本宽度
+            textWidth = allocate;
             //行数
-            int lineNum = length / textNum + 1;
+            int lineNum = length % textNum;
+            if (lineNum == 0) {
+                lineNum = (length + 1) / textNum;
+            } else {
+                lineNum = length / textNum + 1;
+            }
             //计算文本的显示行数
-            if (allocate < textWidth) {
+            if (allocate < width) {
                 String substring;
+                int index;
                 for (int j = 1; j <= lineNum; j++) {
                     //判断当前长度与每行显示的长度之和是否超多字符串的长度，防止数组越界
-                    int index = j + 4;
+                    index = j + 4;
                     if (index > length) {
-                        substring = childName.substring(index * (j - 1), length);
-                    } else if (index * j > length) {
-                        substring = childName.substring(index * (j - 1) - 1, length);
+                        substring = childName.substring(textNum * (j - 1), length);
                     } else {
-                        substring = childName.substring(index * (j - 1), index * j);
+                        substring = childName.substring(textNum * (j - 1), textNum * j);
                     }
                     canvas.drawText(substring, 5, y * i + y / 2 + space * i + marginTop + height * (j - 1), mTextPaint);
                 }
