@@ -21,4 +21,9 @@
         android:text="点击事件"
         />
 
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
 </LinearLayout>

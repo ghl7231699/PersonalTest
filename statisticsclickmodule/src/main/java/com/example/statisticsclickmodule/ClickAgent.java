@@ -69,7 +69,7 @@ public class ClickAgent {
 //            baseViewHolder.setVisible(R.id.lk_tv, false);
 //            baseViewHolder.setTextColor(R.id.tvCalActual, Color.parseColor("#9B9B9B"));
 //        }
-//        if (!TextUtils.isEmpty(informationLk) || infomationLd != null) {
+//        if (!TextUtils.isEmpty(informationLk) || infomaetionLd != null) {
 //            baseViewHolder.setVisible(R.id.lk_tv, true);
 //            baseViewHolder.setVisible(R.id.ld_tv, true);
 //            baseViewHolder.setText(R.id.lk_tv, informationLk);

@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Carson_Ho</title>
+
+    <script>
+         function callAndroid(){
+            /*约定的url协议为：js://webview?arg1=111&arg2=222*/
+            document.location = "js://webview?arg1=111&arg2=222";
+            // 由于对象映射，所以调用test对象等于调用Android映射的对象
+            <!--test.sayHello("Js调用了Android的SayHello方法");-->
+
+               AppHandler.closeH5();
+         }
+
+         function callNative(){
+
+               AppHandler.goActivity("file:///android_asset/detail.html");
+
+         }
+
+         function callNative2(){
+
+               AppHandler.goForward("file:///android_asset/javascript.html");
+
+         }
+
+    </script>
+</head>
+
+<!-- 点击按钮则调用callAndroid（）方法  -->
+<body>
+<button type="button" id="button1" onclick="callAndroid()">退出页面</button>
+<button type="button" id="button2" onclick="callNative()">楼盘详情</button>
+<button type="button" id="button3" onclick="callNative2()">房源详情</button>
+</body>
+</html>

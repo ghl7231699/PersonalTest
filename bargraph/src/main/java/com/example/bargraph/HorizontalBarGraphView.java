@@ -37,7 +37,7 @@ public class HorizontalBarGraphView extends View {
     private int marginBottom = Utils.dp2px(getContext(), 14);
     private int marginTop = Utils.dp2px(getContext(), 14);
     private int marginRight = Utils.dp2px(getContext(), 81);
-    private int space = Utils.dp2px(getContext(), 40);//相邻两个条形图之间的距离
+    private int space = Utils.dp2px(getContext(), 20);//相邻两个条形图之间的距离
     private int num = 1;//条形图的个数
     private int mWidth;//View的宽度
     private int mHeight;//View的高度
@@ -148,8 +148,10 @@ public class HorizontalBarGraphView extends View {
         num = mBars.size();
         setSize();
         if (num > 0) {
-            //获取每个条形图之间的距离
-            space = (mHeight - marginTop - marginBottom - childWidth * (num - 1)) / num;
+//            //获取每个条形图之间的距离
+//            space = (mHeight - marginTop - marginBottom - childWidth * (num - 1)) / num;
+            //获取距离上部的距离
+            marginTop = (mHeight - childWidth * num - space * (num - 1)) / 2;
             int y = childWidth;
             //绘制左侧文字
             drawTextName(canvas, y);
@@ -261,7 +263,7 @@ public class HorizontalBarGraphView extends View {
                 for (int j = 1; j <= lineNum; j++) {
                     //判断当前长度与每行显示的长度之和是否超多字符串的长度，防止数组越界
                     index = j + 4;
-                    if (index > length) {
+                    if (index * j >= length) {
                         substring = childName.substring(textNum * (j - 1), length);
                     } else {
                         substring = childName.substring(textNum * (j - 1), textNum * j);

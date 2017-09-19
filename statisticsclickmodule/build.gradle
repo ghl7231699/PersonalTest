@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.statisticsclickmodule"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
 

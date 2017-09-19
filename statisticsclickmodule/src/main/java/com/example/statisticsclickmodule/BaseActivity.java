@@ -32,5 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void setCustomClick(int clickId, String clickName) {
         Log.e(ClassUtils.TAG, "setCustomClick: " + clickId + "\n" + clickName);
+
     }
 }

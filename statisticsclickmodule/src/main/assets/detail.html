@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Carson</title>
+
+    <script>
+
+         function callUp(){
+
+               AppHandler.closeH5();
+
+         }
+
+         function callNext(){
+
+               AppHandler.goDetail("file:///android_asset/buildingList.html");
+
+         }
+    </script>
+</head>
+
+<!-- 点击按钮则调用callAndroid（）方法  -->
+<body>
+<button type="button" id="button1" onclick="callUp()">返回上个页面</button>
+<button type="button" id="button2" onclick="callNext()">进入楼盘列表</button>
+</body>
+</html>
