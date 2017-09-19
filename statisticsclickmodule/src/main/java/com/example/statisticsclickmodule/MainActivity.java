@@ -1,5 +1,6 @@
 package com.example.statisticsclickmodule;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,8 +12,13 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.mylibrary.ActivityCollector;
+import com.example.mylibrary.PermissionActivity;
+import com.example.mylibrary.PermissionListener;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements ClickListener {
     private Button mButton, mBtn;
@@ -23,6 +29,7 @@ public class MainActivity extends BaseActivity implements ClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityCollector.addActivity(this);
         mButton = (Button) findViewById(R.id.btn_click);
         mBtn = (Button) findViewById(R.id.btn2);
         mWebView = (WebView) findViewById(R.id.web_view);
@@ -83,13 +90,29 @@ public class MainActivity extends BaseActivity implements ClickListener {
                 break;
             case R.id.btn2:
 //                byInterface();
-
-                Intent intent = new Intent(this, HouseDetailsActivity.class);
+//                Intent intent = new Intent(this, HouseDetailsActivity.class);
 //                Intent intent = new Intent(this, BuildingDetailsActivity.class);
-                intent.putExtra("key_url", "file:///android_asset/javascript.html");
+//                intent.putExtra("key_url", "file:///android_asset/javascript.html");
 //                intent.putExtra("key_url", "file:///android_asset/detail.html");
 //                intent.putExtra("key_url", "https://www.baidu.com");
-                startActivity(intent);
+//                startActivity(intent);
+
+                PermissionActivity.onRequestPermissionResult(new String[]{Manifest.permission.READ_PHONE_STATE}, new PermissionListener() {
+                    @Override
+                    public void onGranted() {
+                        Toast.makeText(MainActivity.this, "权限通过", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> deniedPermission) {
+                        for (String p :
+                                deniedPermission) {
+                            Toast.makeText(MainActivity.this, "权限被拒绝" + p, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
                 break;
             default:
                 break;
@@ -103,5 +126,11 @@ public class MainActivity extends BaseActivity implements ClickListener {
         mWebView.addJavascriptInterface(new AndroidToJs(), "test");//AndroidtoJS类对象映射到js的test对象
 //        mWebView.loadUrl("file:///android_asset/javascript.html");
         mWebView.loadUrl("http://www.baidu.com/");
+    }
+
+    @Override
+    protected void onDestroy() {
+        ActivityCollector.removeActivity(this);
+        super.onDestroy();
     }
 }
