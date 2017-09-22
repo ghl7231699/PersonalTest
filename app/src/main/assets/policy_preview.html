@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>投保单影响预览</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../../../js/common/nci_plugin.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/reset.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/basic.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/pages.css">
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				keyEventBind: {
+					backbutton: false //关闭back按键监听
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div class="bao_box_bg">
+			<!--<div class="kk_tit_bg">
+				<label>投保单预览</label>
+				<img src="../../../img/jt_red.png">
+				<span>业务员告知书预览</span>
+			</div>-->
+			<div class="bao_kk_box">
+				<div class="pt_tblp">
+					<table class="basicinfo-table">
+						<tr>
+							<td colspan="4" class="hd nobr" align="left">
+								<span style="text-align: center;width: 100px;display: inline-block;">电子投保书<br>EUA001</span>
+								<span class="policy_no" id="policy_no">对应电子投保申请确认书号码：</span>
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="24" class="hd td_tl">基本信息</td>
+							<td class="hd td_tl1">个人资料</td>
+							<td class="hd">投保人</td>
+							<td class="hd">被保险人</td>
+						</tr>
+						<tr>
+							<td>姓名</td>
+							<td id='holder_name'></td>
+							<td id='insure_name'></td>
+						</tr>
+						<tr>
+							<td>出生日期/性别</td>
+							<td><span id="holder_birthdate"></span>/<span id="holder_sex"></span></td>
+							<td><span id="insure_birthdate"></span>/<span id="insure_sex"></span></td>
+						</tr>
+						<tr>
+							<td>证件类型</td>
+							<td id='holder_certificateType'></td>
+							<td id='insure_certificateType'></td>
+						</tr>
+						<tr>
+							<td>证件号码</td>
+							<td id='holder_certificateNo'></td>
+							<td id='insure_certificateNo'></td>
+						</tr>
+						<tr>
+							<td>证件有效期限</td>
+							<td id='holder_certStartDate'></td>
+							<td id='insure_certStartDate'></td>
+						</tr>
+						<tr>
+							<td>国籍</td>
+							<td id='holder_nationality'></td>
+							<td id='insure_nationality'></td>
+						</tr>
+						<tr>
+							<td>婚姻及子女状况</td>
+							<td><span id='holder_isMarriage'></span><span id='holder_isAnyChild'></span></td>
+							<td><span id='insure_isMarriage'></span><span id='insure_isAnyChild'></span></td>
+						</tr>
+						<tr>
+							<td>与被保险人关系</td>
+							<td id="insure_relation"  style="border-right: 0"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>工作单位</td>
+							<td id='holder_companyName'></td>
+							<td id='insure_companyName'></td>
+						</tr>
+						<tr>
+							<td>职业名称</td>
+							<td id='holder_profession'></td>
+							<td id='insure_profession'></td>
+						</tr>
+						<tr>
+							<td>职业编码及职务</td>
+							<td id='holder_occupationCodeAndJob'></td>
+							<td id='insure_occupationCodeAndJob'></td>
+						</tr>
+						<tr>
+							<td>移动电话／固定电话</td>
+							<td><span id="holder_mobile"></span><span id="holder_telephone"></span></td>
+							<td><span id="insure_mobile"></span><span id="insure_telephone"></span></td>
+						</tr>
+						<tr>
+							<td rowspan="3">电子邮箱</td>
+							<td id='holder_email'>&nbsp;</td>
+							<td id='insure_email'></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="left">电子保单服务<input type="checkbox" id='policyService' disabled="disabled"/>选择“电子保单服务”不影响纸质保险单的送达。</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="left">电子函件服务<input type="checkbox" id='emailService' disabled="disabled"/>选择“电子函件服务”如红利通知书等，无需寄送此类纸质函件。</td>
+						</tr>
+						<tr>
+							<td>通讯(常住)地址</td>
+							<td id='holder_detailAddress' align="left"></td>
+							<td id='insure_detailAddress' align="left"></td>
+						</tr>
+						<tr>
+							<td>邮编</td>
+							<td id='holder_zipNo'></td>
+							<td id='insure_zipNo'></td>
+						</tr>
+						<tr>
+							<td>年收入及收入来源</td>
+							<td><span id="holder_59_001"></span><span id="holder_year_income_source_val"></span></td>
+							<td><span id="insure_59_001"></span><span id="insure_year_income_source_val"></span></td>
+						</tr>
+						<tr>
+							<td>居民类型</td>
+							<td id="holder_59_002"></td>
+							<td id="insure_59_002"></td>
+						</tr>
+						<tr>
+							<td rowspan="3">是否享有社保</td>
+							<td id="holder_59_003">&nbsp;</td>
+							<td id="insure_59_003"></td>
+						</tr>
+						<tr>
+							<td colspan="3" align="left">社保统指城镇职工基本医疗保险、城镇居民基本医疗保险、新型农村合作医疗、公费医疗和医疗救助等基本医疗保障项目。</td>
+						</tr>
+					</table>
+					<table id="beneMessage" class="beneinfo-table">
+						<tr>
+					        <td id="beneRow" class="hd td_tl">身故保险金受益人</td>
+					        <td id="relationCode"></td>
+					    </tr>
+					</table>
+					<table id="policy_list_info" class="calInfos"></table>
+					<table id="special_application" style="display: none;">
+						<tr>
+							<td rowspan="2" class="hd td_tl">特别申请</td>
+							<td>
+								<p>本保险单的险种<span class='main_insurance'></span>的效力因发生责任免除、解除等事项终止时，险种<span class="special_insurance"></span>的效力同时终止，且不再接受续保。</p>
+								<p>本保险单的附加险种<span class='additional_insurance'></span>仅为险种<span class='main_insurance'></span>的附加险，其效力不受本保险单的其他险种效力的影响。 </p>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="pt_tblp" id="finance_introduce">
+				</div>
+				<div class="pt_tblp">
+					<table>
+						<tr>
+							<td class="hd" align="center"><h4>公司声明</h4></td>
+						</tr>
+						<tr>
+							<td>
+								<p>本公司本着最大诚信的原则，向您明确各保险事项。一切与保险合同相违背的任何形式的说明均属无效，一切权益均以保险合同为凭。</p>
+								<p><b>投保须知：</b>投保时，向您提供保险条款、说明保险合同内容、提示并明确说明免除保险人责任的条款是本公司的法定义务，本公司将切实履行。您可以对不理解的保险合同内容进行询问。为维护您的合法权益，请在阅读并理解保险条款及新型保险产品说明书的各项内容后方可投保。</p>
+								<p><b>填写须知：</b>请您真实、准确、完整填写投保书各项内容，尤其是投被保险人的姓名、性别、生日、证件类型、证件号码、职业、联系电话及地址、投被保险人关系等，以上信息主要用于计算保费、核保、寄送保单和客户回访等，以便为您提供更优质的服务。如信息缺失、不实将会对您的利益产生不利影响，同时本公司承诺未经您的同意，不会将您的信息用于本公司和第三方机构的销售活动。</p>
+								<p><b>交费须知：</b>投保人应根据自身财务状况，确定选择适合的交费期间和交费金额，如未能按期足额交纳保险费，有可能导致保险合同效力中止或被解除。</p>
+								<p><b>未成年人投保：</b>父母为其未成年子女投保的人身保险，因被保险人身故给付的保险金总和不得超过国务院保险监督管理机构规定的限额，身故给付的保险金额总和约定也不得超过前述限额。</p>
+								<p><b>合同生效：</b>投保后，本公司可能会通知体检或补充其他资料，视体检结果和具体情况决定是否承保，您应该尽快配合，否则将会影响或延误合同生效，体检不影响投保人的如实告知义务。本公司承保后，保险责任将按照保险条款的规定生效。</p>
+								<p><b>保单送达：</b>本公司将在承保后出具并送达保险合同，投保人应认真核对并在保险合同签收回执上亲笔签字确认。</p>
+								<p><b>犹豫期：</b>除另有约定外，保险期间在一年期（不含一年期）以上的合同设有犹豫期，即自投保人收到保险合同并书面签收之日起十日的期间。投保人应当充分理解犹豫期事宜：在犹豫期内投保人申请退保的，本公司收到退保申请后，保险合同终止，并在扣除一定工本费后将剩余保险费退还投保人。犹豫期过后投保人申请退保的，本公司收到退保申请后，保险合同终止，并将保险合同的现金价值退还投保人。</p>
+								<p><b>自动续保：</b>对于一年期主险/附加险包含有续保条款的，如您同意自动续保，合同保险期间届满前，本公司将通知您，如您未向本公司表示不续保，则视为您申请续保，本公司将对被保险人做续保审核。经本公司审核同意，且您已交纳续保保险费，合同效力延续一年；本公司审核不同意的，将书面通知您。如您不同意自动续保，合同保险期间届满的，合同终止，本公司将不再另行通知。</p>
+								<p><b>合同效力恢复：</b>合同效力中止后二年内，您可以申请恢复合同效力，在满足合同约定的效力恢复条件后，合同效力恢复。合同效力中止满二年双方未达成复效协议的，本公司有权解除合同，并根据合同约定退还保险合同的现金价值。</p>
+								<p><b>红利分配方式：</b>本公司分红保险产品采用增额红利或现金红利的方式进行分红，具体分配方式请参阅条款及产品说明书。</b></p>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="clear"></div>
+				<div class="pt_tblp">
+					<table>
+						<tr>
+							<td class="hd" colspan="5" align="center">客户投保声明</td>
+						</tr>
+						<tr>
+							<td colspan="5" id="customerStatement" style="font-weight: bold;">
+								<p class="bold">1、贵公司已向本人提供保险条款，说明保险合同内容，特别提示并明确说明了免除或者减轻保险人责任的条款（包括责任免除条款、免赔额、免赔率、比例赔付或给付等）。</p>
+								<p class="bold">2、本人已认真阅读并充分理解保险责任、责任免除、犹豫期、合同生效、合同解除、未成年人身故保险金限额、保险事故通知、保险金受益人的指定与变更等保险条款的各项概念、内容及其法律后果，以及投资连结保险、分红保险、万能保险等新型产品的产品说明书，本人自愿承担保单利益不确定的风险。</p>
+								<p class="bold">3、本人及被保险人在投保书中的所有陈述和告知均完整、真实，已知悉各项投保资料如非本人亲笔签名，将对本保险合同效力产生影响。</p>
+								<p class="bold">4、本人及被保险人授权贵公司在必要时可随时向有关机构核实本人及被保险人、保险金受益人的基本信息或向被保险人就诊的医院或医师及社保、农合、健康管理中心等有关机构查询有关记录、诊断证明。本人和被保险人对此均无异议。</p>
+								<p class="bold">5、本人授权贵公司委托本人开户银行对指定账户按照保险合同约定的方式、金额，划转首期、续期保险费及以转账方式将保险金、退保金、退费等给付转入指定账户，若本人指定账户或联系电话、联系地址等信息发生变更，及时至贵公司办理变更手续，如未及时通知贵公司变更，因此产生的相应不利后果由本人承担。</p>
+								<p class="bold">6、本人已知悉电子投保申请确认书等投保资料不得作为收取现金的凭证，公司未授权保险营销员、保险中介机构（银行除外）收取1000元以上的现金保险费。公司在承保之前所收保费为预收保费，不作为是否同意承保的依据，如不符合承保条件，将如数退还。</p>
+								<p class="bold">7、上述各项内容将在电子投保申请确认书中体现，本人将在电子投保申请确认书中签字确认上述投保事宜。</p>
+							</td>
+						</tr>
+					</table>
+					<table class="insurance_company_info">
+						<tr class="telephoneVisit">
+							<td class="hd">电话回访</td>
+							<td id="appointmentDate">
+								<h2 style="padding: 5px 0;">您选择的回访时间是：</h2>
+								<input type="checkbox" name="appointment_date" data-value="A" disabled>
+								<label>A：8:30-12:00</label>
+								<input type="checkbox" name="appointment_date" data-value="B" disabled>
+								<label>B：12:00-13:30</label>
+								<input type="checkbox" name="appointment_date" data-value="C" disabled>
+								<label>C：13:30-18:00</label>
+								<input type="checkbox" name="appointment_date" data-value="D" disabled>
+								<label>D：18:00-20:30</label>
+								<div class="clear"></div>
+								<input type="checkbox" name="is_dialect" data-value="1" disabled>
+								<label>无法通过普通话回访</label> 
+							</td>
+						</tr>
+						<tr>
+							<td class="hd">保险公司</td>
+							<td>
+								<span id="yewuyuanXX">业务员姓名：</span>
+								<span id="yewuyuanH">业务员号：</span>
+								<span id="agentMobile">业务员联系方式：</span>
+								<span id="shjg">所属机构：</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="hd">经办机构</td>
+							<td>
+								<span id="agentBankCode">银行代码：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="agentCom">网点代码：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="managerCode">经办人编号：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span id="">机构签章：</span>
+							</td>
+						</tr>
+					</table>
+	            </div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/common/nci_cache.js"></script>
+		<script type="text/javascript" src="../../../js/policy/template/policy_preview.js"></script>
+	</body>
+</html>

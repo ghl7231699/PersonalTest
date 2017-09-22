@@ -1,10 +1,14 @@
 package com.example.statisticsclickmodule;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,6 +20,7 @@ import com.example.mylibrary.ActivityCollector;
 import com.example.mylibrary.PermissionActivity;
 import com.example.mylibrary.PermissionListener;
 
+import java.lang.ref.WeakReference;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -24,6 +29,26 @@ public class MainActivity extends BaseActivity implements ClickListener {
     private Button mButton, mBtn;
     private StringBuilder sb = new StringBuilder();
     private WebView mWebView;
+    private MyHandler mHandler;
+
+    static class MyHandler extends android.os.Handler {
+        WeakReference<Activity> mWeak;
+
+        public MyHandler(Activity activity) {
+            mWeak = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +58,7 @@ public class MainActivity extends BaseActivity implements ClickListener {
         mButton = (Button) findViewById(R.id.btn_click);
         mBtn = (Button) findViewById(R.id.btn2);
         mWebView = (WebView) findViewById(R.id.web_view);
+        mHandler = new MyHandler(this);
         mButton.setOnClickListener(this);
         mBtn.setOnClickListener(this);
         String activity = ClassUtils.getCurrentActivity(this);
@@ -101,6 +127,7 @@ public class MainActivity extends BaseActivity implements ClickListener {
                     @Override
                     public void onGranted() {
                         Toast.makeText(MainActivity.this, "权限通过", Toast.LENGTH_SHORT).show();
+                        mHandler.sendEmptyMessage(1);
                     }
 
                     @Override

@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         mBgv = (BarGraphView) findViewById(R.id.bgv);
         mHorizontalBar = (HorizontalBarGraphView) findViewById(R.id.h_bar);
         mButton = (Button) findViewById(R.id.go);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        mButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
 //                Intent intent = new Intent(MainActivity.this, Panorama.class);
 //                startActivity(intent);
-                mHorizontalBar.setVisibility(View.VISIBLE);
-            }
-        });
+        mHorizontalBar.setVisibility(View.VISIBLE);
+//            }
+//        });
         initBar();
     }
 
