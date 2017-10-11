@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements ClickListener {
     private WebView mWebView;
     private MyHandler mHandler;
 
-    //handler的弱引用处理
+    //handler的弱引用处理,防止内存泄漏
     static class MyHandler extends android.os.Handler {
         WeakReference<Activity> mWeak;
 
