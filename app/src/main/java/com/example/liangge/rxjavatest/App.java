@@ -11,6 +11,8 @@ import com.example.liangge.rxjavatest.di.modules.AppModule;
 import com.example.liangge.rxjavatest.di.modules.HttpModule;
 import com.example.liangge.rxjavatest.greendao.gen.DaoMaster;
 import com.example.liangge.rxjavatest.greendao.gen.DaoSession;
+import com.example.mylibrary.CrashHandler;
+import com.example.mylibrary.DLog;
 import com.lzy.okhttputils.OkHttpUtils;
 
 import java.io.File;
@@ -36,6 +38,9 @@ public class App extends Application {
         mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).httpModule(new HttpModule()).build();
         mContext = getApplicationContext();
         OkHttpUtils.init(this);
+        DLog.init(this);
+        //初始化奔溃处理类
+        CrashHandler.getInstance().init(this);
     }
 
     public static Context getContext() {

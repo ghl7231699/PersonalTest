@@ -24,6 +24,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Fruits;
 import com.example.liangge.rxjavatest.ui.adapter.FruitsAdapter;
+import com.example.mylibrary.DLog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -101,7 +102,8 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
                         Intent intent = new Intent(MaterialDesignActivity.this, FruitActivity.class);
                         String name = fruits.getName();
                         intent.putExtra(FruitActivity.FRUIT_NAME, name);
-                        Log.d("FruitAdapter", "onClick: " + name);
+//                        Log.d("FruitAdapter", "onClick: " + name);
+                        DLog.d(fruits.getName(), "\n图片id为" + fruits.getImageId());
                         int imageId = fruits.getImageId();
                         intent.putExtra(FruitActivity.FRUIT_IMAGE_ID, imageId);
                         startActivity(intent);

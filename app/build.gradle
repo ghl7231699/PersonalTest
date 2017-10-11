@@ -71,8 +71,10 @@ dependencies {
     //RxDownLoad
 
     //GreenDao
-    compile 'org.greenrobot:eventbus:3.0.0'
     compile project(':alipaystander')
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile project(':mylibrary')
+    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
@@ -98,10 +100,10 @@ dependencies {
     compile 'zlc.season:rxdownload2:2.0.0-beta4'
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'org.greenrobot:greendao-generator:3.2.2'
-    compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
     apt 'com.google.dagger:dagger-compiler:2.10'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile project(':mylibrary')
+    //RxBinding
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 }

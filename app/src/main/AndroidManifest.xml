@@ -33,7 +33,6 @@
         <activity android:name=".ui.activity.UserInfoActivity">
         </activity>
         <activity android:name=".ui.activity.HomeActivity">
-
         </activity>
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.WelcomeActivity">
@@ -72,6 +71,8 @@
         <activity android:name=".ui.activity.SlideActivity">
         </activity>
         <activity android:name=".ui.activity.NiceDialogActivity"/>
+        <activity android:name=".ui.activity.TestActivity">
+        </activity>
     </application>
 
 </manifest>

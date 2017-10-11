@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
@@ -14,12 +16,17 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.ActivityCollector;
+import com.example.mylibrary.DLog;
+import com.example.mylibrary.FileUtils;
 import com.example.mylibrary.PermissionActivity;
 import com.example.mylibrary.PermissionListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,10 +34,12 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity implements ClickListener {
     private Button mButton, mBtn;
+    private TextView mText;
     private StringBuilder sb = new StringBuilder();
     private WebView mWebView;
     private MyHandler mHandler;
 
+    //handler的弱引用处理
     static class MyHandler extends android.os.Handler {
         WeakReference<Activity> mWeak;
 
@@ -65,6 +74,8 @@ public class MainActivity extends BaseActivity implements ClickListener {
         sb.append(activity);
         String deviceId = ClassUtils.getDeviceId(getApplicationContext());
         sb.append(deviceId);
+
+        DLog.init(this);
 
         WebSettings settings = mWebView.getSettings();
         //设置与Js交互的权限
@@ -116,34 +127,66 @@ public class MainActivity extends BaseActivity implements ClickListener {
                 break;
             case R.id.btn2:
 //                byInterface();
-//                Intent intent = new Intent(this, HouseDetailsActivity.class);
-//                Intent intent = new Intent(this, BuildingDetailsActivity.class);
-//                intent.putExtra("key_url", "file:///android_asset/javascript.html");
-//                intent.putExtra("key_url", "file:///android_asset/detail.html");
-//                intent.putExtra("key_url", "https://www.baidu.com");
-//                startActivity(intent);
-
-                PermissionActivity.onRequestPermissionResult(new String[]{Manifest.permission.READ_PHONE_STATE}, new PermissionListener() {
-                    @Override
-                    public void onGranted() {
-                        Toast.makeText(MainActivity.this, "权限通过", Toast.LENGTH_SHORT).show();
-                        mHandler.sendEmptyMessage(1);
-                    }
-
-                    @Override
-                    public void onDenied(List<String> deniedPermission) {
-                        for (String p :
-                                deniedPermission) {
-                            Toast.makeText(MainActivity.this, "权限被拒绝" + p, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-
+                permissionApply();
+//                logUp();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 作者：ghl
+     * 描述：日志收集
+     * 创建时间：2017/9/25 下午2:52
+     *
+     * @Params:
+     * @Return:
+     */
+    private void logUp() {
+        int i = 10;
+        int j = 0;
+//        try {
+//            int i1 = i / j;
+        mText.setText("");
+//        } catch (Exception e) {
+//            DLog.writeToFile(MainActivity.class.getSimpleName(), e);
+//            e.printStackTrace();
+//            DLog.writeToSDCard(MainActivity.class.getSimpleName(), e);
+//        }
+
+//        try {
+////            FileUtils.readLocalData(this);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    /**
+     * 作者：ghl
+     * 描述：申请权限
+     * 创建时间：2017/9/25 下午2:50
+     *
+     * @Params:
+     * @Return:
+     */
+    private void permissionApply() {
+        PermissionActivity.onRequestPermissionResult(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, new PermissionListener() {
+            @Override
+            public void onGranted() {
+                Toast.makeText(MainActivity.this, "权限通过", Toast.LENGTH_SHORT).show();
+                mHandler.sendEmptyMessage(1);
+//                logUp();
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermission) {
+                for (String p :
+                        deniedPermission) {
+                    Toast.makeText(MainActivity.this, "权限被拒绝" + p, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void byInterface() {
@@ -159,5 +202,9 @@ public class MainActivity extends BaseActivity implements ClickListener {
     protected void onDestroy() {
         ActivityCollector.removeActivity(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     }
 }
