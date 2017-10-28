@@ -1,18 +1,24 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ListView;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
+import com.example.liangge.rxjavatest.ui.adapter.StayHouseResAdapter;
 import com.example.liangge.rxjavatest.ui.view.DashedLine;
 import com.example.mylibrary.BaseNiceDialog;
 import com.example.mylibrary.NiceDialog;
 import com.example.mylibrary.ViewConvertListener;
 import com.example.mylibrary.ViewHolder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,7 +52,7 @@ public class NiceDialogActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6})
+    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7})
     public void onViewClicked(final View view) {
         switch (view.getId()) {
             case R.id.button1:
@@ -79,19 +85,44 @@ public class NiceDialogActivity extends BaseActivity {
                         .show(getSupportFragmentManager());
                 break;
             case R.id.button5:
+//                NiceDialog.init()
+//                        .setLayoutId(R.layout.loading_layout)
+//                        .setListener(new ViewConvertListener() {
+//                            @Override
+//                            public void convertView(ViewHolder viewHolder, BaseNiceDialog dialog) {
+//                                viewHolder.setOnClickListener(R.id.load_content, new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        ToastUtils.toast("点击了loading");
+//                                    }
+//                                });
+//                            }
+//                        }).show(getSupportFragmentManager());
                 NiceDialog.init()
-                        .setLayoutId(R.layout.loading_layout)
+                        .setLayoutId(R.layout.stay_house_resource)
                         .setListener(new ViewConvertListener() {
                             @Override
-                            public void convertView(ViewHolder viewHolder, BaseNiceDialog dialog) {
-                                viewHolder.setOnClickListener(R.id.load_content, new View.OnClickListener() {
+                            public void convertView(ViewHolder viewHolder, final BaseNiceDialog dialog) {
+                                ListView mLv = viewHolder.getView(R.id.stay_house_resource_lv);
+                                List<String> list = new ArrayList<>();
+                                for (int i = 0; i < 5; i++) {
+                                    list.add("金山寺,第" + i + "个");
+                                }
+                                mLv.setAdapter(new StayHouseResAdapter(list, NiceDialogActivity.this));
+                                viewHolder.setOnClickListener(R.id.stay_house_resource_close, new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        ToastUtils.toast("点击了loading");
+                                        dialog.dismiss();
                                     }
                                 });
                             }
-                        }).show(getSupportFragmentManager());
+                        })
+                        .setShowBottom(true)
+                        .setHeight(400)
+//                        .setAnimStyle(R.style.RedPacketAnim)
+                        .setOutCancel(false)
+                        .show(getSupportFragmentManager());
+
                 break;
             case R.id.button6:
                 NiceDialog.init()
@@ -122,6 +153,10 @@ public class NiceDialogActivity extends BaseActivity {
                         .setMargin(20)
                         .setOutCancel(false)
                         .show(getSupportFragmentManager());
+                break;
+            case R.id.button7:
+                Intent intent = new Intent(this, ResListActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -59,6 +59,14 @@
             android:text="确定"
             />
 
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="进入房源列表"
+            />
+
         <!--<com.example.liangge.rxjavatest.ui.view.TimeLineMakerView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->

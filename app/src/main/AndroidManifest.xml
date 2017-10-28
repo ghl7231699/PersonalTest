@@ -73,6 +73,9 @@
         <activity android:name=".ui.activity.NiceDialogActivity"/>
         <activity android:name=".ui.activity.TestActivity">
         </activity>
+        <activity android:name=".ui.activity.ResListActivity"/>
+        <activity android:name=".ui.activity.HousesResListActivity">
+        </activity>
     </application>
 
 </manifest>

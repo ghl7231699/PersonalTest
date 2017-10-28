@@ -6,4 +6,8 @@
     <color name="colorLight">#9FA3B6</color>
     <color name="imaginary_line">#313076</color>
 
+    <color name="a">#ff0</color>
+    <color name="b">#fff</color>
+    <color name="c">#313076</color>
+
 </resources>

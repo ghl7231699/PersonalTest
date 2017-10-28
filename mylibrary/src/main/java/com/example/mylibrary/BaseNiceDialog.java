@@ -114,7 +114,7 @@ public abstract class BaseNiceDialog extends DialogFragment {
             window.setWindowAnimations(animStyle);
             window.setAttributes(params);
         }
-        setOutCancel(outCancel);
+        getDialog().setCanceledOnTouchOutside(outCancel);
     }
 
     public BaseNiceDialog show(FragmentManager manager) {
