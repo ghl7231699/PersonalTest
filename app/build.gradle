@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
@@ -48,31 +47,8 @@ dependencies {
     compile('com.android.support:support-v4:26.0.0-alpha1') {
         force = true;
     }
-    //Rxjava
-
-    //Retrofit
-
-    //
-
-    //dagger
-
-    //butterKnife
-
-    //okHttp Log
-
-    //path view
-
-    //pdfAndroidViewer
-
-    //okHttpUtils
-
-    //BaseRecyclerViewAdapterHelper
-
-    //RxDownLoad
-
-    //GreenDao
-    compile project(':alipaystander')
-    compile project(':mylibrary')
+    implementation project(':alipaystander')
+    implementation project(':mylibrary')
     compile 'org.greenrobot:eventbus:3.0.0'
     //RxBinding
     compile 'org.greenrobot:eventbus:3.0.0'
@@ -103,7 +79,7 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:3.2.2'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     testCompile 'junit:junit:4.12'
-    apt 'com.google.dagger:dagger-compiler:2.10'
-    apt 'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 }
