@@ -72,6 +72,7 @@
         <activity android:name=".ui.activity.SlideActivity">
         </activity>
         <activity android:name=".ui.activity.NiceDialogActivity"/>
+        <activity android:name=".ui.activity.ManiActivity" />
     </application>
 
 </manifest>
