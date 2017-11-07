@@ -4,8 +4,18 @@
       <w>boder</w>
       <w>cardview</w>
       <w>imei</w>
+      <w>jclass</w>
+      <w>jfield</w>
+      <w>jmethod</w>
+      <w>jobject</w>
+      <w>jstring</w>
+      <w>jthrowable</w>
+      <w>liangge</w>
       <w>litepal</w>
+      <w>ljava</w>
+      <w>logi</w>
       <w>nums</w>
+      <w>rxjavatest</w>
       <w>textsize</w>
       <w>tset</w>
       <w>xfermode</w>

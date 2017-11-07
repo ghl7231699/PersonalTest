@@ -24,17 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBgv = (BarGraphView) findViewById(R.id.bgv);
-        mHorizontalBar = (HorizontalBarGraphView) findViewById(R.id.h_bar);
-        mButton = (Button) findViewById(R.id.go);
-//        mButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, Panorama.class);
-//                startActivity(intent);
+        mBgv = findViewById(R.id.bgv);
+        mHorizontalBar = findViewById(R.id.h_bar);
+        mButton = findViewById(R.id.go);
         mHorizontalBar.setVisibility(View.VISIBLE);
-//            }
-//        });
         initBar();
     }
 
@@ -62,20 +55,12 @@ public class MainActivity extends AppCompatActivity {
         mBgv.setMarginLeft(100)
                 .setMarginBottom(20)
                 .setBars(mList);
-        //
         mBar = new HorizontalBarGraphView.HorizontalBar(51, Color.argb(252, 252, 71, 88), "15000", "金汉王通讯研发中心");
         mBars.add(mBar);
         mBar = new HorizontalBarGraphView.HorizontalBar(80, Color.argb(252, 39, 210, 180), "12000", "领智中心");
         mBars.add(mBar);
         mBar = new HorizontalBarGraphView.HorizontalBar(80, Color.argb(252, 100, 179, 251), "12000", "领智中心");
         mBars.add(mBar);
-//        mBar = new HorizontalBarGraphView.HorizontalBar(75, Color.argb(252, 100, 179, 251), "10000", "？？？");
-//        mBars.add(mBar);
-//        mBar = new HorizontalBarGraphView.HorizontalBar(55, Color.argb(252, 100, 179, 251), "10000", "领智中心");
-//        mBars.add(mBar);
-//        mBar = new HorizontalBarGraphView.HorizontalBar(55, Color.argb(252, 100, 179, 251), "10000", "领智中心");
-//        mBars.add(mBar);
-//        mHorizontalBar.setChildWidth(10);
         mHorizontalBar.setChildTextColor(R.color.text_color);
         mHorizontalBar.setBars(mBars);
     }
