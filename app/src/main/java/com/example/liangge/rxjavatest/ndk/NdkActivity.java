@@ -3,15 +3,21 @@ package com.example.liangge.rxjavatest.ndk;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.di.component.AppComponent;
+import com.example.liangge.rxjavatest.ndk.baseactivity.BaseNdkActivity;
+import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
 
 /**
  * Created by ghl11 on 2017/11/5.
  */
 
-public class NdkActivity extends AppCompatActivity {
+public class NdkActivity extends BaseNdkActivity {
     private TextView mTv;
 
     static {
@@ -33,6 +39,7 @@ public class NdkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         mTv = findViewById(R.id.main_tv);
+        showToast();
 
 //        mTv.append(updateNameFromC() + "\n");
 //
@@ -52,6 +59,28 @@ public class NdkActivity extends AppCompatActivity {
 //        for (int i = 0; i < 10; i++) {
 //            cache();
 //        }
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.main_activity;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+    }
+
+    private void showToast() {
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_LONG);
+        View view = LayoutInflater.from(this).inflate(R.layout.stay_house_resource_item, null, false);
+        toast.setView(view);
+        toast.show();
     }
 
     /**

@@ -93,7 +93,10 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getLocalReference(JNIEnv *en
         //对象操作
         env->DeleteLocalRef(pJobject);
     }
-}extern "C"
+}
+
+
+extern "C"
 JNIEXPORT void JNICALL
 Java_com_example_liangge_rxjavatest_ndk_NdkActivity_exception(JNIEnv *env, jobject instance) {
     //构建一个异常
