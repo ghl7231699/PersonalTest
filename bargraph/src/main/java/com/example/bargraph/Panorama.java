@@ -1,9 +1,7 @@
 package com.example.bargraph;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.zph.glpanorama.GLPanorama;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * 类名称：Panorama
@@ -16,15 +14,15 @@ import com.zph.glpanorama.GLPanorama;
  * @version v1.0
  */
 public class Panorama extends AppCompatActivity {
-    private GLPanorama mLp;
+//    private GLPanorama mLp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panorama);
         //
-        mLp = (GLPanorama) findViewById(R.id.glp);
-        //传入你的全景图
-        mLp.setGLPanorama(R.mipmap.mountain);
+//        mLp = (GLPanorama) findViewById(R.id.glp);
+//        //传入你的全景图
+//        mLp.setGLPanorama(setGLPanoramaR.mipmap.mountain);
     }
 }

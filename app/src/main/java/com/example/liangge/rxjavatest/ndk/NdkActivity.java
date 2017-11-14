@@ -1,24 +1,29 @@
 package com.example.liangge.rxjavatest.ndk;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
-import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ndk.baseactivity.BaseNdkActivity;
-import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
+
+import java.io.File;
 
 /**
  * Created by ghl11 on 2017/11/5.
  */
 
-public class NdkActivity extends BaseNdkActivity {
+public class NdkActivity extends BaseNdkActivity implements View.OnClickListener {
     private TextView mTv;
+    private Button fix, calutor;
+
+    private String mDirCache;
 
     static {
         System.loadLibrary("native-lib");
@@ -33,15 +38,42 @@ public class NdkActivity extends BaseNdkActivity {
         return "长征";
     }
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.main_activity;
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        mTv = findViewById(R.id.main_tv);
-        showToast();
+    public void initView() {
+        mTv = findViewById(R.id.ndk_tv);
+        fix = findViewById(R.id.ndk_fix);
+        calutor = findViewById(R.id.ndk_calutor);
 
-//        mTv.append(updateNameFromC() + "\n");
+        fix.setOnClickListener(this);
+        calutor.setOnClickListener(this);
+    }
+
+    @Override
+    public void initData() {
+        showToast();
+    }
+
+    /**
+     * 自定义toast
+     */
+    private void showToast() {
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_LONG);
+        View view = LayoutInflater.from(this).inflate(R.layout.stay_house_resource_item, null, false);
+        toast.setView(view);
+        toast.show();
+    }
+
+    /**
+     * 加载ndk方法
+     */
+    private void loadNdkMethod() {
+        //        mTv.append(updateNameFromC() + "\n");
 //
 //        mTv.append(getMethod() + "\n");
 //
@@ -59,28 +91,6 @@ public class NdkActivity extends BaseNdkActivity {
 //        for (int i = 0; i < 10; i++) {
 //            cache();
 //        }
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.main_activity;
-    }
-
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData() {
-    }
-
-    private void showToast() {
-        Toast toast = new Toast(this);
-        toast.setDuration(Toast.LENGTH_LONG);
-        View view = LayoutInflater.from(this).inflate(R.layout.stay_house_resource_item, null, false);
-        toast.setView(view);
-        toast.show();
     }
 
     /**
@@ -104,4 +114,48 @@ public class NdkActivity extends BaseNdkActivity {
 
     //动态库加载的时候初始化全局变量
     public native static void init();
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ndk_calutor:
+                Calutor calutor = new Calutor();
+                mTv.setText(calutor.calutor());
+                break;
+            case R.id.ndk_fix:
+                //创建缓存目录
+                getmDirCache();
+                if (mDirCache == null) {
+                    return;
+                }
+                File file = new File(mDirCache);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                AndFixPatchManager.addPatch(getPatchName());
+                break;
+        }
+    }
+
+    /**
+     * 获取patch文件
+     *
+     * @return
+     */
+    private String getPatchName() {
+        return mDirCache.concat("My").concat(".apatch");
+    }
+
+    /**
+     * 判断sdCard是否可用
+     *
+     * @return
+     */
+    private String getmDirCache() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            mDirCache = getExternalCacheDir().getAbsolutePath() + "/apatch/";
+        }
+        return mDirCache;
+    }
 }

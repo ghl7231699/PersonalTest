@@ -11,6 +11,7 @@ import com.example.liangge.rxjavatest.di.modules.AppModule;
 import com.example.liangge.rxjavatest.di.modules.HttpModule;
 import com.example.liangge.rxjavatest.greendao.gen.DaoMaster;
 import com.example.liangge.rxjavatest.greendao.gen.DaoSession;
+import com.example.liangge.rxjavatest.ndk.AndFixPatchManager;
 import com.example.mylibrary.CrashHandler;
 import com.example.mylibrary.DLog;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -41,6 +42,8 @@ public class App extends Application {
         DLog.init(this);
         //初始化奔溃处理类
         CrashHandler.getInstance().init(this);
+        //初始化andFix
+        AndFixPatchManager.getInstance().init(this);
     }
 
     public static Context getContext() {
