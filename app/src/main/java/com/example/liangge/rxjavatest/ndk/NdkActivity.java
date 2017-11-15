@@ -1,9 +1,6 @@
 package com.example.liangge.rxjavatest.ndk;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
