@@ -59,7 +59,6 @@ dependencies {
     compile('com.android.support:support-v4:26.+') {
         force = true
     }
-    implementation project(':alipaystander')
     implementation project(':mylibrary')
     compile 'org.greenrobot:eventbus:3.0.0'
     //RxBinding

@@ -5,12 +5,9 @@ package com.example.liangge.rxjavatest.ndk;
  */
 
 public class Calutor {
-    private int i;
-    private int j;
-
     public int calutor() {
-        i = 10;
-        j = 0;
+        int i = 10;
+        int j = 0;
         return i / j;
     }
 }

@@ -117,7 +117,12 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.ndk_calutor:
                 Calutor calutor = new Calutor();
-                mTv.setText(calutor.calutor());
+//                try {
+//                    calutor.calutor();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+                mTv.setText("替换后");
+//                }
                 break;
             case R.id.ndk_fix:
                 //创建缓存目录
@@ -140,17 +145,27 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
      * @return
      */
     private String getPatchName() {
-        return mDirCache.concat("My").concat(".apatch");
+        return mDirCache.concat("ndk").concat(".apatch");
     }
 
     /**
      * 判断sdCard是否可用
+     * <p>
+     * getCacheDir()方法用于获取/data/data//cache目录
+     * getFilesDir()方法用于获取/data/data//files目录
      *
      * @return
      */
     private String getmDirCache() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
+            /**
+             * 通过Context.getExternalFilesDir()方法可以获取到 SDCard/Android/data/你的应用的包名/files/ 目录，
+             * 一般放一些长时间保存的数据
+             通过Context.getExternalCacheDir()方法可以获取到 SDCard/Android/data/你的应用包名/cache/目录，
+             一般存放临时缓存数据.如果使用上面的方法，
+             当你的应用在被用户卸载后，SDCard/Android/data/你的应用的包名/ 这个目录下的所有文件都会被删除，不会留下垃圾信息。
+             */
             mDirCache = getExternalCacheDir().getAbsolutePath() + "/apatch/";
         }
         return mDirCache;

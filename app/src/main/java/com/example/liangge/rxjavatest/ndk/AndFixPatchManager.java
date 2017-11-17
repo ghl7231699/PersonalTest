@@ -3,6 +3,7 @@ package com.example.liangge.rxjavatest.ndk;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.alipay.euler.andfix.patch.PatchManager;
 
@@ -40,6 +41,7 @@ public class AndFixPatchManager {
         try {
             if (mPatchManager != null) {
                 mPatchManager.addPatch(path);
+                Log.e("AndFixPatchManager", "替换成功");
             }
         } catch (IOException e) {
             e.printStackTrace();

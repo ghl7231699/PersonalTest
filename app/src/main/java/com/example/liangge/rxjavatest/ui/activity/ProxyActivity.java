@@ -2,9 +2,7 @@ package com.example.liangge.rxjavatest.ui.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Bundle;
 
-import com.example.alipaystander.AliPayInterface;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.manager.PluginManager;
@@ -20,7 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ProxyActivity extends BaseActivity {
     private String className;//需要跳转的activity类名
-    AliPayInterface mAliPayInterface;
+//    AliPayInterface mAliPayInterface;
 
     @Override
     public int getLayoutId() {
@@ -41,11 +39,11 @@ public class ProxyActivity extends BaseActivity {
              *
              * 传递生命周期
              */
-            mAliPayInterface = (AliPayInterface) instance;
-            mAliPayInterface.attach(this);
-            //可以传递信息
-            Bundle bundle = new Bundle();
-            mAliPayInterface.onCreate(bundle);
+//            mAliPayInterface = (AliPayInterface) instance;
+//            mAliPayInterface.attach(this);
+//            //可以传递信息
+//            Bundle bundle = new Bundle();
+//            mAliPayInterface.onCreate(bundle);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -59,35 +57,35 @@ public class ProxyActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAliPayInterface.onStart();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mAliPayInterface.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mAliPayInterface.onStop();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAliPayInterface.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mAliPayInterface.onDestroy();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mAliPayInterface.onStart();
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mAliPayInterface.onPause();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        mAliPayInterface.onStop();
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        mAliPayInterface.onResume();
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mAliPayInterface.onDestroy();
+//    }
 
     @Override
     public void initData() {
