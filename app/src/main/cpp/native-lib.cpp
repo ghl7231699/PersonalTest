@@ -146,3 +146,23 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_init(JNIEnv *env, jclass typ
     }
 
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_liangge_rxjavatest_ndk_CustomFix_HandlerNative_replaceMethod(JNIEnv *env,
+                                                                              jclass type,
+                                                                              jobject method,
+                                                                              jobject dest) {
+
+    // TODO
+
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_liangge_rxjavatest_ndk_CustomFix_HandlerNative_init(JNIEnv *env, jclass type,
+                                                                     jint apiCode) {
+
+    // TODO
+
+}
