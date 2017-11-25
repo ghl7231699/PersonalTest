@@ -15,6 +15,8 @@ import com.example.liangge.rxjavatest.ndk.AndFixPatchManager;
 import com.example.mylibrary.CrashHandler;
 import com.example.mylibrary.DLog;
 import com.lzy.okhttputils.OkHttpUtils;
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 import java.io.File;
 
@@ -22,7 +24,7 @@ import java.io.File;
  * Created by guhongliang on 2017/3/30.
  */
 
-public class App extends Application {
+public class App extends TinkerApplication {
     private static Context mContext;
     private AppComponent mAppComponent;
     public static App mApp;
@@ -31,6 +33,10 @@ public class App extends Application {
     private SQLiteDatabase db;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
+
+    public App() {
+        super(ShareConstants.TINKER_ENABLE_ALL, "com.example.liangge.rxjavatest.ThinkApplicationLink");
+    }
 
     @Override
     public void onCreate() {

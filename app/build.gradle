@@ -95,4 +95,11 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
     //andFix依赖
     compile 'com.alipay.euler:andfix:0.5.0@aar'
+
+    //可选，用于生成application类
+//    provided('com.tencent.tinker:tinker-android-anno:1.9.1')
+    //tinker的核心库
+    compile('com.tencent.tinker:tinker-android-lib:1.9.1')
+
+    compile "com.android.support:multidex:1.0.1"
 }

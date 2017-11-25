@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.ndk.baseactivity.BaseNdkActivity;
+import com.example.liangge.rxjavatest.thinker.ThinkerManger;
 
 import java.io.File;
 
@@ -116,25 +117,29 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ndk_calutor:
-                Calutor calutor = new Calutor();
+//                Calutor calutor = new Calutor();
 //                try {
 //                    calutor.calutor();
 //                } catch (Exception e) {
 //                    e.printStackTrace();
-                mTv.setText("替换后");
+//                mTv.setText("替换后");
 //                }
+
+
                 break;
             case R.id.ndk_fix:
-                //创建缓存目录
-                getmDirCache();
-                if (mDirCache == null) {
-                    return;
-                }
-                File file = new File(mDirCache);
-                if (!file.exists()) {
-                    file.mkdir();
-                }
-                AndFixPatchManager.addPatch(getPatchName());
+//                //创建缓存目录
+//                getmDirCache();
+//                if (mDirCache == null) {
+//                    return;
+//                }
+//                File file = new File(mDirCache);
+//                if (!file.exists()) {
+//                    file.mkdir();
+//                }
+//                AndFixPatchManager.addPatch(getPatchName());
+                fix();
+
                 break;
         }
     }
@@ -169,5 +174,10 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
             mDirCache = getExternalCacheDir().getAbsolutePath() + "/apatch/";
         }
         return mDirCache;
+    }
+
+    private void fix() {
+        String path = getExternalCacheDir() + "/fix.apk";
+        ThinkerManger.loadPatch(path);
     }
 }
