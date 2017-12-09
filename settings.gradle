@@ -1,2 +1,2 @@
-include ':app', ':alipaystander', ':taopiaopiao', ':mylibrary', ':bargraph', ':statisticsclickmodule'
+include ':app', ':alipaystander', ':taopiaopiao', ':mylibrary', ':bargraph', ':statisticsclickmodule', ':mypluginlibrary', ':buildSrc'
 

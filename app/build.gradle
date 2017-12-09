@@ -1,6 +1,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
+apply plugin: 'com.ghl.init'
+
+buildscript{
+    repositories {
+//        maven {
+//            url uri('/Users/guhongliang/.m2/repository')
+//        }
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath 'com.ghl.init:mypluginlibrary:1.0'
+    }
+}
+
+
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -22,6 +39,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
 
@@ -29,6 +47,24 @@ android {
         cmake {
             path "CMakeLists.txt"
         }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/activity',
+                            'src/main/res/layouts/fragment',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+
+    productFlavors{
+
+
     }
 }
 
@@ -102,4 +138,11 @@ dependencies {
     compile('com.tencent.tinker:tinker-android-lib:1.9.1')
 
     compile "com.android.support:multidex:1.0.1"
+
+    compile 'com.ghl.init:mypluginlibrary:1.0'
 }
+
+
+
+
+

@@ -1,0 +1,28 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+group = 'com.ghl.init'
+version = '1.0'
+
+//设置maven deployer
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.ghl.init'
+            pom.artifactId = 'mypluginlibrary'
+            pom.version = 1.0
+
+            repository(url: uri('/Users/guhongliang/.m2/repository'))
+        }
+    }
+}
