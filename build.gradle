@@ -45,3 +45,141 @@ task printGradleInfo() {
     println "User Home Dir:" + gradle.gradleUserHomeDir
     println "Parent:" + gradle.parent
 }
+
+task printStringClass << {
+    def str1 = '单引号'
+    def str2 = "双引号"
+
+
+    println "单引号定义的字符串类型" + str1.getClass().getName()
+    println "双引号定义的字符串类型" + str2.getClass().getName()
+}
+
+task printStringValue << {
+    def str1 = "少年张三丰"
+
+
+    println '单引号的变量计算：${str1}'
+    println "双引号的变量计算1：${str1}"
+    println "双引号的变量计算2：$str1"
+}
+task printList << {
+    def numList = [1, 2, 3, 4, 5, 0]
+    println numList.getClass().getName()
+    println numList[0..numList.size() - 1]
+    println numList[-1]
+    println numList[-1..-4]
+    numList.each {
+        println "this is " + it + "个数据"
+    }
+}
+task printMap << {
+    def map = ['width': 1024, 'height': 1080]
+    def maps = ['key1': '你是猪吗', 'key2': true]
+    map.each {
+        println "this is map中的" + it + "个"
+    }
+    println maps.key1
+}
+task invokeMethod << {
+//    method1(1, 2)
+    def a = method1 2, 2
+    def var = method2(1, 5)
+    println "a==${a},var==$var"
+}
+
+def method1(int a, int b) {
+    a + b
+}
+
+def method2(int a, int b) {
+    if (a > b) {
+        a
+    } else {
+        b
+    }
+}
+
+task helloClosure << {
+    //使用我们自定义的闭包
+    customEach {
+        println it
+    }
+    eachMap { key, v ->
+        println "${key} is $v"
+    }
+    def mClosure = {
+        String a, int b ->
+            println a + b
+    }
+    mClosure.call("this is ", 10)
+    mClosure("this is ", 100)
+}
+
+def customEach(closure) {
+    //模拟一个有10个元素的集合，开始迭代
+    for (int i in 1..10) {
+        closure(i)
+    }
+}
+
+def eachMap(closure) {
+    def map = ["name": "张三", "age": "18"]
+    map.each {
+        closure(it.key, it.value)
+    }
+}
+
+task helloDelegate << {
+    new Delegate().test {
+        println "thisObject : ${thisObject.getClass()}"
+        println "delegate : ${delegate.getClass()}"
+        println "owener : ${owner.getClass()}"
+
+        method()
+        it.method()
+    }
+
+}
+
+def method() {
+    println "Context this : ${this.getClass()} in root"
+    println "method in root"
+}
+
+class Delegate {
+    def method() {
+        println "Delegate this : ${this.getClass()} in Delegate"
+        println "method in Delegate"
+    }
+
+    def test(Closure<Delegate> closure) {
+        closure(this)
+    }
+
+}
+
+task configClosure << {
+    person {
+        personName = "sun geng"
+        personAge = 26
+        dumpPerson()
+    }
+}
+
+class Person {
+    String personName
+    int personAge
+
+    def dumpPerson() {
+        println "The name is: ${personName} his age is: $personAge"
+    }
+}
+
+def person(Closure<Person> closure) {
+    Person person = new Person()
+    closure.delegate = person
+    closure.setResolveStrategy(Closure.DELEGATE_FIRST)
+    closure(person)
+}
+

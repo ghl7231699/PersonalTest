@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/recycler_view_tb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="?homeAsUpIndicator"
+        app:subtitle="?title"/>
+
+    <Button
+        android:id="@+id/recycler_view_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="添加数据"/>
+
+    <Button
+        android:id="@+id/recycler_view_insert_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="批量添加数据"/>
+
+    <Button
+        android:id="@+id/recycler_view_modification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="修改一条数据"/>
+
+    <Button
+        android:id="@+id/recycler_view_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="删除一条数据"/>
+
+    <Button
+        android:id="@+id/recycler_view_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="查询一条数据"/>
+
+    <Button
+        android:id="@+id/recycler_view_query_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="查询全部数据"/>
+
+    <TextView
+        android:id="@+id/recycler_view_content_tv"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/boder"
+        android:gravity="center"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
