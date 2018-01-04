@@ -183,3 +183,113 @@ def person(Closure<Person> closure) {
     closure(person)
 }
 
+task upper(dependsOn: 'count') << {
+    String a = "gu_hong_liang"
+    println "Original :" + a
+    println "upper :" + a.toUpperCase()
+}
+
+task count << {
+    4.times {
+        println "result is :" + it
+    }
+    4.times { counter ->
+        println "this is $counter"
+//        "task$counter" << {
+//            println "this is $counter"
+//        }
+    }
+
+}
+
+task multiTask << {
+    create()
+}
+
+def create() {
+    println "create"
+}
+
+task hellos << {
+    println 'Hello Earth'
+}
+hellos.doFirst {
+    println 'Hello Venus'
+}
+hellos << {
+    println 'Hello Jupiter'
+}
+hellos.doFirst {
+    println 'this is third'
+}
+hellos.doLast {
+    println 'Hello Mars'
+}
+hellos.doFirst {
+    println 'this is six'
+}
+
+defaultTasks 'loadFile', 'hello'
+
+task hello << {
+    println "Hello Gradle"
+    println propertyTask.myProperty
+}
+task loadFile << {
+    def files = file("/Users/guhongliang/Desktop/项目").listFiles().sort()
+    files.each { File file ->
+        if (file.isFile()) {
+            println file.name
+        }
+    }
+}
+
+hello.doLast {
+    println "Greeting from the ${hello.name} task "
+}
+
+task propertyTask {
+    ext.myProperty = "guhongliang"
+}
+task checkSum << {
+    file("/Users/guhongliang/Desktop/项目").listFiles().each { File file ->
+
+    }
+}
+
+task distribution << {
+    println "We build the zip with version=$version"
+}
+task release(dependsOn: 'distribution') << {
+    println "We release now"
+}
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(release)) {
+        version = '1.0'
+    } else {
+        version = '1.0-SNAPSHOT'
+    }
+}
+task copy(type: Copy) {
+    from(file("/Users/guhongliang/Desktop/项目/gradle项目/build.gradle"))
+    into("/Users/guhongliang/Desktop/项目")
+}
+task(deletes, type: Delete) {
+    delete("/Users/guhongliang/Desktop/项目/build.gradle")
+}
+
+task compile << {
+    println 'compiling source'
+}
+
+task compileTest(dependsOn: compile) << {
+    println 'compiling unit tests'
+}
+
+task test(dependsOn: [compile, compileTest]) << {
+    println 'running unit tests'
+}
+
+task dist(dependsOn: [compile, test]) << {
+    println 'building the distribution'
+}

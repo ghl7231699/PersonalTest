@@ -25,4 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="我被修复了"/>
+
+    <com.example.liangge.rxjavatest.ui.view.UnreadMessageView
+        android:id="@+id/ndk_custom"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 </LinearLayout>

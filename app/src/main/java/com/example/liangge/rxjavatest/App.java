@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
+import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.di.component.DaggerAppComponent;
 import com.example.liangge.rxjavatest.di.modules.AppModule;
@@ -50,6 +51,8 @@ public class App extends TinkerApplication {
         CrashHandler.getInstance().init(this);
         //初始化andFix
         AndFixPatchManager.getInstance().init(this);
+        //初始化Toast
+        ToastUtils.init(mApp);
     }
 
     public static Context getContext() {

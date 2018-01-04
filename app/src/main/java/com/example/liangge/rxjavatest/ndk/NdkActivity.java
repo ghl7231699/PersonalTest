@@ -1,5 +1,6 @@
 package com.example.liangge.rxjavatest.ndk;
 
+import android.graphics.Color;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.ndk.baseactivity.BaseNdkActivity;
 import com.example.liangge.rxjavatest.thinker.ThinkerManger;
+import com.example.liangge.rxjavatest.ui.view.UnreadMessageView;
 
 import java.io.File;
 
@@ -22,6 +25,8 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
     private Button fix, calutor;
 
     private String mDirCache;
+
+    private UnreadMessageView mMessageView;
 
     static {
         System.loadLibrary("native-lib");
@@ -43,9 +48,14 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
 
     @Override
     public void initView() {
-        mTv = findViewById(R.id.ndk_tv);
-        fix = findViewById(R.id.ndk_fix);
-        calutor = findViewById(R.id.ndk_calutor);
+        mTv = (TextView) findViewById(R.id.ndk_tv);
+        fix = (Button) findViewById(R.id.ndk_fix);
+        mMessageView = (UnreadMessageView) findViewById(R.id.ndk_custom);
+        calutor = (Button) findViewById(R.id.ndk_calutor);
+
+        mMessageView.setContent("未读消息");
+        mMessageView.setNum("8");
+        mMessageView.setColor(Color.BLUE);
 
         fix.setOnClickListener(this);
         calutor.setOnClickListener(this);
@@ -60,11 +70,10 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
      * 自定义toast
      */
     private void showToast() {
-        Toast toast = new Toast(this);
-        toast.setDuration(Toast.LENGTH_LONG);
-        View view = LayoutInflater.from(this).inflate(R.layout.stay_house_resource_item, null, false);
-        toast.setView(view);
-        toast.show();
+        View view = LayoutInflater.from(this).inflate(R.layout.loadding, null, false);
+        TextView content = view.findViewById(R.id.load_content);
+        content.setText("朱日和");
+        ToastUtils.showWidgetView(view);
     }
 
     /**
