@@ -293,3 +293,83 @@ task test(dependsOn: [compile, compileTest]) << {
 task dist(dependsOn: [compile, test]) << {
     println 'building the distribution'
 }
+/***********************************************************我是分割线***********************************************************/
+Task createTask1 = task(createTask1)
+
+createTask1.doLast {
+    println '创建方法原型为： Task task(String name) throws InvalidUserDataException'
+}
+
+Task createTask2 = task(createTask2, group: BasePlugin.BUILD_GROUP)
+createTask2.doLast {
+    println '创建方法原型为： Task task(Map<String,?> args,String name) throws InvalidUserDataException'
+    println "任务分组：${createTask2.group}"
+}
+
+task createTask3 {
+    description '演示任务创建'
+    doLast {
+        println '创建方法原型为： Task task(String name,Closure configureClosure) throws InvalidUserDataException'
+        println "任务描述：${createTask3.description}"
+    }
+}
+
+tasks.create('createTask4') {
+    description '演示任务创建'
+    doLast {
+        println '创建方法原型为： Task create(String name,Closure configureClosure) throws InvalidUserDataException'
+        println "任务描述：${createTask4.description}"
+    }
+}
+
+task task1
+task1.doLast {
+    println "task1.doLast"
+}
+
+task task2
+tasks.getByName('task2').doLast {
+    println 'task2.doLast'
+}
+tasks['task2'].doLast {
+    println 'task2.doLast'
+}
+
+
+task task3
+tasks['task3'].doLast {
+    println 'mission is ' + tasks.getByPath('app:myTest')
+    println tasks.findByPath('app:myTest')
+    println tasks.findByPath('task10')
+}
+
+task task4
+tasks['task4'].doLast {
+    println 'mission is ' + tasks.getByName('task4')
+    println tasks.findByName('task4')
+    println tasks.findByName('task10')
+}
+
+task groupTask
+groupTask.group = BasePlugin.BUILD_GROUP
+groupTask.description = '这是一个构建的引导任务'
+
+groupTask.doLast {
+    println "group:${group},description:${description}"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
