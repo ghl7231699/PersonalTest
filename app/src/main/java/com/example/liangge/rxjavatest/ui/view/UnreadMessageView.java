@@ -122,7 +122,8 @@ public class UnreadMessageView extends View {
         switch (specMode) {
             case MeasureSpec.UNSPECIFIED:
                 Log.e("YViewWidth", "---speMode = UNSPECIFIED");
-                defaultWidth = Math.max(defaultWidth, specSize);
+//                defaultWidth = Math.max(defaultWidth, specSize);
+                defaultWidth = (paddingLeft + measureMost(content).width() + paddingRight + 10) * 2;
                 break;
             case MeasureSpec.EXACTLY:
                 defaultWidth = specSize;

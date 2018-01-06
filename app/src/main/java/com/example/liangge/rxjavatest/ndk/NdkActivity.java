@@ -5,16 +5,19 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
+import com.example.liangge.rxjavatest.common.utils.Utils;
 import com.example.liangge.rxjavatest.ndk.baseactivity.BaseNdkActivity;
 import com.example.liangge.rxjavatest.thinker.ThinkerManger;
+import com.example.liangge.rxjavatest.ui.view.SmartScrollView;
 import com.example.liangge.rxjavatest.ui.view.UnreadMessageView;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ghl11 on 2017/11/5.
@@ -27,6 +30,8 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
     private String mDirCache;
 
     private UnreadMessageView mMessageView;
+    private LinearLayout mLayout;
+    private SmartScrollView mSmartScrollView;
 
     static {
         System.loadLibrary("native-lib");
@@ -52,6 +57,8 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
         fix = (Button) findViewById(R.id.ndk_fix);
         mMessageView = (UnreadMessageView) findViewById(R.id.ndk_custom);
         calutor = (Button) findViewById(R.id.ndk_calutor);
+        mLayout = (LinearLayout) findViewById(R.id.ndk_ll_container);
+        mSmartScrollView = (SmartScrollView) findViewById(R.id.ndk_scroll_ssv);
 
         mMessageView.setContent("未读消息");
         mMessageView.setNum("8");
@@ -59,6 +66,43 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
 
         fix.setOnClickListener(this);
         calutor.setOnClickListener(this);
+
+        addView();
+        addViews();
+    }
+
+    private void addViews() {
+        List<String> list = new ArrayList<>();
+        list.add("未读消息");
+        list.add("今日资讯");
+        list.add("本地特惠");
+        list.add("爱奇艺");
+        list.add("京东");
+        list.add("支付宝");
+        mSmartScrollView.setDatas(list);
+    }
+
+    private void addView() {
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int marginHorizontal = Utils.dp2px(this, 5);
+        param.setMargins(marginHorizontal, 0, 0, 0);
+        UnreadMessageView view;
+        for (int i = 0; i < 10; i++) {
+            View layout = LayoutInflater.from(this).inflate(R.layout.scroll_item, null);
+
+            view = layout.findViewById(R.id.ndk_custom_item);
+            if (i == 0) {
+                view.setColor(Color.BLUE);
+            } else {
+                view.setColor(Color.BLACK);
+            }
+            view.setContent("消息" + i);
+            view.setNum(String.valueOf(i));
+            layout.setLayoutParams(param);
+            mLayout.addView(layout);
+        }
+
     }
 
     @Override

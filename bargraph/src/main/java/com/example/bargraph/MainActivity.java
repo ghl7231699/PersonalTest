@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBgv = findViewById(R.id.bgv);
-        mHorizontalBar = findViewById(R.id.h_bar);
-        mButton = findViewById(R.id.go);
+        mBgv = (BarGraphView) findViewById(R.id.bgv);
+        mHorizontalBar = (HorizontalBarGraphView) findViewById(R.id.h_bar);
+        mButton = (Button) findViewById(R.id.go);
         mHorizontalBar.setVisibility(View.VISIBLE);
         initBar();
     }
