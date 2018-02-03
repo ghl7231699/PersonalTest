@@ -34,7 +34,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
@@ -49,19 +49,34 @@
             />
 
         <HorizontalScrollView
+            android:id="@+id/ndk_hs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scrollbars="none">
 
             <LinearLayout
-                android:id="@+id/ndk_ll_container"
-                android:layout_width="wrap_content"
+                android:id="@+id/ndk_hs_ll"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal"
+                ></LinearLayout>
         </HorizontalScrollView>
+
+        <!--<HorizontalScrollView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:scrollbars="none">-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/ndk_ll_container"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal"/>-->
+        <!--</HorizontalScrollView>-->
 
         <ImageView
             android:id="@+id/iv_phone_icons"
@@ -72,9 +87,4 @@
             android:scaleType="fitCenter"
             android:src="@mipmap/scroll_back"/>
     </LinearLayout>
-
-    <com.example.liangge.rxjavatest.ui.view.SmartScrollView
-        android:id="@+id/ndk_scroll_ssv"
-        android:layout_width="500dp"
-        android:layout_height="50dp"/>
 </LinearLayout>

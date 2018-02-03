@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.example.liangge.rxjavatest.common.utils.Utils;
+
 /**
  * Created by guhongliang on 2018/1/4.
  */
@@ -78,7 +80,7 @@ public class UnreadMessageView extends View {
 
         mPaint.setColor(color);
         mPaint.setStrokeWidth(1);
-        mPaint.setTextSize(40);
+        mPaint.setTextSize(Utils.dp2px(mContext, 16));
         float textWidth = mPaint.measureText(content);
         Rect rect = measureMost(content);
         int textY = paddingTop + (height - paddingTop - paddingBottom) / 2;
@@ -96,8 +98,8 @@ public class UnreadMessageView extends View {
 
         mPaint.setColor(Color.WHITE);
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setStrokeWidth(2);
-        mPaint.setTextSize(20);
+        mPaint.setStrokeWidth(1);
+        mPaint.setTextSize(Utils.dp2px(mContext, 10));
         float v = mPaint.measureText(num);
         Rect h = measureMost(num);
         int y = textY + h.height() / 2;
@@ -152,7 +154,7 @@ public class UnreadMessageView extends View {
                 Log.e("YViewHeight", "---speMode = EXACTLY");
                 break;
             case MeasureSpec.AT_MOST:
-                defaultWidth = measureMost(content).height() + paddingTop + paddingBottom;
+                defaultWidth = (measureMost(content).height() + paddingTop + paddingBottom) * 2;
                 Log.e("YViewHeight", "---speMode = AT_MOST");
                 break;
         }

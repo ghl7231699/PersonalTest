@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    def name = rootProject.extensions.getByName("ext")
+    compileSdkVersion name.compileSdkVersion
+    buildToolsVersion name.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 15
@@ -18,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 

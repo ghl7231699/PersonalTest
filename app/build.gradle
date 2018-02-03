@@ -12,15 +12,19 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.ghl.init:mypluginlibrary:1.0'
+//        classpath 'com.ghl.init:mypluginlibrary:1.0'
+        classpath "${rootProject.ext.dependencies['mypluginlibrary']}"
+
+//        classpath files('/Users/guhongliang/.m2/repository/com/ghl/init/mypluginlibrary/1.0/mypluginlibrary-1.0.jar')
     }
 }
 
 
-
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+
+    def name = rootProject.extensions.getByName("ext")
+    compileSdkVersion name.compileSdkVersion
+    buildToolsVersion name.buildToolsVersion
     defaultConfig {
         applicationId "com.example.liangge.rxjavatest"
         minSdkVersion 18
@@ -52,11 +56,11 @@ android {
     sourceSets {
         main {
             res.srcDirs =
-                    [
-                            'src/main/res/layouts/activity',
-                            'src/main/res/layouts/fragment',
-                            'src/main/res/layouts',
-                            'src/main/res'
+                    ['src/main/res/layouts/common',
+                     'src/main/res/layouts/activity',
+                     'src/main/res/layouts/fragment',
+                     'src/main/res/layouts',
+                     'src/main/res'
                     ]
         }
     }
@@ -87,6 +91,8 @@ greendao {
 }
 
 dependencies {
+    def dep = rootProject.ext.dependencies
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -135,11 +141,14 @@ dependencies {
     //可选，用于生成application类
 //    provided('com.tencent.tinker:tinker-android-anno:1.9.1')
     //tinker的核心库
-    implementation('com.tencent.tinker:tinker-android-lib:1.9.1')
+//    implementation('com.tencent.tinker:tinker-android-lib:1.9.1')
+    implementation "${dep['thinker']}"
 
-    implementation "com.android.support:multidex:1.0.1"
+//    implementation "com.android.support:multidex:1.0.1"
+    implementation "${dep['multidex']}"
 
-    implementation 'com.ghl.init:mypluginlibrary:1.0'
+//    implementation 'com.ghl.init:mypluginlibrary:1.0'
+    implementation dep['mypluginlibrary']
 }
 
 task myTest << {
@@ -149,4 +158,26 @@ task myTest << {
 }
 
 
+apply plugin: CustomPlugin
 
+class CustomPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project target) {
+        target.task('TaskTest') << {
+            description '这是个个人项目依赖的自定义插件'
+            println "这是一个通过自定义插件方式创建的任务"
+        }
+    }
+}
+
+task printName << {
+
+    println "SDK版本号：${android.compileSdkVersion}"
+    println "构建工具版本：${android.buildToolsVersion}"
+    sourceSets.each {
+        println "文件名称是" + name
+    }
+}
+
+//extension=project.extensions.create("android",getExtensions().getClass(),)

@@ -1,0 +1,16 @@
+//this is your configuration file,that you can make your build.gradle dependence
+
+
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.2"
+    android = [
+
+    ]
+    dependencies = [
+            "mypluginlibrary": "com.ghl.init:mypluginlibrary:1.0",
+            "multidex"       : "com.android.support:multidex:1.0.1",
+            "thinker"         : "com.tencent.tinker:tinker-android-lib:1.9.1"
+
+    ]
+}

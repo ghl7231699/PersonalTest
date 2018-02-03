@@ -2,9 +2,11 @@ package com.example.liangge.rxjavatest.ndk;
 
 import android.graphics.Color;
 import android.os.Environment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,7 +15,6 @@ import com.example.liangge.rxjavatest.common.utils.ToastUtils;
 import com.example.liangge.rxjavatest.common.utils.Utils;
 import com.example.liangge.rxjavatest.ndk.baseactivity.BaseNdkActivity;
 import com.example.liangge.rxjavatest.thinker.ThinkerManger;
-import com.example.liangge.rxjavatest.ui.view.SmartScrollView;
 import com.example.liangge.rxjavatest.ui.view.UnreadMessageView;
 
 import java.util.ArrayList;
@@ -30,8 +31,10 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
     private String mDirCache;
 
     private UnreadMessageView mMessageView;
-    private LinearLayout mLayout;
-    private SmartScrollView mSmartScrollView;
+    //    private LinearLayout mLayout;
+    private HorizontalScrollView mWheelView;
+    private LinearLayout mLinearLayout;
+    private int screenWitdth;
 
     static {
         System.loadLibrary("native-lib");
@@ -57,8 +60,10 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
         fix = (Button) findViewById(R.id.ndk_fix);
         mMessageView = (UnreadMessageView) findViewById(R.id.ndk_custom);
         calutor = (Button) findViewById(R.id.ndk_calutor);
-        mLayout = (LinearLayout) findViewById(R.id.ndk_ll_container);
-        mSmartScrollView = (SmartScrollView) findViewById(R.id.ndk_scroll_ssv);
+//        mLayout = (LinearLayout) findViewById(R.id.ndk_ll_container);
+
+        mWheelView = (HorizontalScrollView) findViewById(R.id.ndk_hs);
+        mLinearLayout = (LinearLayout) findViewById(R.id.ndk_hs_ll);
 
         mMessageView.setContent("未读消息");
         mMessageView.setNum("8");
@@ -67,19 +72,68 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
         fix.setOnClickListener(this);
         calutor.setOnClickListener(this);
 
-        addView();
-        addViews();
+//        addView();
+//        addViews();
+        addWheelView();
+
     }
 
-    private void addViews() {
-        List<String> list = new ArrayList<>();
-        list.add("未读消息");
-        list.add("今日资讯");
-        list.add("本地特惠");
-        list.add("爱奇艺");
-        list.add("京东");
-        list.add("支付宝");
-        mSmartScrollView.setDatas(list);
+    private void addWheelView() {
+        screenWitdth = getResources().getDisplayMetrics().widthPixels;
+        UnreadMessageView messageView;
+//        TextView messageView;
+        List<View> mViews = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            messageView = new UnreadMessageView(this);
+//            messageView = new TextView(this);
+//            messageView.setBackground(getDrawable(R.drawable.list_item_select));
+            messageView.setBackground(getResources().getDrawable(R.drawable.list_item_select));
+            messageView.setContent("房源审核失败" + i);
+            messageView.setNum(String.valueOf(i));
+            messageView.setColor(Color.BLUE);
+//            messageView.setText("跟进提醒" + i);
+//            messageView.setTextColor(Color.RED);
+            mViews.add(messageView);
+        }
+        LinearLayout.LayoutParams childP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        childP.gravity = Gravity.CENTER;
+        if (mViews == null) {
+            return;
+        }
+        View childAt;
+        int size = mViews.size();
+        for (int i = 0; i < size; i++) {
+            //获取到每个item
+            childAt = mViews.get(i);
+            childAt.setLayoutParams(childP);
+            //如果view被选中，则居中显示，除了i=0和i=childCount-1
+            mLinearLayout.addView(childAt);
+            if (childAt.isSelected()) {
+                if (i != 0 && i != size - 1) {
+                    int left = childAt.getLeft();//获取子空间距离父控件左侧的距离
+                    int childWidth = childAt.getMeasuredWidth();//获取子控件的宽度
+                    int x = left + childWidth / 2 - screenWitdth / 2;
+                    mWheelView.smoothScrollTo(x, 0);
+                }
+            }
+            childAt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setChildView(v);
+                }
+            });
+        }
+    }
+
+    private void setChildView(View v) {
+        if (!v.isSelected()) {
+            v.isSelected();
+        }
+        v.setBackground(getResources().getDrawable(R.drawable.list_item_select));
+        int left = v.getLeft();//获取子空间距离父控件左侧的距离
+        int childWidth = v.getMeasuredWidth();//获取子控件的宽度
+        int x = left + childWidth / 2 - screenWitdth / 2;
+        mWheelView.smoothScrollTo(x, 0);
     }
 
     private void addView() {
@@ -100,7 +154,7 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
             view.setContent("消息" + i);
             view.setNum(String.valueOf(i));
             layout.setLayoutParams(param);
-            mLayout.addView(layout);
+//            mLayout.addView(layout);
         }
 
     }
@@ -114,10 +168,16 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
      * 自定义toast
      */
     private void showToast() {
-        View view = LayoutInflater.from(this).inflate(R.layout.loadding, null, false);
-        TextView content = view.findViewById(R.id.load_content);
-        content.setText("朱日和");
-        ToastUtils.showWidgetView(view);
+//        View view = LayoutInflater.from(this).inflate(R.layout.loadding, null, false);
+//        TextView content = view.findViewById(R.id.load_content);
+//        content.setText("朱日和");
+//        ToastUtils.showWidgetView(view);
+        ToastUtils.showCenter(this, "我是个中间的toast");
+//        Toast mToast = new Toast(this);
+//        mToast.setGravity(Gravity.CENTER, 0, 0);
+//        mToast.setDuration(Toast.LENGTH_SHORT);
+//        mToast.setText("我是个中间的toast");
+//        mToast.show();
     }
 
     /**

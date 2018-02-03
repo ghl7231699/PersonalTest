@@ -3,6 +3,7 @@ package com.example.liangge.rxjavatest.common.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -78,9 +79,10 @@ public class ToastUtils {
     /**
      * 显示自定义view的toast
      */
-    public static void showWidgetView(View view) {
+    public static void showWidgetView(View view, int gravity) {
         mToast.setDuration(Toast.LENGTH_SHORT);
         mToast.setView(view);
+        mToast.setGravity(gravity, 0, 0);
         mToast.show();
     }
 
@@ -91,5 +93,18 @@ public class ToastUtils {
         if (mToast != null) {
             mToast.cancel();
         }
+    }
+
+    /**
+     * 中间位置弹出的消息提醒
+     *
+     * @param context
+     * @param message
+     */
+    public static void showCenter(Context context, String message) {
+        Toast t = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+        t.setGravity(Gravity.CENTER, 0, 0);
+        t.setText(message);
+        t.show();
     }
 }
