@@ -1,7 +1,6 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.eftimoff.androipathview.PathView;
@@ -10,7 +9,6 @@ import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class WelcomeActivity extends BaseActivity {
 

@@ -9,7 +9,7 @@ public class Fruit {
     private int imageId;
     private int t;
     private int flag;
-    private String url;
+    public String url;
     private boolean top;
 
     public boolean isTop() {
@@ -21,6 +21,13 @@ public class Fruit {
     }
 
     public Fruit() {
+    }
+
+    public Fruit(int i) {
+        imageId = i;
+    }
+
+    public Fruit(String s) {
     }
 
     public String getUrl() {
