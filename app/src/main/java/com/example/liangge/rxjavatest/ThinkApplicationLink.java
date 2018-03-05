@@ -3,7 +3,7 @@ package com.example.liangge.rxjavatest;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.support.multidex.MultiDex;
+//import android.support.multidex.MultiDex;
 
 import com.example.liangge.rxjavatest.thinker.ThinkerManger;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
@@ -21,7 +21,7 @@ public class ThinkApplicationLink extends DefaultApplicationLike {
     public void onBaseContextAttached(Context base) {
         super.onBaseContextAttached(base);
         //you must install multiDex whatever tinker is installed!
-        MultiDex.install(base);
+//        MultiDex.install(base);
         //
         ThinkerManger.installTinker(this);
     }

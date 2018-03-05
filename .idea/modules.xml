@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/mypluginlibrary/mypluginlibrary.iml" filepath="$PROJECT_DIR$/mypluginlibrary/mypluginlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" filepath="$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" filepath="$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/taopiaopiao/taopiaopiao.iml" filepath="$PROJECT_DIR$/taopiaopiao/taopiaopiao.iml" />
     </modules>

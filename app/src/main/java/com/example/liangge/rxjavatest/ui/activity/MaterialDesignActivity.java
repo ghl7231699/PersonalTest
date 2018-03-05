@@ -90,7 +90,7 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
     private void setRecycleView() {
         initFruits();
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
-        GridLayoutManager manager = new GridLayoutManager(this, 4);
+        GridLayoutManager manager = new GridLayoutManager(this, 3);
         rv.setLayoutManager(manager);
         mFruitAdapter = new FruitsAdapter(this, mFruitsList);
         mFruitAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

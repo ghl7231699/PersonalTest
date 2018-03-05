@@ -1,8 +1,10 @@
 package com.example.liangge.rxjavatest.ui.fragment.basefragment;
 
-import android.app.Fragment;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +12,6 @@ import android.view.ViewGroup;
 import com.example.liangge.rxjavatest.App;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.presenter.BasePresenter;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -26,7 +26,8 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     private App mApp;
     //    @Inject
 //    T mPresenter;
-    private View rootView;
+    protected View rootView;
+    protected Activity mActivity;
 
     //获取布局Id
     public abstract int getLayoutId();
@@ -51,6 +52,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
+        mActivity = getActivity();
         return rootView;
     }
 
@@ -60,6 +62,8 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         this.mApp = (App) getActivity().getApplication();
         setUpComponent(mApp.getAppComponent());
         initView();
+        initData();
+        initListener();
     }
 
     @Override

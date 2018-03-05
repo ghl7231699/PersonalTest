@@ -89,6 +89,7 @@
 
         </activity>
         <activity android:name=".ui.activity.ReflectActivity"/>
+        <activity android:name=".ui.activity.TabActivity"/>
     </application>
 
 </manifest>

@@ -92,7 +92,6 @@ greendao {
 
 dependencies {
     def dep = rootProject.ext.dependencies
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -137,18 +136,11 @@ dependencies {
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     //andFix依赖
     implementation 'com.alipay.euler:andfix:0.5.0@aar'
-
     //可选，用于生成application类
-//    provided('com.tencent.tinker:tinker-android-anno:1.9.1')
+//    provided 'com.tencent.tinker:tinker-android-anno:1.9.1'
     //tinker的核心库
-//    implementation('com.tencent.tinker:tinker-android-lib:1.9.1')
-    implementation "${dep['thinker']}"
-
-//    implementation "com.android.support:multidex:1.0.1"
-    implementation "${dep['multidex']}"
-
-//    implementation 'com.ghl.init:mypluginlibrary:1.0'
-    implementation dep['mypluginlibrary']
+    implementation 'com.tencent.tinker:tinker-android-lib:1.9.1'
+    implementation project(':navigationbarlibrary')
 }
 
 task myTest << {
