@@ -151,7 +151,7 @@ public class ReflectActivity extends BaseActivity implements View.OnClickListene
         }
         System.out.println("*****************获取公有、无参的构造方法*******************************");
         try {
-            Constructor constructor = mFruit.getConstructor(null);
+            Constructor constructor = mFruit.getConstructor((Class<?>) null);
             LogUtil.d("Reflect7", "No param Constructor is " +
                     constructor);
         } catch (NoSuchMethodException e) {

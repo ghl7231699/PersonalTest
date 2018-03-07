@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/fg_mine_onclick_bg"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/fg_mine_head_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:background="@mipmap/head"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/fg_mine_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="化身孤岛的鲸"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/fg_mine_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text=".."
+            android:textColor="#77000000"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fg_mine_head_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3:26"
+            android:textColor="@color/selector_grey"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/fg_mine_qr_code_iv"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:background="@mipmap/rq_code"/>
+    </LinearLayout>
+</LinearLayout>

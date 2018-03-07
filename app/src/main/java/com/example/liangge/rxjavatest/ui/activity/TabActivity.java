@@ -1,15 +1,20 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
 import com.example.liangge.rxjavatest.ui.activity.baseactivity.BaseActivity;
-import com.example.liangge.rxjavatest.ui.fragment.HeadLineFragment;
+import com.example.liangge.rxjavatest.ui.fragment.DiscoveryFragment;
+import com.example.liangge.rxjavatest.ui.fragment.MineFragment;
 import com.example.liangge.rxjavatest.ui.fragment.TabFragment;
 import com.example.liangge.rxjavatest.ui.fragment.VideoFragment;
 import com.example.navigationbarlibrary.TabBarItem;
@@ -22,9 +27,10 @@ import java.util.List;
  * Created by guhongliang on 2018/3/5.
  */
 
-public class TabActivity extends BaseActivity {
+public class TabActivity extends BaseActivity implements View.OnClickListener {
     private ViewPager mViewPager;
     private TabBarLayout mTabBarLayout;
+    private ImageView add;
     private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
@@ -36,41 +42,42 @@ public class TabActivity extends BaseActivity {
     public void initView() {
         mViewPager = (ViewPager) findViewById(R.id.vp_content);
         mTabBarLayout = (TabBarLayout) findViewById(R.id.bbl);
+        add = (ImageView) findViewById(R.id.ac_tab_add);
+        add.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
+        mViewPager.setOffscreenPageLimit(3);//最大预加载页面数
         TabFragment homeFragment = new TabFragment();
         mFragmentList.add(homeFragment);
 
         VideoFragment videoFragment = new VideoFragment();
         mFragmentList.add(videoFragment);
 
-        HeadLineFragment microFragment = new HeadLineFragment();
-        Bundle bundle3 = new Bundle();
-        bundle3.putString(TabFragment.CONTENT, "微头条");
-        microFragment.setArguments(bundle3);
+        DiscoveryFragment microFragment = new DiscoveryFragment();
         mFragmentList.add(microFragment);
 
-        TabFragment meFragment = new TabFragment();
-        Bundle bundle4 = new Bundle();
-        bundle4.putString(TabFragment.CONTENT, "我的");
-        meFragment.setArguments(bundle4);
+        MineFragment meFragment = new MineFragment();
         mFragmentList.add(meFragment);
 
         mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         mTabBarLayout.setViewPager(mViewPager);
-        mTabBarLayout.setOnItemSelectedListener(new TabBarLayout.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(TabBarItem tabBarItem, int previousPosition, int currentPosition) {
-
-            }
-        });
     }
 
     @Override
     public void setUpComponent(AppComponent appComponent) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ac_tab_add:
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 
@@ -88,6 +95,11 @@ public class TabActivity extends BaseActivity {
         @Override
         public int getCount() {
             return mFragmentList.size();
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+//            super.destroyItem(container, position, object);
         }
     }
 }

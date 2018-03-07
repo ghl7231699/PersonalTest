@@ -27,7 +27,7 @@ public class WelcomeActivity extends BaseActivity {
                 .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
                     @Override
                     public void onAnimationEnd() {
-                        Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(WelcomeActivity.this, TabActivity.class);
                         startActivity(intent);
                         finish();
                     }

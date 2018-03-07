@@ -7,6 +7,8 @@
     android:orientation="vertical"
     >
 
+    <include layout="@layout/tab_bar"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
@@ -63,7 +65,7 @@
             app:iconNormal="@drawable/tab_micro_normal"
             app:iconSelected="@drawable/tab_micro_selected"
             app:itemMarginTop="-5dp"
-            app:itemText="微头条"
+            app:itemText="发现"
             app:itemTextSize="10sp"
             app:openTouchBg="true"
             app:textColorNormal="@color/tab_normal_color"

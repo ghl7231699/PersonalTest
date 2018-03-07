@@ -1,19 +1,16 @@
 package com.example.liangge.rxjavatest.ui.fragment;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Fruits;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
-import com.example.liangge.rxjavatest.ui.activity.FruitActivity;
-import com.example.liangge.rxjavatest.ui.adapter.FruitsAdapter;
+import com.example.liangge.rxjavatest.ui.adapter.VideoAdapter;
 import com.example.liangge.rxjavatest.ui.fragment.basefragment.BaseFragment;
 
 import java.lang.ref.WeakReference;
@@ -35,12 +32,12 @@ import java.util.Random;
 public class VideoFragment extends BaseFragment {
     private static SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
-    private Fruits[] mFruits = {new Fruits("Apple", R.mipmap.backup), new Fruits("Orange", R.mipmap.call),
-            new Fruits("Pear", R.mipmap.friends),
-            new Fruits("Cherry", R.mipmap.location),
-            new Fruits("PineApple", R.mipmap.mail)};
+    private Fruits[] mFruits = {new Fruits("小李", R.mipmap.kdbag), new Fruits("小王", R.mipmap.collect),
+            new Fruits("shirley", R.mipmap.expression),
+            new Fruits("小马", R.mipmap.kdbag),
+            new Fruits("小刘", R.mipmap.friends)};
     private List<Fruits> mFruitsList = new ArrayList<>();
-    private FruitsAdapter mFruitAdapter;
+    private VideoAdapter mFruitAdapter;
     private DelayHandler mHandler;
 
     private static class DelayHandler extends Handler {
@@ -111,31 +108,16 @@ public class VideoFragment extends BaseFragment {
 
     private void setRecycleView() {
         initFruits();
-        GridLayoutManager manager = new GridLayoutManager(mActivity, 3);
+        LinearLayoutManager manager = new LinearLayoutManager(mActivity);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(manager);
-        mFruitAdapter = new FruitsAdapter(mActivity, mFruitsList);
-        mFruitAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.fruit_image:
-                        Fruits fruits = mFruitsList.get(position);
-                        Intent intent = new Intent(mActivity, FruitActivity.class);
-                        String name = fruits.getName();
-                        intent.putExtra(FruitActivity.FRUIT_NAME, name);
-                        int imageId = fruits.getImageId();
-                        intent.putExtra(FruitActivity.FRUIT_IMAGE_ID, imageId);
-                        startActivity(intent);
-                        break;
-                }
-            }
-        });
+        mFruitAdapter = new VideoAdapter(mFruitsList, mActivity);
         mRecyclerView.setAdapter(mFruitAdapter);
     }
 
     private void initFruits() {
         mFruitsList.clear();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             Random r = new Random();
             int index = r.nextInt(mFruits.length);
             mFruitsList.add(mFruits[index]);

@@ -22,6 +22,9 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
+    protected boolean bIsViewCreated;
+    protected boolean bIsDataLoaded;
+    protected boolean isVisible;
     private Unbinder mUnbinder;
     private App mApp;
     //    @Inject
@@ -47,6 +50,19 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     //初始化Component
     public abstract void setUpComponent(AppComponent appComponent);
 
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser && bIsViewCreated && !bIsDataLoaded) {
+//            initData();
+//            bIsDataLoaded = true;
+//        }
+//        if (getUserVisibleHint()) {
+//            isVisible=true;
+//
+//        }
+//    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +78,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         this.mApp = (App) getActivity().getApplication();
         setUpComponent(mApp.getAppComponent());
         initView();
+//        bIsViewCreated = true;
+//
+//        if (getUserVisibleHint() && !bIsDataLoaded) {
         initData();
+//            bIsDataLoaded = true;
+//        }
         initListener();
     }
 
@@ -72,5 +93,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         if (mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        bIsViewCreated = false;
+        bIsDataLoaded = false;
     }
 }
