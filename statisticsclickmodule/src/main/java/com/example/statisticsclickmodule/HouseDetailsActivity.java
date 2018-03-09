@@ -24,10 +24,10 @@ public class HouseDetailsActivity extends AppCompatActivity implements View.OnCl
     public static final String KEY_URL = "key_url";
     public static final String KEY_TITLE = "key_title";
 
-    private static final int MSG_FINISHING = 0;
-    private static final int MSG_GO_BACK = 1;
-    private static final int MSG_GO_Forward = 2;
-    private static final int MSG_GO_FORWARD_A = 3;
+    public static final int MSG_FINISHING = 0;
+    public static final int MSG_GO_BACK = 1;
+    public static final int MSG_GO_Forward = 2;
+    public static final int MSG_GO_FORWARD_A = 3;
 
     private ProgressBar mProgressBar;
     private WebView mWebView;
@@ -173,16 +173,6 @@ public class HouseDetailsActivity extends AppCompatActivity implements View.OnCl
         public void goBackH5() {
             if (mHandler != null) {
                 mHandler.sendEmptyMessage(MSG_GO_BACK);
-            }
-        }
-
-        @JavascriptInterface
-        public void goForward(String url) {
-            if (mHandler != null) {
-                Message msg = Message.obtain();
-                msg.what = MSG_GO_Forward;
-                msg.obj = url;
-                mHandler.sendMessage(msg);
             }
         }
 

@@ -16,6 +16,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import static com.example.statisticsclickmodule.HouseDetailsActivity.MSG_GO_Forward;
+
 /**
  * Created by guhongliang on 2017/9/15.
  * 楼盘详情页
@@ -141,6 +143,16 @@ public class BuildingDetailsActivity extends AppCompatActivity {
         public void goBackH5() {
             if (mHandler != null) {
                 mHandler.sendEmptyMessage(MSG_GO_BACK);
+            }
+        }
+
+        @JavascriptInterface
+        public void goForward(String url) {
+            if (mHandler != null) {
+                Message msg = Message.obtain();
+                msg.what = MSG_GO_Forward;
+                msg.obj = url;
+                mHandler.sendMessage(msg);
             }
         }
 

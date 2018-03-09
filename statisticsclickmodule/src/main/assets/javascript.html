@@ -11,7 +11,8 @@
             // 由于对象映射，所以调用test对象等于调用Android映射的对象
             <!--test.sayHello("Js调用了Android的SayHello方法");-->
 
-               AppHandler.closeH5();
+               <!--AppHandler.closeH5();-->
+               AppHandler.goActivity("file:///android_asset/js.html");
          }
 
          function callNative(){
@@ -31,6 +32,7 @@
 
 <!-- 点击按钮则调用callAndroid（）方法  -->
 <body>
+<p>我是首页的网页</p>
 <button type="button" id="button1" onclick="callAndroid()">退出页面</button>
 <button type="button" id="button2" onclick="callNative()">楼盘详情</button>
 <button type="button" id="button3" onclick="callNative2()">房源详情</button>

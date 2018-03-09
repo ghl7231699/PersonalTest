@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>JavaSript教程</title> 
+  <script type="text/javascript">
+    function first(){
+      document.getElementById("first").innerHTML="我的第一个JavaScript 函数";
+    }
+  </script> 
+  <script>
+function displayDate(){
+  document.getElementById("demo").innerHTML=Date();
+}
+</script> 
+  <script type="text/javascript">
+    document.write("<h1>这只是一个标题</h1>");
+    document.write("<p>这是一个段落</p>")
+  </script> 
+  <script>
+  function myFunction()
+  {
+  x=document.getElementById("d");  // 找到元素
+  x.innerHTML="Hello JavaScript!";    // 改变内容
+  }
+</script> 
+  <script>
+  function changeColor(){
+    x=document.getElementById("color");//根据id找到元素
+    x.style.color="#ff0000";//改变样式
+  }
+</script> 
+  <script type="text/javascript">
+  function inputNum(){
+    var x=document.getElementById("number").value;
+    if (x ==""||isNaN(x)) {
+      alert("您输入的不是数字");
+    }
+  }
+</script> 
+<script src="first.js"></script>
+<script type="text/javascript">
+    var carname1="Volvo XC60";
+    var carname2='Volvo XC60';
+    var answer1='It\'s alright';
+    var answer2="He is called \"Johnny\"";
+    var answer3='He is called "Johnny"';
+    document.write(carname1+"<br>")
+    document.write(carname2+"<br>")
+    document.write(answer1+"<br>")
+    document.write(answer2+"<br>")
+    document.write(answer3+"<br>")
+  </script>
+  <script type="text/javascript">
+    var x1=34.00;
+    var x2=34;
+    var y1=123e5;
+    var y2=123e-5;
+    document.write(x1+"<br>")
+    document.write(x2+"<br>")
+    document.write(y1+"<br>")
+    document.write(y2+"<br>")
+  </script>
+  <script type="text/javascript">
+    var i;
+    var cars=new Array();
+    cars[0]="Saab";
+    cars[1]="Volvo";
+    cars[2]="BMW";
+    for (var i = 0; i < cars.length; i++) {
+      document.write("我是第"+cars[i]+"个"+"<br>"); 
+    }
+  </script>
+
+  <script type="text/javascript">
+    var preson=
+  {
+    firstname : "John",
+    lastname  :"Doe",
+    id        :5566
+  };
+document.write(preson.lastname+"<br>");
+document.write(preson["lastname"]+"<br>");
+  </script>
+  <script type="text/javascript">
+    function newObject()
+{
+  var obj=new Object();
+  obj.name="厉害了，我的国";
+  obj.age=28;
+  obj.first=function(){
+
+  }
+  obj.second=function(){
+
+  }
+  return obj;
+}
+  var one=newObject();
+  document.write(one.age);
+  </script>
+ </head> 
+ <body> 
+  <h1>我的Web页面</h1> 
+  <p id="first">一个段落</p> 
+  <button type="button" onclick="first()">点击</button> 
+  <h1>我的第一个JavaScript 程序</h1> 
+  <p id="demo">这是一个段落</p> 
+  <button type="button" onclick="displayDate()">显示日期</button> 
+  <h2>来自于外部的script的内容</h2>
+  <p id="out">一个段落</p>
+  <button type="button" onclick="outJs()">外部</button>
+
+  <p>JavaScript能够直接写入HTML输出流中：</p> 
+  <p id="d"> JavaScript 能改变html内容</p> 
+  <button type="button" onclick="myFunction()">点击这里</button> 
+  <p id="color">JavaScript 能改变HTML元素的样式</p> 
+  <button type="button" onclick="changeColor()">改变颜色</button> 
+  <p>请输入数字。如果输入值不是数字，浏览器会弹出提示框</p> 
+  <input type="text" id="number" /> 
+  <button type="button" onclick="inputNum()">输入</button>  
+  <p>计算10*10的值</p>
+  <p id="add"></p>
+  <button type="button" onclick="add()">计算</button>
+  <p id="text"></p>
+
+  <p>调用这个按钮，来调用带参数的函数</p>
+  <button type="button" onclick="getSomething('李宁','职业运动员')">点击这里</button>
+  <hr>
+  <button onclick="getElementById('time').innerHTML=Date()">现在的时间是？</button>
+  <p id="time"></p>
+
+
+
+  <script>
+    document.getElementById("text").innerHTML = "你好 Dolly";
+  </script>
+  <p id="demo1"></p>
+  <p id="demo2"></p>
+  <script>
+  a = 1;
+  b = 2;
+  c = a + b;
+  document.getElementById("demo1").innerHTML = c;
+  x = 1; y = 2; z = x + y;
+  document.getElementById("demo2").innerHTML = z;
+  </script>
+  <p id="p"></p>
+  <script>
+    var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+  document.getElementById("p").innerHTML =
+    person.firstName+"现在"+person.age+"岁 .他的眼睛是"+person.eyeColor+"色的";
+  </script>
+  <p id="person"></p>
+  <script type="text/javascript">
+    var person ={
+  firstName:"John",
+  lastName:"Doe",
+  id:5566,
+  fullName: function(){
+    return this.firstName+this.lastName;
+  }
+}
+  document.getElementById("person").innerHTML=person.fullName();
+  </script>
+  <p id="p1"></p>
+  <p id="p2"></p>
+  <script>
+    var person = {
+    firstName: "John ",
+    lastName : "Doe ",
+    id : 5566,
+    fullName : function() 
+    {
+       return this.firstName + "" + this.lastName;
+    }
+};
+  document.getElementById("p1").innerHTML = "不加括号输出函数表达式："  + person.fullName;
+  document.getElementById("p2").innerHTML = "加括号输出函数执行结果："  +  person.fullName();
+  </script>
+  <p id="type"></p>
+  <script>
+    var x="John";
+    var y=new String("John");
+    document.getElementById("type").innerHTML=typeof x+typeof y;
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </body>
+</html>

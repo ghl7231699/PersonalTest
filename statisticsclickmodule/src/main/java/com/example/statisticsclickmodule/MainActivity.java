@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -31,6 +32,9 @@ import java.lang.ref.WeakReference;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
+import static com.example.statisticsclickmodule.HouseDetailsActivity.MSG_GO_FORWARD_A;
+import static com.example.statisticsclickmodule.HouseDetailsActivity.MSG_GO_Forward;
 
 public class MainActivity extends BaseActivity implements ClickListener {
     private Button mButton, mBtn;
@@ -104,8 +108,6 @@ public class MainActivity extends BaseActivity implements ClickListener {
                 Toast.makeText(MainActivity.this, "点击了第一个", Toast.LENGTH_SHORT).show();
                 super.setCustomClick(1, "搜索房源按钮");
 
-                mWebView.loadUrl("file:///android_asset/javascript.html");
-
                 // 复写WebViewClient类的shouldOverrideUrlLoading方法
                 mWebView.setWebViewClient(new WebViewClient() {
                     @Override
@@ -124,10 +126,13 @@ public class MainActivity extends BaseActivity implements ClickListener {
                         return super.shouldOverrideUrlLoading(view, url);
                     }
                 });
+                mWebView.loadUrl("file:///android_asset/javascript.html");
+                mWebView.addJavascriptInterface(new JsToNative(), "AppHandler");
+
                 break;
             case R.id.btn2:
-//                byInterface();
-                permissionApply();
+                byInterface();
+//                permissionApply();
 //                logUp();
                 break;
             default:
@@ -206,5 +211,49 @@ public class MainActivity extends BaseActivity implements ClickListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    }
+
+    private class JsToNative {
+
+        @JavascriptInterface
+        public void closeH5() {
+            if (mHandler != null) {
+//                mHandler.sendEmptyMessage(MSG_FINISHING);
+            }
+        }
+
+        @JavascriptInterface
+        public void goBackH5() {
+            if (mHandler != null) {
+//                mHandler.sendEmptyMessage(MSG_GO_BACK);
+            }
+        }
+
+        @JavascriptInterface
+        public void goForward(String url) {
+            if (mHandler != null) {
+                Message msg = Message.obtain();
+                msg.what = MSG_GO_Forward;
+                msg.obj = url;
+                mHandler.sendMessage(msg);
+                Intent intent = new Intent(MainActivity.this, HouseDetailsActivity.class);
+                intent.putExtra("key_url", url);
+                startActivity(intent);
+            }
+        }
+
+        @JavascriptInterface
+        public void goActivity(String url) {
+            if (mHandler != null) {
+                Message msg = Message.obtain();
+                msg.what = MSG_GO_FORWARD_A;
+                msg.obj = url;
+                mHandler.sendMessage(msg);
+                Intent intent = new Intent(MainActivity.this, BuildingDetailsActivity.class);
+                intent.putExtra("key_url", url);
+                startActivity(intent);
+            }
+        }
+
     }
 }
