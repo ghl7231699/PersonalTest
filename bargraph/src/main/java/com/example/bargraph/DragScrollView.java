@@ -14,54 +14,49 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by guhongliang on 2017/9/9.
- * 水平方向的柱形图
+ * 类名称：
+ * 类描述：可拖动柱形图
+ * 创建人：ghl
+ * 创建时间：2018/3/15 下午2:49
+ * 修改人：ghl
+ * 修改时间：2018/3/15 下午2:49
+ *
+ * @version v1.0
  */
 
-public class HorizontalBarGraphView extends View {
-
+public class DragScrollView extends View {
     private Paint mTextPaint;//字体
     private Paint mLinePaint;//线条
     private Paint mRectPaint;//矩形
-    private Paint mRectPain2;//矩形
-    private Paint mRectPain3;//矩形
     private Path mPath;
     private int childWidth = Utils.dp2px(getContext(), 15);//条形图的宽度
-    private int marginLeft = Utils.dp2px(getContext(), 10);//距离左边界的距离
-    private int marginBottom = Utils.dp2px(getContext(), 10);
-    private int marginTop = Utils.dp2px(getContext(), 10);
-    private int marginRight = Utils.dp2px(getContext(), 10);
+    private int marginLeft = 10;//距离左边界的距离
+    private int marginBottom = Utils.dp2px(getContext(), 14);
+    private int marginTop = Utils.dp2px(getContext(), 20);
+    private int marginRight = Utils.dp2px(getContext(), 81);
     private int space = Utils.dp2px(getContext(), 20);//相邻两个条形图之间的距离
     private int num = 1;//条形图的个数
     private int mWidth;//View的宽度
     private int mHeight;//View的高度
     private int default_height = 100;
     private int height;//条形图的高度
-    private int topMargin = Utils.dp2px(getContext(), 10);//顶部item之间的距离
 
     private int lineCount = 6;
 
     private int textWidth;//文本宽度
-    private int textMarginLeft = Utils.dp2px(getContext(), 10);//文本距离左边的距离
-    private int textMarginRight = Utils.dp2px(getContext(), 10);//文本距离左边的距离
+    private int textMarginLeft = Utils.dp2px(getContext(), 22);//文本距离左边的距离
 
     private int textNum = 5;//每行显示的文字个数
     private int spaceY = 10;//大条形与小条形之间的距离
     private Rect mTextRf;//文本框矩形
 
     private Rect mRf;
-    private Rect mRf1;
-    private Rect mRf2;
-    private int[] color = {Color.RED, Color.BLUE, Color.YELLOW, Color.BLACK, Color.GREEN, Color.GRAY};
-    private String[] menu = {"金汉王通讯研发中心", "领智中心", "领智中心"};
-    private String[] numText = {"15000", "12000", "12000"};
-    private String perText = "月租金（元/月）";
-    private int type;//类型 用于绘制不同的顶部
 
     private String childName;//左侧名称
     private String childNum;//右侧数字
@@ -71,46 +66,44 @@ public class HorizontalBarGraphView extends View {
     private int standerH;
     private float scaling;//缩放比例
 
-    public void setBars(List<HorizontalBar> bars) {
+    private int max;//最大值
+
+    public void setBars(List<HorizontalBarGraphView.HorizontalBar> bars) {
         mBars = bars;
         postInvalidate();
     }
 
-    private List<HorizontalBar> mBars;
+    private List<HorizontalBarGraphView.HorizontalBar> mBars;
 
-    public HorizontalBarGraphView(Context context) {
+    public DragScrollView(Context context) {
         this(context, null);
     }
 
-    public HorizontalBarGraphView(Context context, @Nullable AttributeSet attrs) {
+    public DragScrollView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
         initParam(context, attrs);
     }
 
-    public HorizontalBarGraphView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DragScrollView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int size = MeasureSpec.getSize(heightMeasureSpec);
-        int mode = MeasureSpec.getMode(heightMeasureSpec);
+        int size = View.MeasureSpec.getSize(heightMeasureSpec);
+        int mode = View.MeasureSpec.getMode(heightMeasureSpec);
         int screenWidth = Utils.getScreenWidth(getContext());
         int screenHeight = Utils.getScreenHeight(getContext());
-        int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
-        int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
-        if (mode == MeasureSpec.EXACTLY) {
+        int modeWidth = View.MeasureSpec.getMode(widthMeasureSpec);
+        int sizeWidth = View.MeasureSpec.getSize(widthMeasureSpec);
+        if (mode == View.MeasureSpec.EXACTLY || mode == View.MeasureSpec.UNSPECIFIED) {
             mHeight = size;
-        }
-        if (mode == MeasureSpec.AT_MOST) {
+        } else if (mode == View.MeasureSpec.AT_MOST) {
             mHeight = Math.min(screenWidth, standerH);
         }
-        if (mode == MeasureSpec.UNSPECIFIED) {
-            mHeight = Utils.dp2px(getContext(), 400);
-        }
-        if (modeWidth == MeasureSpec.EXACTLY || mode == MeasureSpec.UNSPECIFIED) {
+        if (modeWidth == View.MeasureSpec.EXACTLY || mode == View.MeasureSpec.UNSPECIFIED) {
             mWidth = sizeWidth;
-        } else if (modeWidth == MeasureSpec.AT_MOST) {
+        } else if (modeWidth == View.MeasureSpec.AT_MOST) {
             mWidth = Math.min(screenHeight, sizeWidth);
         }
         if (standerH > mHeight) {
@@ -133,12 +126,8 @@ public class HorizontalBarGraphView extends View {
 
     private void initParam(Context context, AttributeSet attrs) {
         mRf = new Rect();
-        mRf1 = new Rect();
-        mRf2 = new Rect();
         mTextPaint = new Paint();
         mRectPaint = new Paint();
-        mRectPain2 = new Paint();
-        mRectPain3 = new Paint();
         mLinePaint = new Paint();
         mPath = new Path();
         mTextRf = new Rect();
@@ -150,8 +139,6 @@ public class HorizontalBarGraphView extends View {
         childColor = typedArray.getColor(R.styleable.HorizontalBarGraphView_child_color, Color.BLACK);
         childTextColor = typedArray.getColor(R.styleable.HorizontalBarGraphView_child_text_name_color, Color.RED);
         standerH = typedArray.getDimensionPixelSize(R.styleable.HorizontalBarGraphView_height_stander, Utils.dp2px(getContext(), 124));
-
-        typedArray.recycle();
     }
 
     @Override
@@ -160,56 +147,22 @@ public class HorizontalBarGraphView extends View {
         //获取条形图数量
         num = mBars.size();
         setSize();
-        drawTop(canvas);
         if (num > 0) {
-//            //获取每个条形图之间的距离
-//            space = (mHeight - marginTop - marginBottom - childWidth * (num - 1)) / num;
-            space = (mHeight - marginTop - Utils.dp2px(getContext(), 5) - marginBottom - childWidth * (num - 1)) / num;
             //获取距离上部的距离
-//            marginTop = (mHeight - childWidth * num - space * (num - 1)) / 2;
+            marginTop = (mHeight - childWidth * num - space * (num - 1)) / 2;
             int y = childWidth;
             //绘制左侧文字
             drawTextName(canvas, y);
             //虚线之间的距离
-            int oneH = (mWidth - marginLeft - textWidth - textMarginLeft - textMarginRight - marginRight) / (lineCount - 1);
+            int oneH = (mWidth - marginLeft - textWidth - textMarginLeft - marginRight) / (lineCount - 1);
             //实线开始绘制的起始坐标
-            int startX = textWidth + marginLeft + textMarginLeft + textMarginRight;
+            int startX = textWidth + marginLeft + textMarginLeft;
             //绘制矩形
             drawRect(canvas, y, startX);
             //绘制虚线
             drawImaginaryLine(canvas, oneH, startX);
         } else {
 
-        }
-    }
-
-    /**
-     * 绘制顶部视图
-     */
-    private void drawTop(Canvas canvas) {
-        if (type == 0) {
-            String s1 = "激活量";
-            mTextPaint.setColor(Color.parseColor("#FF6A6A77"));
-            //设置字体大小
-            mTextPaint.setTextSize(Utils.dp2px(getContext(), 11));
-
-            //获取文本内容的大小
-            int text = s1.length();
-            mTextPaint.getTextBounds(s1, 0, text, mTextRf);
-            int width = mTextRf.width();
-            int height = mTextRf.height();
-            int le = Utils.dp2px(getContext(), 10);
-            int i = Utils.dp2px(getContext(), 5);
-            int itemW = width + i + le;
-            //第一个item坐标
-            int x = (mWidth - itemW * 3 - topMargin * 2) / 2;
-            mRectPaint.setColor(Color.parseColor("#EE8F52"));
-            //todo
-            mRf.set(x, marginTop, x + le, marginBottom);
-            canvas.drawRect(mRf, mRectPaint);
-
-
-            canvas.drawText(s1, x + le * 2, marginTop, mTextPaint);
         }
     }
 
@@ -223,7 +176,6 @@ public class HorizontalBarGraphView extends View {
         marginLeft = (int) (marginLeft * scaling);
         marginRight = (int) (marginRight * scaling);
         textMarginLeft = (int) (textMarginLeft * scaling);
-        textMarginRight = (int) (textMarginRight * scaling);
     }
 
     /**
@@ -236,42 +188,30 @@ public class HorizontalBarGraphView extends View {
     private void drawRect(Canvas canvas, int y, int startX) {
         mRectPaint.setStyle(Paint.Style.FILL);
         for (int i = 0; i < num; i++) {
-            HorizontalBar horizontalBar = mBars.get(i);
+            HorizontalBarGraphView.HorizontalBar horizontalBar = mBars.get(i);
             height = horizontalBar.getHeight();
-            int height2 = 10;
-            int height3 = 6;
             int colors = horizontalBar.getColor();
-            mRectPaint.setColor(Color.parseColor("#EE8F52"));
-            int top = y * i + space * i + marginTop + Utils.dp2px(getContext(), 5);
+            mRectPaint.setColor(colors);
+            int top = y * i + space * i + marginTop;
             int bottom = top + y;
-            //矩形的右边界坐标
-            int l1 = startX + (mWidth - startX - marginRight) * height / default_height;
-            int l2 = l1 + (mWidth - startX - marginRight) * height2 / default_height;
-            int l3 = l2 + (mWidth - startX - marginRight) * height3 / default_height;
-            Log.e(MainActivity.TAG, "绘制坐标: " + l1);
-            //绘制第一个矩形
-            mRf.set(startX, top, l1, bottom);
+            //大矩形的长度
+            int length = startX + (mWidth - startX - marginRight) * height / default_height;
+            Log.e(MainActivity.TAG, "绘制坐标: " + length);
+            //绘制大矩形
+            mRf.set(startX, top, length, bottom);
             canvas.drawRect(mRf, mRectPaint);
-
-            mRectPaint.setColor(Color.parseColor("#F4C65F"));
-            mRf1.set(l1, top, l2, bottom);
-            canvas.drawRect(mRf1, mRectPaint);
-
-            mRectPain3.setColor(Color.parseColor("#F8E37D"));
-            mRf2.set(l2, top, l3, bottom);
-            canvas.drawRect(mRf2, mRectPain3);
+            //绘制小条形
+            int l = length + spaceY;
+            mRf.set(l, top, l + spaceY, bottom);
+            canvas.drawRect(mRf, mRectPaint);
             //设置字体大小
-            mTextPaint.setTextSize(Utils.dp2px(getContext(), 10));
-            mTextPaint.setColor(Color.parseColor("#FFFFFF"));
-            childNum = String.valueOf(horizontalBar.getHeight());
-            //获取文本内容的大小
-            int text = childName.length();
-            mTextPaint.getTextBounds(childName, 0, text, mTextRf);
-            int width = mTextRf.width();
-            int height = mTextRf.height();
-            canvas.drawText(childNum, (startX + l1 - width) / 2, top + y - height / 2, mTextPaint);
-            canvas.drawText(String.valueOf(height2), (l2 + l1 - width) / 2, top + y - height / 2, mTextPaint);
-            canvas.drawText(String.valueOf(height3), (l3 + l2 - width) / 2, top + y - height / 2, mTextPaint);
+            mTextPaint.setTextSize(Utils.dp2px(getContext(), 14 * scaling));
+            mTextPaint.setARGB(252, 106, 106, 119);
+            childNum = horizontalBar.getTextContent();
+            canvas.drawText(childNum, l + spaceY * 2, y * i + space * i + marginTop, mTextPaint);
+            //绘制月/租金
+            mTextPaint.setTextSize(Utils.dp2px(getContext(), 10 * scaling * scaling));
+            mTextPaint.setColor(Color.argb(252, 158, 164, 175));
         }
     }
 
@@ -282,32 +222,29 @@ public class HorizontalBarGraphView extends View {
      * @param y      单个条形图的宽度
      */
     private void drawTextName(Canvas canvas, int y) {
-        String max = "";
         mTextPaint.setAntiAlias(true);
         mTextPaint.setStyle(Paint.Style.FILL);
         mTextPaint.setDither(true);
-        mTextPaint.setColor(Color.parseColor("#FF6A6A77"));
+//        getContext().getResources().getColor(R.color.text_color);
+//        mTextPaint.setColor(Color.argb(252, 106, 106, 119));
+        mTextPaint.setColor(childTextColor);
         //设置字体大小
-        mTextPaint.setTextSize(Utils.dp2px(getContext(), 11));
-        for (HorizontalBar bar : mBars
-                ) {
-            String textContent = bar.getTextItem();
-            if (textContent.length() > max.length()) {
-                max = textContent;
-            }
-        }
-        float measureText = mTextPaint.measureText(max);
-        textWidth = (int) measureText;
+        mTextPaint.setTextSize(Utils.dp2px(getContext(), 12 * scaling));
         for (int i = 0; i < num; i++) {
-            int top = y * i + space * i + marginTop + Utils.dp2px(getContext(), 5);
             childName = mBars.get(i).getTextItem();
-            //获取文本大小
+            //获取文本内容的大小
             int length = childName.length();
             mTextPaint.getTextBounds(childName, 0, length, mTextRf);
-            int width = mTextRf.width();
-            int height = mTextRf.height();
+            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+            int textHeight = (int) ((-fontMetrics.ascent - fontMetrics.descent) / 2);
             //获取文本总宽度
-            canvas.drawText(childName, textWidth + marginLeft + textMarginLeft - textMarginRight - width, top + childWidth - height / 2, mTextPaint);
+            float measureText = mTextPaint.measureText(childName);
+            float perTextW = measureText / length;
+            //实际分配给文本的宽度
+            int allocate = (int) (perTextW * textNum);
+            //将想要的值赋给文本，固定文本宽度
+            textWidth = allocate;
+            canvas.drawText(childName, 0, textHeight / 2 + space * i + marginTop, mTextPaint);
         }
     }
 
@@ -330,11 +267,11 @@ public class HorizontalBarGraphView extends View {
         for (int i = 0; i < lineCount; i++) {
             if (i == 0) {
                 mLinePaint.setColor(R.color.full_line_color);
-                canvas.drawLine(xl, marginTop + Utils.dp2px(getContext(), 2), xl, mHeight, mLinePaint);
+                canvas.drawLine(xl, 0, xl, mHeight, mLinePaint);
             } else {
                 mPath.reset();
                 int x = xl + oneH * i;
-                mPath.moveTo(x, marginTop + Utils.dp2px(getContext(), 2));
+                mPath.moveTo(x, 0);
                 Log.e(MainActivity.TAG, "oneH " + x);
                 mPath.lineTo(x, mHeight);
                 canvas.drawPath(mPath, mLinePaint);
@@ -346,104 +283,74 @@ public class HorizontalBarGraphView extends View {
     /**
      * 所有的赋值方法
      */
-    public HorizontalBarGraphView setChildWidth(int childWidth) {
+    public DragScrollView setChildWidth(int childWidth) {
         this.childWidth = Utils.dp2px(getContext(), childWidth);
         return this;
     }
 
-    public HorizontalBarGraphView setMarginLeft(int marginLeft) {
+    public DragScrollView setMarginLeft(int marginLeft) {
         this.marginLeft = Utils.dp2px(getContext(), marginLeft);
         return this;
     }
 
-    public HorizontalBarGraphView setMarginBottom(int marginBottom) {
+    public DragScrollView setMarginBottom(int marginBottom) {
         this.marginBottom = Utils.dp2px(getContext(), marginBottom);
         return this;
     }
 
-    public HorizontalBarGraphView setMarginTop(int marginTop) {
+    public DragScrollView setMarginTop(int marginTop) {
         this.marginTop = Utils.dp2px(getContext(), marginTop);
         return this;
     }
 
-    public HorizontalBarGraphView setMarginRight(int marginRight) {
+    public DragScrollView setMarginRight(int marginRight) {
         this.marginRight = Utils.dp2px(getContext(), marginRight);
         return this;
     }
 
-    public HorizontalBarGraphView setSpace(int space) {
+    public DragScrollView setSpace(int space) {
         this.space = Utils.dp2px(getContext(), space);
         return this;
     }
 
-    public HorizontalBarGraphView setHeight(int height) {
+    public DragScrollView setHeight(int height) {
         this.height = Utils.dp2px(getContext(), height);
         return this;
     }
 
-    public HorizontalBarGraphView setLineCount(int lineCount) {
+    public DragScrollView setLineCount(int lineCount) {
         this.lineCount = Utils.dp2px(getContext(), lineCount);
         return this;
     }
 
-    public HorizontalBarGraphView setChildName(String childName) {
+    public DragScrollView setChildName(String childName) {
         this.childName = childName;
         return this;
     }
 
-    public HorizontalBarGraphView setChildNum(String childNum) {
+    public DragScrollView setChildNum(String childNum) {
         this.childNum = childNum;
         return this;
     }
 
-    public HorizontalBarGraphView setChildColor(int childColor) {
+    public DragScrollView setChildColor(int childColor) {
         this.childColor = childColor;
         return this;
     }
 
-    public HorizontalBarGraphView setChildTextColor(int childTextColor) {
+    public DragScrollView setChildTextColor(int childTextColor) {
         this.childTextColor = childTextColor;
         return this;
     }
-
-    public int getDefault_height() {
-        return default_height;
-    }
-
-    public HorizontalBarGraphView setDefault_height(int default_height) {
-        this.default_height = default_height;
-        return this;
-    }
-
-    public HorizontalBarGraphView setType(int type) {
-        this.type = type;
-        return this;
-    }
-
-    private float leftMoving;
-    private float lastPointY;
-    private float movingLeftThisTime = 0.0f;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
-//                Toast.makeText(getContext(), "点击了", Toast.LENGTH_SHORT).show();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float y = event.getRawY();
-                movingLeftThisTime = lastPointY - y;
-
-                leftMoving += movingLeftThisTime;
-                lastPointY = y;
-
-                invalidate();
-                break;
-            case MotionEvent.ACTION_DOWN:
-                lastPointY = event.getRawY();
+                Toast.makeText(getContext(), "点击了", Toast.LENGTH_SHORT).show();
                 break;
             default:
-                return super.onTouchEvent(event);
+                break;
         }
         return true;
     }

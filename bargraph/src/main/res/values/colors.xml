@@ -11,7 +11,10 @@
 
     <!-- 自定义柱形图  字体颜色-->
     <color name="text_color">#FF6A6A77</color>
+    <color name="blue">#0000ff</color>
     <color name="per_text_color">#FF9EA4AF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="orange">#F4C65F</color>
 
 
     <!-- 绿色 -->
