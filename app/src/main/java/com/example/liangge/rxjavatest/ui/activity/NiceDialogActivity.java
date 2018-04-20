@@ -1,6 +1,5 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
-import android.content.Intent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -52,7 +51,7 @@ public class NiceDialogActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7})
+    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6})
     public void onViewClicked(final View view) {
         switch (view.getId()) {
             case R.id.button1:
@@ -153,10 +152,6 @@ public class NiceDialogActivity extends BaseActivity {
                         .setMargin(20)
                         .setOutCancel(false)
                         .show(getSupportFragmentManager());
-                break;
-            case R.id.button7:
-                Intent intent = new Intent(this, ResListActivity.class);
-                startActivity(intent);
                 break;
         }
     }

@@ -51,8 +51,8 @@ public class DiscoveryFragment extends BaseFragment {
 
     @Override
     public void processClick(View v) {
-
     }
+
 
     @Override
     public void setUpComponent(AppComponent appComponent) {

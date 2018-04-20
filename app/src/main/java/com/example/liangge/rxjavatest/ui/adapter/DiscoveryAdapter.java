@@ -1,6 +1,7 @@
 package com.example.liangge.rxjavatest.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.HomePageBean;
 import com.example.liangge.rxjavatest.common.utils.ToastUtils;
+import com.example.liangge.rxjavatest.ui.activity.ResListActivity;
 import com.example.navigationbarlibrary.UIUtils;
 
 import java.util.List;
@@ -40,7 +42,7 @@ public class DiscoveryAdapter extends BaseQuickAdapter<HomePageBean, BaseViewHol
 //        helper.setImageResource(R.id.iv_tv_item_dis_iv, item.getImageId());
     }
 
-    private void addView(HomePageBean it) {
+    private void addView(final HomePageBean it) {
         int num = it.getPosition();
         final List<HomePageBean> home = it.getHome();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIUtils.dip2Px(mContext, 48));
@@ -57,7 +59,12 @@ public class DiscoveryAdapter extends BaseQuickAdapter<HomePageBean, BaseViewHol
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtils.showCenter(mContext, "点击了" + home.get(x).getContent());
+                        String content = home.get(x).getContent();
+                        ToastUtils.showCenter(mContext, "点击了" + content);
+                        if ("朋友圈".equals(content)) {
+                            Intent intent = new Intent(mContext, ResListActivity.class);
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
             }
@@ -69,6 +76,17 @@ public class DiscoveryAdapter extends BaseQuickAdapter<HomePageBean, BaseViewHol
             tv.setText(it.getContent());
             view.setLayoutParams(params);
             mContainer.addView(view, params);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String content = it.getContent();
+                    ToastUtils.showCenter(mContext, "点击了" + content);
+                    if ("朋友圈".equals(content)) {
+                        Intent intent = new Intent(mContext, ResListActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                }
+            });
         }
     }
 

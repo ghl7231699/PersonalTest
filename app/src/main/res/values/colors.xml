@@ -13,10 +13,14 @@
     <color name="tab_gb">#F3F5F4</color>
     <color name="tab_normal_color">#91515041</color>
     <color name="tab_selected_color">#D33D3C</color>
+    <color name="tab_black">#91000000</color>
+    <color name="black">#000000</color>
 
     <color name="white">#ffffff</color>
     <color name="red">#ff0000</color>
     <color name="selector_grey">#DDDDDD</color>
     <color name="selector_greys">#DDDDDD</color>
+
+    <color name="orange">#ffbb33</color>
 
 </resources>

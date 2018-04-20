@@ -1,5 +1,6 @@
 package com.example.liangge.rxjavatest.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Fruits;
 import com.example.liangge.rxjavatest.di.component.AppComponent;
+import com.example.liangge.rxjavatest.ui.activity.HomeActivity;
 import com.example.liangge.rxjavatest.ui.adapter.MineAdapter;
 import com.example.liangge.rxjavatest.ui.fragment.basefragment.BaseFragment;
 
@@ -22,7 +24,7 @@ import java.util.List;
  * Created by guhongliang on 2018/3/6.
  */
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView mRecyclerView;
     private LinearLayout mLayout;
     private TextView wxNum;
@@ -33,6 +35,8 @@ public class MineFragment extends BaseFragment {
             new Fruits("表情", R.mipmap.expression)};
     private List<Fruits> mFruitsList = new ArrayList<>();
     private MineAdapter mFruitAdapter;
+
+    private LinearLayout mSet;
 
     @Override
     public int getLayoutId() {
@@ -45,6 +49,9 @@ public class MineFragment extends BaseFragment {
         mLayout = mActivity.findViewById(R.id.fg_mine_ll);
         wxNum = mActivity.findViewById(R.id.fg_mine_num_tv);
         wxName = mActivity.findViewById(R.id.fg_mine_name_tv);
+        mSet = mActivity.findViewById(R.id.fg_mine_setting);
+
+        mSet.setOnClickListener(this);
     }
 
     @Override
@@ -100,6 +107,18 @@ public class MineFragment extends BaseFragment {
         mFruitsList.clear();
         for (int i = 0; i < 4; i++) {
             mFruitsList.add(mFruits[i]);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fg_mine_setting:
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
         }
     }
 }

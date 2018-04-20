@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.ui.adapter.HouseResAdapter;
@@ -19,6 +20,8 @@ import butterknife.ButterKnife;
 public class HousesResListActivity extends AppCompatActivity {
     @BindView(R.id.house_list_lv)
     ListView mHouseListLv;
+
+    TextView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +46,13 @@ public class HousesResListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        back = (TextView) findViewById(R.id.house_list_build_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
 }
