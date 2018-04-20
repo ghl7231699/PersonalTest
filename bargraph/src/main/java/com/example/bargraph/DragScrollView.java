@@ -68,12 +68,12 @@ public class DragScrollView extends View {
 
     private int max;//最大值
 
-    public void setBars(List<HorizontalBarGraphView.HorizontalBar> bars) {
+    public void setBars(List<HorizontalBar> bars) {
         mBars = bars;
         postInvalidate();
     }
 
-    private List<HorizontalBarGraphView.HorizontalBar> mBars;
+    private List<HorizontalBar> mBars;
 
     public DragScrollView(Context context) {
         this(context, null);
@@ -188,7 +188,7 @@ public class DragScrollView extends View {
     private void drawRect(Canvas canvas, int y, int startX) {
         mRectPaint.setStyle(Paint.Style.FILL);
         for (int i = 0; i < num; i++) {
-            HorizontalBarGraphView.HorizontalBar horizontalBar = mBars.get(i);
+            HorizontalBar horizontalBar = mBars.get(i);
             height = horizontalBar.getHeight();
             int colors = horizontalBar.getColor();
             mRectPaint.setColor(colors);

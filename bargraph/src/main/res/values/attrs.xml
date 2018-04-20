@@ -11,4 +11,11 @@
         <attr name="child_text_name_size" format="dimension"/>
         <attr name="child_text_num_size" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="HouseReportView">
+        <attr name="title" format="reference"/>
+        <attr name="total" format="string"/>
+        <attr name="large" format="string"/>
+        <attr name="txt" format="string"/>
+        <attr name="num" format="string"/>
+    </declare-styleable>
 </resources>
