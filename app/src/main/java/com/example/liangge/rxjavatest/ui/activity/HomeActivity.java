@@ -2,7 +2,9 @@ package com.example.liangge.rxjavatest.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.liangge.rxjavatest.R;
@@ -19,7 +21,20 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getIntentValue();
         ButterKnife.bind(this);
+    }
+
+    private void getIntentValue() {
+        Uri uri = getIntent().getData();
+        //Uri 规则: scheme://host+path?query
+        //这里以“https://yaoyi.ypzdw.com/article/413?type=url&from=web”为例
+        String scheme = uri.getScheme(); //https , "://" 这个前面的就表示scheme
+        String host = uri.getHost(); //yaoyi.ypzdw.com
+        String path = uri.getPath(); //article/413
+        String query = uri.getQuery(); //type=mobile&from=web
+        String type = uri.getQueryParameter("type"); //url
+        Log.d(HomeActivity.class.getSimpleName(), "scheme = " + scheme + ", host = " + host + ", path = " + path + ", query = " + query + ", type = " + type);
     }
 
 
