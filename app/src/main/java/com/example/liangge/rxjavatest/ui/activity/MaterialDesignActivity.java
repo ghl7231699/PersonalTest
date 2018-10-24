@@ -1,9 +1,11 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,11 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.transition.Explode;
+import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MaterialDesignActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -54,37 +59,33 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
 
     }
 
-    private static class MyHandler extends Handler {
-        private final WeakReference<MaterialDesignActivity> mWeakReference;
-
-        public MyHandler(MaterialDesignActivity activity) {
-            mWeakReference = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            MaterialDesignActivity activity = mWeakReference.get();
-            super.handleMessage(msg);
-            if (activity != null) {
-                switch (msg.what) {
-                    case 1:
-                        if (mRefreshLayout.isRefreshing()) {
-                            mRefreshLayout.setRefreshing(false);
-                        }
-                        break;
-                }
-            }
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        initWindow();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material_design);
         initView();
         setActionBar();
         setNavigationListener();
         setRecycleView();
+    }
+
+
+    private void initWindow() {
+        requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        /**
+         * 2、设置ShareElement外其他view的退出方式（左边划出）
+         */
+        getWindow().setExitTransition(new Slide(Gravity.START));
+
+
+        Slide slide = new Slide(Gravity.END);//右侧平移
+        slide.setDuration(500);
+        slide.setSlideEdge(Gravity.START);
+
+        Explode explode = new Explode();//展开回收
+        getWindow().setEnterTransition(explode);
+        getWindow().setReturnTransition(slide);
     }
 
     private void setRecycleView() {
@@ -185,6 +186,29 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
             default:
         }
         return true;
+    }
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<MaterialDesignActivity> mWeakReference;
+
+        public MyHandler(MaterialDesignActivity activity) {
+            mWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            MaterialDesignActivity activity = mWeakReference.get();
+            super.handleMessage(msg);
+            if (activity != null) {
+                switch (msg.what) {
+                    case 1:
+                        if (mRefreshLayout.isRefreshing()) {
+                            mRefreshLayout.setRefreshing(false);
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     class LoadThread extends Thread {

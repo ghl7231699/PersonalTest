@@ -1,24 +1,30 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.liangge.rxjavatest.IMyAidlInterface;
 import com.example.liangge.rxjavatest.R;
+import com.example.liangge.rxjavatest.aidl.TestService;
 
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private TextView tv;
+    IMyAidlInterface mStub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +33,52 @@ public class MainActivity extends AppCompatActivity {
         tv = (TextView) findViewById(R.id.main_text);
     }
 
-    public void onclick(View view) {
-        Observable<String> observable = getObservable();
-//        Observer observer=getObserver();
-//        observable.subscribe(observer);
-        observable.subscribe(new Consumer<String>() {
-            @Override
-            public void accept(@NonNull String s) throws Exception {
-                Log.d(TAG, "accept: " + s);
-                tv.append(s);
-                tv.append(".......");
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
+    private void initData() {
+        Intent intent = new Intent(this, TestService.class);
+        bindService(intent, mConnection, BIND_AUTO_CREATE);
+    }
 
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mStub = IMyAidlInterface.Stub.asInterface(service);
+            if (mStub == null) {
+                return;
+            } else {
+                try {
+                    mStub.add(1, "this is my first aidl file");
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
-        });
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    public void onclick(View view) {
+//        Observable<String> observable = getObservable();
+////        Observer observer=getObserver();
+////        observable.subscribe(observer);
+//        observable.subscribe(new Consumer<String>() {
+//            @Override
+//            public void accept(@NonNull String s) throws Exception {
+//                Log.d(TAG, "accept: " + s);
+//                tv.append(s);
+//                tv.append(".......");
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(@NonNull Throwable throwable) throws Exception {
+//
+//            }
+//        });
+
+        initData();
     }
 
     private Observable<String> getObservable() {
@@ -99,4 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
+
 }

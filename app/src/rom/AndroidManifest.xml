@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.liangge.rxjavatest">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/jz"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="TINKER_ID"
+            android:value="tinker_id_b168b32"/>
+
+        <activity android:name=".ui.activity.SchedulerActivity"/>
+        <activity android:name=".ui.activity.MapActivity"/>
+        <activity android:name=".ui.activity.AuthCodeActivity"/>
+        <activity android:name=".ui.activity.baseactivity.BaseActivity"/>
+        <activity
+            android:name=".ui.activity.MaterialDesignActivity"
+            android:label="@string/Fruits"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.FruitActivity"/>
+        <activity android:name=".ui.activity.UserInfoActivity">
+        </activity>
+        <activity android:name=".ui.activity.HomeActivity">
+
+            <!-- <intent-filter android:autoVerify="true"> -->
+            <!-- &lt;!&ndash; action 和category 必须这样写！！！ &ndash;&gt; -->
+            <!-- <action android:name="android.intent.action.VIEW"/> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+            <!-- <category android:name="android.intent.category.BROWSABLE"/> -->
+            <!-- &lt;!&ndash; 接受以 "http://baidu.com" 或 "https://baidu.com"开头的URIs &ndash;&gt; -->
+            <!-- <data android:scheme="http"/> -->
+            <!-- <data android:scheme="https"/> -->
+            <!-- <data android:host="baidu.com"/> -->
+            <!-- &lt;!&ndash; android:pathPrefix="/article" 这里表示匹配Path以“/article”开头的uri，可以不写&ndash;&gt; -->
+            <!-- <data android:pathPrefix="/article"/> -->
+            <!-- &lt;!&ndash; 注意 "/" 在pathPrefix中是必须的&ndash;&gt; -->
+            <!-- </intent-filter> -->
+
+        </activity>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.PdfActivity"/>
+        <activity android:name=".ui.activity.baseactivity.PdfDownLoadActivity">
+        </activity>
+        <activity android:name=".ui.activity.RxDownLoadActivity"/>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+        <activity android:name=".ui.activity.CustomActivity">
+        </activity>
+        <activity android:name=".ui.activity.VideoActivity"/>
+        <activity android:name=".ui.activity.EventBusActivity"/>
+        <activity android:name=".ui.activity.RxjavaActivity"/>
+        <activity android:name=".ui.activity.PaintViewActivity"/>
+        <activity android:name=".ui.activity.OkHttpActivity"/>
+        <activity android:name=".ui.activity.HotFixActivity"/>
+        <activity android:name=".ui.activity.InterviewActivity"/>
+        <activity android:name=".ui.activity.RetrofitActivity"/>
+        <activity android:name=".ui.activity.RecyclerViewActivity"/>
+        <activity android:name=".ui.activity.ResultActivity"/>
+        <activity android:name=".ui.activity.ProxyActivity"/>
+
+        <service
+            android:name=".service.MessengerService"
+            android:process=":remote"/>
+        <service
+            android:name=".aidl.TestService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":test"
+            />
+
+        <activity android:name=".ui.activity.SlideActivity">
+        </activity>
+        <activity android:name=".ui.activity.NiceDialogActivity"/>
+        <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.UnRomActivity"/>
+        <activity android:name=".ui.activity.ResListActivity"/>
+        <activity android:name=".ui.activity.HousesResListActivity">
+        </activity>
+        <activity android:name=".ndk.NdkActivity">
+        </activity>
+        <activity android:name=".ui.activity.ReflectActivity"/>
+        <activity android:name=".ui.activity.TabActivity"/>
+        <activity android:name=".ui.activity.CoordinateActivity">
+        </activity>
+    </application>
+
+</manifest>
