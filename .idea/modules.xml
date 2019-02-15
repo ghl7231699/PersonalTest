@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" filepath="$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" filepath="$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/taopiaopiao/taopiaopiao.iml" filepath="$PROJECT_DIR$/taopiaopiao/taopiaopiao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxinglib/zxinglib.iml" filepath="$PROJECT_DIR$/zxinglib/zxinglib.iml" />
     </modules>
   </component>
 </project>

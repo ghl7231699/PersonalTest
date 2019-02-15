@@ -1,2 +1,2 @@
-include ':app', ':alipaystander', ':taopiaopiao', ':mylibrary', ':bargraph', ':statisticsclickmodule', ':mypluginlibrary', ':navigationbarlibrary', ':annotationLib'
+include ':app', ':alipaystander', ':taopiaopiao', ':mylibrary', ':bargraph', ':statisticsclickmodule', ':mypluginlibrary', ':navigationbarlibrary', ':annotationLib', ':zxinglib'
 

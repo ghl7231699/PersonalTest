@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by guhongliang on 2018/2/22.
@@ -184,12 +185,18 @@ public class ReflectActivity extends BaseActivity implements View.OnClickListene
             Field[] fields = mFruit.getFields();
             for (Field f : fields
                     ) {
-                LogUtil.d("ReflectField", "All Public Fields are " + f);
+                LogUtil.d("ReflectField", "All Public Fields are " + f + "\ttype==\t" + f
+                        .getType());
             }
             System.out.println("************获取所有的字段(包括私有、受保护、默认的)********************");
             //包括私有
             Field[] declaredFields = mFruit.getDeclaredFields();
-            LogUtil.d("ReflectField", "All Fields are " + declaredFields);
+            LogUtil.d("ReflectField", "All Fields are " + Arrays.toString(declaredFields));
+            for (Field f : declaredFields
+                    ) {
+                LogUtil.d("ReflectField", "All Public Fields are " + f + "\ttype==\t" + f
+                        .getType());
+            }
             System.out.println("*************获取公有字段**并调用***********************************");
             //
             Field url = mFruit.getField("url");

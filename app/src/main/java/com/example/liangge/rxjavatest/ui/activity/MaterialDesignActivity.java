@@ -1,5 +1,6 @@
 package com.example.liangge.rxjavatest.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.liangge.rxjavatest.R;
 import com.example.liangge.rxjavatest.common.constant.Fruits;
 import com.example.liangge.rxjavatest.ui.adapter.FruitsAdapter;
+import com.example.liangge.rxjavatest.ui.divider.DividerItem;
 import com.example.mylibrary.DLog;
 
 import java.lang.ref.WeakReference;
@@ -39,14 +41,15 @@ import java.util.Random;
 public class MaterialDesignActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private Fruits[] mFruits = {new Fruits("Apple", R.mipmap.backup), new Fruits("Orange", R.mipmap.call),
-            new Fruits("Pear", R.mipmap.friends),
-            new Fruits("Cherry", R.mipmap.location),
-            new Fruits("PineApple", R.mipmap.mail)};
+    private Fruits[] mFruits = {new Fruits("Apple", R.mipmap.backup, 90), new Fruits("Orange", R
+            .mipmap.call, 150),
+            new Fruits("Pear", R.mipmap.friends, 120),
+            new Fruits("Cherry", R.mipmap.location, 70),
+            new Fruits("PineApple", R.mipmap.mail, 45)};
     private List<Fruits> mFruitsList = new ArrayList<>();
     //    private FruitAdapter mFruitAdapter;
     private FruitsAdapter mFruitAdapter;
-    private static SwipeRefreshLayout mRefreshLayout;
+    private static WeakReference<SwipeRefreshLayout> reference;
     private MyHandler mHandler;
 
     @Override
@@ -70,6 +73,13 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
         setRecycleView();
     }
 
+    @Override
+    protected void onDestroy() {
+//        if (mHandler!=null) {
+//            mHandler.
+//        }
+        super.onDestroy();
+    }
 
     private void initWindow() {
         requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS);
@@ -93,6 +103,7 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
         GridLayoutManager manager = new GridLayoutManager(this, 3);
         rv.setLayoutManager(manager);
+        rv.addItemDecoration(new DividerItem(this, DividerItem.HORIZONTAL));
         mFruitAdapter = new FruitsAdapter(this, mFruitsList);
         mFruitAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -138,13 +149,14 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
-        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swi_re_l);
+        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swi_re_l);
+        reference = new WeakReference<>(refreshLayout);
         mHandler = new MyHandler(this);
-        mRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+        refreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
-        mRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
-        mRefreshLayout.setDistanceToTriggerSync(300);
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        refreshLayout.setDistanceToTriggerSync(300);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new LoadThread().start();
@@ -188,6 +200,7 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
         return true;
     }
 
+    @SuppressLint("HandlerLeak")
     private static class MyHandler extends Handler {
         private final WeakReference<MaterialDesignActivity> mWeakReference;
 
@@ -198,12 +211,12 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
         @Override
         public void handleMessage(Message msg) {
             MaterialDesignActivity activity = mWeakReference.get();
-            super.handleMessage(msg);
             if (activity != null) {
                 switch (msg.what) {
                     case 1:
-                        if (mRefreshLayout.isRefreshing()) {
-                            mRefreshLayout.setRefreshing(false);
+                        SwipeRefreshLayout refreshLayout = reference.get();
+                        if (refreshLayout.isRefreshing()) {
+                            refreshLayout.setRefreshing(false);
                         }
                         break;
                 }
@@ -215,7 +228,7 @@ public class MaterialDesignActivity extends AppCompatActivity implements AbsList
         @Override
         public void run() {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

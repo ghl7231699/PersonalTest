@@ -23,6 +23,10 @@
         <activity android:name=".ui.activity.TestActivity"/>
         <activity android:name=".ui.activity.ScaleGestureActivity"/>
         <activity android:name=".ui.activity.CardViewActivity"/>
+        <activity android:name=".ui.activity.WeiBoDiscoveryActivity">
+        </activity>
+        <activity android:name=".ui.activity.DbDaoActivity"/>
+        <activity android:name=".ui.activity.ConstraintActivity"/>
     </application>
 
 </manifest>

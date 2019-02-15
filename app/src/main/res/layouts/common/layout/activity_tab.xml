@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:iconNormal="@drawable/tab_video_normal"
+            app:iconNormal="@drawable/icon_item_add"
             app:iconSelected="@drawable/tab_video_selected"
             app:itemMarginTop="-5dp"
             app:itemText="视频"

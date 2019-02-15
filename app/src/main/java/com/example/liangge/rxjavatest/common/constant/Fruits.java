@@ -7,6 +7,13 @@ package com.example.liangge.rxjavatest.common.constant;
 public class Fruits {
     private String name;
     private int imageId;
+    private int height;
+
+    public Fruits(String name, int imageId, int height) {
+        this.name = name;
+        this.imageId = imageId;
+        this.height = height;
+    }
 
     public Fruits(String name, int imageId) {
         this.name = name;
@@ -27,5 +34,13 @@ public class Fruits {
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

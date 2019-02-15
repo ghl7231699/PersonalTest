@@ -6,7 +6,7 @@ package com.example.liangge.rxjavatest.bean;
 
 public class Fruit {
     private String name;
-    private int imageId;
+    public int imageId;
     private int t;
     private int flag;
     public String url;
