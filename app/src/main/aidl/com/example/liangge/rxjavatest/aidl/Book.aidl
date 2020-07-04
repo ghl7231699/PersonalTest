@@ -1,5 +1,6 @@
-package com.example.liangge.rxjavatest.aidl;
-// Declare any non-default types here with import statements
+// Book.aidl
+package com.mmc.sample;
 
 parcelable Book;
+
 

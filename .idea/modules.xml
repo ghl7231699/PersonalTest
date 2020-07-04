@@ -2,18 +2,17 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PersonalTest.iml" filepath="$PROJECT_DIR$/PersonalTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/alipaystander/alipaystander.iml" filepath="$PROJECT_DIR$/alipaystander/alipaystander.iml" />
-      <module fileurl="file://$PROJECT_DIR$/annotationLib/annotationLib.iml" filepath="$PROJECT_DIR$/annotationLib/annotationLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bargraph/bargraph.iml" filepath="$PROJECT_DIR$/bargraph/bargraph.iml" />
-      <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mypluginlibrary/mypluginlibrary.iml" filepath="$PROJECT_DIR$/mypluginlibrary/mypluginlibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" filepath="$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" filepath="$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/taopiaopiao/taopiaopiao.iml" filepath="$PROJECT_DIR$/taopiaopiao/taopiaopiao.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zxinglib/zxinglib.iml" filepath="$PROJECT_DIR$/zxinglib/zxinglib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PersonalTest.iml" filepath="$PROJECT_DIR$/PersonalTest.iml" group="PersonalTest" />
+      <module fileurl="file://$PROJECT_DIR$/annotationLib/annotationLib.iml" filepath="$PROJECT_DIR$/annotationLib/annotationLib.iml" group="PersonalTest/annotationLib" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="PersonalTest/app" />
+      <module fileurl="file://$PROJECT_DIR$/bargraph/bargraph.iml" filepath="$PROJECT_DIR$/bargraph/bargraph.iml" group="PersonalTest/bargraph" />
+      <module fileurl="file://$PROJECT_DIR$/buildsrc/buildsrc.iml" filepath="$PROJECT_DIR$/buildsrc/buildsrc.iml" group="PersonalTest/buildsrc" />
+      <module fileurl="file://$PROJECT_DIR$/kotlin/kotlin.iml" filepath="$PROJECT_DIR$/kotlin/kotlin.iml" group="PersonalTest/kotlin" />
+      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" group="PersonalTest/mylibrary" />
+      <module fileurl="file://$PROJECT_DIR$/mypluginlibrary/mypluginlibrary.iml" filepath="$PROJECT_DIR$/mypluginlibrary/mypluginlibrary.iml" group="PersonalTest/mypluginlibrary" />
+      <module fileurl="file://$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" filepath="$PROJECT_DIR$/navigationbarlibrary/navigationbarlibrary.iml" group="PersonalTest/navigationbarlibrary" />
+      <module fileurl="file://$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" filepath="$PROJECT_DIR$/statisticsclickmodule/statisticsclickmodule.iml" group="PersonalTest/statisticsclickmodule" />
+      <module fileurl="file://$PROJECT_DIR$/zxinglib/zxinglib.iml" filepath="$PROJECT_DIR$/zxinglib/zxinglib.iml" group="PersonalTest/zxinglib" />
     </modules>
   </component>
 </project>

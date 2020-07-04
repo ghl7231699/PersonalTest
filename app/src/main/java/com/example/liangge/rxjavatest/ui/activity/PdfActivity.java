@@ -21,8 +21,8 @@ import butterknife.ButterKnife;
  */
 
 public class PdfActivity extends BaseActivity implements OnPageChangeListener {
-    @BindView(R.id.pdf_view)
-    PDFView mPdfView;
+//    @BindView(R.id.pdf_view)
+//    PDFView mPdfView;
     @BindView(R.id.text)
     TextView mText;
     String pdfName;
@@ -42,11 +42,11 @@ public class PdfActivity extends BaseActivity implements OnPageChangeListener {
             setTitle(pdfName = assetFileName);
         try {
             File file = new File(assetFileName, "LoadRunner11-中文教程.pdf");
-            mPdfView.fromFile(file)
-                    //                .pages(0, 0, 0, 0, 0, 0) // 默认全部显示，pages属性可以过滤性显示
-                    .defaultPage(1)//默认展示第一页
-                    .onPageChange(this)//监听页面切换
-                    .load();
+//            mPdfView.fromFile(file)
+//                    //                .pages(0, 0, 0, 0, 0, 0) // 默认全部显示，pages属性可以过滤性显示
+//                    .defaultPage(1)//默认展示第一页
+//                    .onPageChange(this)//监听页面切换
+//                    .load();
         } catch (Exception e) {
             e.printStackTrace();
         }

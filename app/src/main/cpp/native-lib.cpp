@@ -23,8 +23,7 @@ int compare(const void *a, const void *b) {
     return (*(int *) a - *(int *) b);
 }
 
-extern "C"
-JNIEXPORT jstring JNICALL
+extern "C" jstring
 Java_com_example_liangge_rxjavatest_ndk_NdkActivity_updateNameFromC(JNIEnv *env,
                                                                     jobject instance) {
     //获取jclass
@@ -46,8 +45,7 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_updateNameFromC(JNIEnv *env,
 }
 
 
-extern "C"
-JNIEXPORT void JNICALL
+extern "C" void
 Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getArray(JNIEnv *env, jobject instance,
                                                              jintArray arrays_) {
     jint *arrays = env->GetIntArrayElements(arrays_, NULL);
@@ -61,8 +59,7 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getArray(JNIEnv *env, jobjec
 }
 
 
-extern "C"
-JNIEXPORT jstring JNICALL
+extern "C" jstring
 Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getMethod(JNIEnv *env, jobject instance) {
 
     //获取jclass
@@ -83,8 +80,7 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getMethod(JNIEnv *env, jobje
 }
 
 //删除局部引用
-extern "C"
-JNIEXPORT void JNICALL
+extern "C" void
 Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getLocalReference(JNIEnv *env,
                                                                       jobject instance) {
     for (int i = 0; i < 100; i++) {
@@ -96,8 +92,7 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_getLocalReference(JNIEnv *en
 }
 
 
-extern "C"
-JNIEXPORT void JNICALL
+extern "C" void
 Java_com_example_liangge_rxjavatest_ndk_NdkActivity_exception(JNIEnv *env, jobject instance) {
     //构建一个异常
     jclass pJclass = env->GetObjectClass(instance);
@@ -122,11 +117,14 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_exception(JNIEnv *env, jobje
 }
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_liangge_rxjavatest_ndk_NdkActivity_cache(JNIEnv *env, jobject instance) {
+void
+Java_com_example_liangge_rxjavatest_ndk_NdkActivity_cache(JNIEnv
+                                                          *env,
+                                                          jobject instance
+) {
 
     jclass pJclass = env->GetObjectClass(instance);
-    //局部静态变量，访问内存空间
+//局部静态变量，访问内存空间
     static jfieldID jfieldID = NULL;
     if (jfieldID == NULL) {
         jfieldID = env->GetFieldID(pJclass, "name", "Ljava/lang/String;");
@@ -136,8 +134,11 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_cache(JNIEnv *env, jobject i
 }
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_liangge_rxjavatest_ndk_NdkActivity_init(JNIEnv *env, jclass type) {
+void
+Java_com_example_liangge_rxjavatest_ndk_NdkActivity_init(JNIEnv
+                                                         *env,
+                                                         jclass type
+) {
 
     static jfieldID jfieldID = NULL;
     if (jfieldID == NULL) {
@@ -148,21 +149,27 @@ Java_com_example_liangge_rxjavatest_ndk_NdkActivity_init(JNIEnv *env, jclass typ
 }
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_liangge_rxjavatest_ndk_CustomFix_HandlerNative_replaceMethod(JNIEnv *env,
+void
+Java_com_example_liangge_rxjavatest_ndk_CustomFix_HandlerNative_replaceMethod(JNIEnv
+                                                                              *env,
                                                                               jclass type,
-                                                                              jobject method,
-                                                                              jobject dest) {
+                                                                              jobject
+                                                                              method,
+                                                                              jobject dest
+) {
 
-    // TODO
+// TODO
 
 }
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_example_liangge_rxjavatest_ndk_CustomFix_HandlerNative_init(JNIEnv *env, jclass type,
-                                                                     jint apiCode) {
+void
+Java_com_example_liangge_rxjavatest_ndk_CustomFix_HandlerNative_init(JNIEnv
+                                                                     *env,
+                                                                     jclass type,
+                                                                     jint
+                                                                     apiCode) {
 
-    // TODO
+// TODO
 
 }

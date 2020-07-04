@@ -2,34 +2,44 @@
 
 apply from: 'config.gradle'
 buildscript {
-    ext.kotlin_version = '1.1.2'
+    ext.kotlin_version = '1.3.21'
     repositories {
         maven {
-            url 'https://maven.google.com/'
-            name 'Google'
+            url 'https://maven.aliyun.com/repository/jcenter'
         }
-        mavenLocal()
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
+//        maven {
+//            url 'https://maven.google.com/'
+//            name 'Google'
+//        }
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         classpath('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.1')
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 allprojects {
-
-
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
         maven { url "https://jitpack.io" }
         maven {
             url 'https://maven.google.com/'
             name 'Google'
         }
-        mavenLocal()
         jcenter()
 
     }
@@ -39,366 +49,347 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task printGradleInfo() {
-    println "----------------------------"
-    println "In posdevice, gradle id is" + gradle.hashCode()
-    println "Home Dir:" + gradle.gradleHomeDir
-    println "User Home Dir:" + gradle.gradleUserHomeDir
-    println "Parent:" + gradle.parent
-}
-
-task printStringClass << {
-    def str1 = '单引号'
-    def str2 = "双引号"
-
-
-    println "单引号定义的字符串类型" + str1.getClass().getName()
-    println "双引号定义的字符串类型" + str2.getClass().getName()
-}
-
-task printStringValue << {
-    def str1 = "少年张三丰"
-
-
-    println '单引号的变量计算：${str1}'
-    println "双引号的变量计算1：${str1}"
-    println "双引号的变量计算2：$str1"
-}
-task printList << {
-    def numList = [1, 2, 3, 4, 5, 0]
-    println numList.getClass().getName()
-    println numList[0..numList.size() - 1]
-    println numList[-1]
-    println numList[-1..-4]
-    numList.each {
-        println "this is " + it + "个数据"
-    }
-}
-task printMap << {
-    def map = ['width': 1024, 'height': 1080]
-    def maps = ['key1': '你是猪吗', 'key2': true]
-    map.each {
-        println "this is map中的" + it + "个"
-    }
-    println maps.key1
-}
-task invokeMethod << {
-//    method1(1, 2)
-    def a = method1 2, 2
-    def var = method2(1, 5)
-    println "a==${a},var==$var"
-}
-
-def method1(int a, int b) {
-    a + b
-}
-
-def method2(int a, int b) {
-    if (a > b) {
-        a
-    } else {
-        b
-    }
-}
-
-task helloClosure << {
-    //使用我们自定义的闭包
-    customEach {
-        println it
-    }
-    eachMap { key, v ->
-        println "${key} is $v"
-    }
-    def mClosure = {
-        String a, int b ->
-            println a + b
-    }
-    mClosure.call("this is ", 10)
-    mClosure("this is ", 100)
-}
-
-def customEach(closure) {
-    //模拟一个有10个元素的集合，开始迭代
-    for (int i in 1..10) {
-        closure(i)
-    }
-}
-
-def eachMap(closure) {
-    def map = ["name": "张三", "age": "18"]
-    map.each {
-        closure(it.key, it.value)
-    }
-}
-
-task helloDelegate << {
-    new Delegate().test {
-        println "thisObject : ${thisObject.getClass()}"
-        println "delegate : ${delegate.getClass()}"
-        println "owener : ${owner.getClass()}"
-
-        method()
-        it.method()
-    }
-
-}
-
-def method() {
-    println "Context this : ${this.getClass()} in root"
-    println "method in root"
-}
-
-class Delegate {
-    def method() {
-        println "Delegate this : ${this.getClass()} in Delegate"
-        println "method in Delegate"
-    }
-
-    def test(Closure<Delegate> closure) {
-        closure(this)
-    }
-
-}
-
-task configClosure << {
-    person {
-        personName = "sun geng"
-        personAge = 26
-        dumpPerson()
-    }
-}
-
-class Person {
-    String personName
-    int personAge
-
-    def dumpPerson() {
-        println "The name is: ${personName} his age is: $personAge"
-    }
-}
-
-def person(Closure<Person> closure) {
-    Person person = new Person()
-    closure.delegate = person
-    closure.setResolveStrategy(Closure.DELEGATE_FIRST)
-    closure(person)
-}
-
-task upper(dependsOn: 'count') << {
-    String a = "gu_hong_liang"
-    println "Original :" + a
-    println "upper :" + a.toUpperCase()
-}
-
-task count << {
-    4.times {
-        println "result is :" + it
-    }
-    4.times { counter ->
-        println "this is $counter"
-//        "task$counter" << {
-//            println "this is $counter"
+//task printGradleInfo() {
+//    println "----------------------------"
+//    println "In posdevice, gradle id is" + gradle.hashCode()
+//    println "Home Dir:" + gradle.gradleHomeDir
+//    println "User Home Dir:" + gradle.gradleUserHomeDir
+//    println "Parent:" + gradle.parent
+//}
+//
+////task printStringClass << {
+////    def str1 = '单引号'
+////    def str2 = "双引号"
+////
+////
+////    println "单引号定义的字符串类型" + str1.getClass().getName()
+////    println "双引号定义的字符串类型" + str2.getClass().getName()
+////}
+//
+//task printStringValue << {
+//    def str1 = "少年张三丰"
+//
+//
+//    println '单引号的变量计算：${str1}'
+//    println "双引号的变量计算1：${str1}"
+//    println "双引号的变量计算2：$str1"
+//}
+//task printList << {
+//    def numList = [1, 2, 3, 4, 5, 0]
+//    println numList.getClass().getName()
+//    println numList[0..numList.size() - 1]
+//    println numList[-1]
+//    println numList[-1..-4]
+//    numList.each {
+//        println "this is " + it + "个数据"
+//    }
+//}
+//task printMap << {
+//    def map = ['width': 1024, 'height': 1080]
+//    def maps = ['key1': '你是猪吗', 'key2': true]
+//    map.each {
+//        println "this is map中的" + it + "个"
+//    }
+//    println maps.key1
+//}
+//task invokeMethod << {
+////    method1(1, 2)
+//    def a = method1 2, 2
+//    def var = method2(1, 5)
+//    println "a==${a},var==$var"
+//}
+//
+//def method1(int a, int b) {
+//    a + b
+//}
+//
+//def method2(int a, int b) {
+//    if (a > b) {
+//        a
+//    } else {
+//        b
+//    }
+//}
+//
+//task helloClosure << {
+//    //使用我们自定义的闭包
+//    customEach {
+//        println it
+//    }
+//    eachMap { key, v ->
+//        println "${key} is $v"
+//    }
+//    def mClosure = {
+//        String a, int b ->
+//            println a + b
+//    }
+//    mClosure.call("this is ", 10)
+//    mClosure("this is ", 100)
+//}
+//
+//def customEach(closure) {
+//    //模拟一个有10个元素的集合，开始迭代
+//    for (int i in 1..10) {
+//        closure(i)
+//    }
+//}
+//
+//def eachMap(closure) {
+//    def map = ["name": "张三", "age": "18"]
+//    map.each {
+//        closure(it.key, it.value)
+//    }
+//}
+//
+//task helloDelegate << {
+//    new Delegate().test {
+//        println "thisObject : ${thisObject.getClass()}"
+//        println "delegate : ${delegate.getClass()}"
+//        println "owener : ${owner.getClass()}"
+//
+//        method()
+//        it.method()
+//    }
+//
+//}
+//
+//def method() {
+//    println "Context this : ${this.getClass()} in root"
+//    println "method in root"
+//}
+//
+//class Delegate {
+//    def method() {
+//        println "Delegate this : ${this.getClass()} in Delegate"
+//        println "method in Delegate"
+//    }
+//
+//    def test(Closure<Delegate> closure) {
+//        closure(this)
+//    }
+//
+//}
+//
+//task configClosure << {
+//    person {
+//        personName = "sun geng"
+//        personAge = 26
+//        dumpPerson()
+//    }
+//}
+//
+//class Person {
+//    String personName
+//    int personAge
+//
+//    def dumpPerson() {
+//        println "The name is: ${personName} his age is: $personAge"
+//    }
+//}
+//
+//def person(Closure<Person> closure) {
+//    Person person = new Person()
+//    closure.delegate = person
+//    closure.setResolveStrategy(Closure.DELEGATE_FIRST)
+//    closure(person)
+//}
+//
+//task upper(dependsOn: 'count') << {
+//    String a = "gu_hong_liang"
+//    println "Original :" + a
+//    println "upper :" + a.toUpperCase()
+//}
+//
+//task count << {
+//    4.times {
+//        println "result is :" + it
+//    }
+//    4.times { counter ->
+//        println "this is $counter"
+////        "task$counter" << {
+////            println "this is $counter"
+////        }
+//    }
+//
+//}
+//
+//task multiTask << {
+//    create()
+//}
+//
+//def create() {
+//    println "create"
+//}
+//
+//task hellos << {
+//    println 'Hello Earth'
+//}
+//hellos.doFirst {
+//    println 'Hello Venus'
+//}
+//hellos << {
+//    println 'Hello Jupiter'
+//}
+//hellos.doFirst {
+//    println 'this is third'
+//}
+//hellos.doLast {
+//    println 'Hello Mars'
+//}
+//hellos.doFirst {
+//    println 'this is six'
+//}
+//
+//defaultTasks 'loadFile', 'hello'
+//
+//task hello << {
+//    println "Hello Gradle"
+//    println propertyTask.myProperty
+//}
+//task loadFile << {
+//    def files = file("/Users/guhongliang/Desktop/项目").listFiles().sort()
+//    files.each { File file ->
+//        if (file.isFile()) {
+//            println file.name
 //        }
-    }
-
-}
-
-task multiTask << {
-    create()
-}
-
-def create() {
-    println "create"
-}
-
-task hellos << {
-    println 'Hello Earth'
-}
-hellos.doFirst {
-    println 'Hello Venus'
-}
-hellos << {
-    println 'Hello Jupiter'
-}
-hellos.doFirst {
-    println 'this is third'
-}
-hellos.doLast {
-    println 'Hello Mars'
-}
-hellos.doFirst {
-    println 'this is six'
-}
-
-defaultTasks 'loadFile', 'hello'
-
-task hello << {
-    println "Hello Gradle"
-    println propertyTask.myProperty
-}
-task loadFile << {
-    def files = file("/Users/guhongliang/Desktop/项目").listFiles().sort()
-    files.each { File file ->
-        if (file.isFile()) {
-            println file.name
-        }
-    }
-}
-
-hello.doLast {
-    println "Greeting from the ${hello.name} task "
-}
-
-task propertyTask {
-    ext.myProperty = "guhongliang"
-}
-task checkSum << {
-    file("/Users/guhongliang/Desktop/项目").listFiles().each { File file ->
-
-    }
-}
-
-task distribution << {
-    println "We build the zip with version=$version"
-}
-task release(dependsOn: 'distribution') << {
-    println "We release now"
-}
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.hasTask(release)) {
-        version = '1.0'
-    } else {
-        version = '1.0-SNAPSHOT'
-    }
-}
-task copy(type: Copy) {
-    from(file("/Users/guhongliang/Desktop/项目/gradle项目/build.gradle"))
-    into("/Users/guhongliang/Desktop/项目")
-}
-task(deletes, type: Delete) {
-    delete("/Users/guhongliang/Desktop/项目/build.gradle")
-}
-
-task compile << {
-    println 'compiling source'
-}
-
-task compileTest(dependsOn: compile) << {
-    println 'compiling unit tests'
-}
-
-task test(dependsOn: [compile, compileTest]) << {
-    println 'running unit tests'
-}
-
-task dist(dependsOn: [compile, test]) << {
-    println 'building the distribution'
-}
-/***********************************************************我是分割线***********************************************************/
-Task createTask1 = task(createTask1)
-
-createTask1.doLast {
-    println '创建方法原型为： Task task(String name) throws InvalidUserDataException'
-}
-
-Task createTask2 = task(createTask2, group: BasePlugin.BUILD_GROUP)
-createTask2.doLast {
-    println '创建方法原型为： Task task(Map<String,?> args,String name) throws InvalidUserDataException'
-    println "任务分组：${createTask2.group}"
-}
-
-task createTask3 {
-    description '演示任务创建'
-    doLast {
-        println '创建方法原型为： Task task(String name,Closure configureClosure) throws InvalidUserDataException'
-        println "任务描述：${createTask3.description}"
-    }
-}
-
-tasks.create('createTask4') {
-    description '演示任务创建'
-    doLast {
-        println '创建方法原型为： Task create(String name,Closure configureClosure) throws InvalidUserDataException'
-        println "任务描述：${createTask4.description}"
-    }
-}
-
-task task1
-task1.doLast {
-    println "task1.doLast"
-}
-
-task task2
-tasks.getByName('task2').doLast {
-    println 'task2.doLast'
-}
-tasks['task2'].doLast {
-    println 'task2.doLast'
-}
-
-
-task task3
-tasks['task3'].doLast {
-    println 'mission is ' + tasks.getByPath('app:myTest')
-    println tasks.findByPath('app:myTest')
-    println tasks.findByPath('task10')
-}
-
-task task4
-tasks['task4'].doLast {
-    println 'mission is ' + tasks.getByName('task4')
-    println tasks.findByName('task4')
-    println tasks.findByName('task10')
-}
-
-task groupTask
-groupTask.group = BasePlugin.BUILD_GROUP
-groupTask.description = '这是一个构建的引导任务'
-
-groupTask.doLast {
-    println "group:${group},description:${description}"
-}
-
-final String BUILD_APPS_ALL = "all"
-final String BUILD_APPS_FIRST = "first"
-final String BUILD_APPS_SHOUFA_ = "exclude_shoufa"
-
-
-task QQRelease << {
-    println '打包应用宝app'
-}
-task BaiduRelease << {
-    println '打包百度app'
-}
-task HuaweiRelease << {
-    println '打包华为app'
-}
-task MiuiRelease << {
-    println '打包小米app'
-}
-task build {
-    group BasePlugin.BUILD_GROUP
-    println '打渠道包'
-}
-
-build.dependsOn QQRelease, BaiduRelease, HuaweiRelease, MiuiRelease
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//    }
+//}
+//
+//hello.doLast {
+//    println "Greeting from the ${hello.name} task "
+//}
+//
+//task propertyTask {
+//    ext.myProperty = "guhongliang"
+//}
+//task checkSum << {
+//    file("/Users/guhongliang/Desktop/项目").listFiles().each { File file ->
+//
+//    }
+//}
+//
+//task distribution << {
+//    println "We build the zip with version=$version"
+//}
+//task release(dependsOn: 'distribution') << {
+//    println "We release now"
+//}
+//gradle.taskGraph.whenReady { taskGraph ->
+//    if (taskGraph.hasTask(release)) {
+//        version = '1.0'
+//    } else {
+//        version = '1.0-SNAPSHOT'
+//    }
+//}
+//task copy(type: Copy) {
+//    from(file("/Users/guhongliang/Desktop/项目/gradle项目/build.gradle"))
+//    into("/Users/guhongliang/Desktop/项目")
+//}
+//task(deletes, type: Delete) {
+//    delete("/Users/guhongliang/Desktop/项目/build.gradle")
+//}
+//
+//task compile << {
+//    println 'compiling source'
+//}
+//
+//task compileTest(dependsOn: compile) << {
+//    println 'compiling unit tests'
+//}
+//
+//task test(dependsOn: [compile, compileTest]) << {
+//    println 'running unit tests'
+//}
+//
+//task dist(dependsOn: [compile, test]) << {
+//    println 'building the distribution'
+//}
+///***********************************************************我是分割线***********************************************************/
+//Task createTask1 = task(createTask1)
+//
+//createTask1.doLast {
+//    println '创建方法原型为： Task task(String name) throws InvalidUserDataException'
+//}
+//
+//Task createTask2 = task(createTask2, group: BasePlugin.BUILD_GROUP)
+//createTask2.doLast {
+//    println '创建方法原型为： Task task(Map<String,?> args,String name) throws InvalidUserDataException'
+//    println "任务分组：${createTask2.group}"
+//}
+//
+//task createTask3 {
+//    description '演示任务创建'
+//    doLast {
+//        println '创建方法原型为： Task task(String name,Closure configureClosure) throws InvalidUserDataException'
+//        println "任务描述：${createTask3.description}"
+//    }
+//}
+//
+//tasks.create('createTask4') {
+//    description '演示任务创建'
+//    doLast {
+//        println '创建方法原型为： Task create(String name,Closure configureClosure) throws InvalidUserDataException'
+//        println "任务描述：${createTask4.description}"
+//    }
+//}
+//
+//task task1
+//task1.doLast {
+//    println "task1.doLast"
+//}
+//
+//task task2
+//tasks.getByName('task2').doLast {
+//    println 'task2.doLast'
+//}
+//tasks['task2'].doLast {
+//    println 'task2.doLast'
+//}
+//
+//
+//task task3
+//tasks['task3'].doLast {
+//    println 'mission is ' + tasks.getByPath('app:myTest')
+//    println tasks.findByPath('app:myTest')
+//    println tasks.findByPath('task10')
+//}
+//
+//task task4
+//tasks['task4'].doLast {
+//    println 'mission is ' + tasks.getByName('task4')
+//    println tasks.findByName('task4')
+//    println tasks.findByName('task10')
+//}
+//
+//task groupTask
+//groupTask.group = BasePlugin.BUILD_GROUP
+//groupTask.description = '这是一个构建的引导任务'
+//
+//groupTask.doLast {
+//    println "group:${group},description:${description}"
+//}
+//
+//final String BUILD_APPS_ALL = "all"
+//final String BUILD_APPS_FIRST = "first"
+//final String BUILD_APPS_SHOUFA_ = "exclude_shoufa"
+//
+//
+//task QQRelease << {
+//    println '打包应用宝app'
+//}
+//task BaiduRelease << {
+//    println '打包百度app'
+//}
+//task HuaweiRelease << {
+//    println '打包华为app'
+//}
+//task MiuiRelease << {
+//    println '打包小米app'
+//}
+//task build {
+//    group BasePlugin.BUILD_GROUP
+//    println '打渠道包'
+//}
+//
+//build.dependsOn QQRelease, BaiduRelease, HuaweiRelease, MiuiRelease
 

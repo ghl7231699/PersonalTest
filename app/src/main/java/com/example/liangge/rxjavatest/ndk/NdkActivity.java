@@ -97,9 +97,6 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
         }
         LinearLayout.LayoutParams childP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         childP.gravity = Gravity.CENTER;
-        if (mViews == null) {
-            return;
-        }
         View childAt;
         int size = mViews.size();
         for (int i = 0; i < size; i++) {
@@ -184,7 +181,7 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
      * 加载ndk方法
      */
     private void loadNdkMethod() {
-        //        mTv.append(updateNameFromC() + "\n");
+                mTv.append(updateNameFromC() + "\n");
 //
 //        mTv.append(getMethod() + "\n");
 //
@@ -209,6 +206,8 @@ public class NdkActivity extends BaseNdkActivity implements View.OnClickListener
      * which is packaged with this application.
      */
     public native String updateNameFromC();//属性的访问
+
+    public native String getString();
 
     public native void getArray(int[] arrays);//获取数组
 
